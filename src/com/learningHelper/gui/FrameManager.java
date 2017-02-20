@@ -1,11 +1,11 @@
-package com.gui;
+package com.learningHelper.gui;
 
 import java.awt.Component;
 
 import javax.swing.text.JTextComponent;
 
-import com.timing.TimeCatcher;
-import com.xml.XMLHelper;
+import com.learningHelper.timing.TimeCatcher;
+import com.learningHelper.xml.XMLHelper;
 
 public class FrameManager {
 	

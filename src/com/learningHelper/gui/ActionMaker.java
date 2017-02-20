@@ -1,4 +1,4 @@
-package com.kanji.graphicInterface;
+package com.learningHelper.gui;
 
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -11,16 +11,16 @@ import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.text.JTextComponent;
 
-import com.gui.Frame;
-import com.gui.FrameManager;
 import com.guimaker.keyBinding.SimpleActionMaker;
-import com.resources.PdfResource;
-import com.resources.UrlResource;
-import com.xml.XMLHelper;
+import com.learningHelper.resources.PdfResource;
+import com.learningHelper.resources.UrlResource;
+import com.learningHelper.strings.Exceptions;
+import com.learningHelper.xml.XMLHelper;
 
 public class ActionMaker extends SimpleActionMaker {
 	
 	private static XMLHelper helper = FrameManager.getInstance().getHelper();
+	private final static String REQUIRED_URI_PREFIX="http://";
 	
 	public static void foo(){
 		//force instantiating of the xml helper
@@ -32,14 +32,7 @@ public class ActionMaker extends SimpleActionMaker {
 			public void actionPerformed(ActionEvent e) {
 				PdfResource pdf = new PdfResource("");
 				helper.addResource(pdf);
-				try {
-					frame.createResource(pdf);
-				} 
-				catch (Exception e1) {
-					frame.showMessageDialog("Nie mozna utworzyc zrodla pdf. Sprawdz konsolę", true);
-					e1.printStackTrace();
-				}
-				
+				frame.createResource(pdf);
 			}
 		};
     }
@@ -50,15 +43,8 @@ public class ActionMaker extends SimpleActionMaker {
 			public void actionPerformed(ActionEvent e) {
 				UrlResource url = new UrlResource();
 				helper.addResource(url);
-				try {
-					frame.createResource(url);
-				} 
-				catch (Exception e1) {
-					frame.showMessageDialog("Nie mozna utworzyc zrodla webowego. Sprawdz konsolę", 
-							true);
-					e1.printStackTrace();
-
-				}
+				frame.createResource(url);
+				frame.showMessageDialog(Exceptions.CANNOT_CREATE_URL_RESOURCE, true);
 			}
 		};
     }
@@ -74,49 +60,50 @@ public class ActionMaker extends SimpleActionMaker {
 //					frame.showMessageDialog("IO excpetion", true);
 //				}
 				if (!file.exists() || file.isDirectory()){
-					frame.showMessageDialog("Plik nie istnieje lub jest katalogiem", true);
+					frame.showMessageDialog(Exceptions.FILE_DOESNT_EXIST_OR_IS_DIRECTORY, true);
 				}
 				if (Desktop.isDesktopSupported()) {
 			          try {
 			            Desktop.getDesktop().open(file);
 			          }
 			          catch (IOException ex) {
-			        	  frame.showMessageDialog("Nie można otworzyć przeglądarki.", true);			        	  
+			        	  frame.showMessageDialog(Exceptions.CANNOT_OPEN_FILE, true);			        	  
 			          }
 			        } 
 				  else { 
-					  frame.showMessageDialog("Nie można odtworzyć desktopu", true); 
+					  frame.showMessageDialog(Exceptions.DESKTOP_NOT_SUPPORTED, true); 
 				  }
 			}
 		};
     }
     
-    public static AbstractAction goToResourceURL (JTextComponent uriContainer, Frame frame){
+    public static AbstractAction goToResourceURL (JTextComponent textFieldWithUri, Frame frame){
     	return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String uri = uriContainer.getText();
-				String neededPrefix = "http://";
-				if (!uri.startsWith(neededPrefix)){
-					uri=neededPrefix+uri;
+				String uriText = textFieldWithUri.getText();
+				String requiredPrefix = REQUIRED_URI_PREFIX;
+				if (!uriText.startsWith(requiredPrefix)){
+					uriText=requiredPrefix+uriText;
 				}
-				URI urii = null;
+				URI uriObject = null;
 				try {
-					urii = new URI(uri);
-				} catch (URISyntaxException e1) {
-					frame.showMessageDialog("Niepoprawny uri", true);
+					uriObject = new URI(uriText);
+				} 
+				catch (URISyntaxException e1) {
+					frame.showMessageDialog(Exceptions.URI_SYNTAX_EXCEPTION, true);
 					return;
 				}
 				  if (Desktop.isDesktopSupported()) {
 			          try {
-			            Desktop.getDesktop().browse(urii);
+			            Desktop.getDesktop().browse(uriObject);
 			          }
 			          catch (IOException ex) {
-			        	  frame.showMessageDialog("Nie można otworzyć przeglądarki.", true);			        	  
+			        	  frame.showMessageDialog(Exceptions.CANNOT_OPEN_BROWSER_EXCEPTION, true);			        	  
 			          }
 			        } 
 				  else { 
-					  frame.showMessageDialog("Nie można odtworzyć desktopu", true); 
+					  frame.showMessageDialog(Exceptions.DESKTOP_NOT_SUPPORTED, true); 
 				  }
 			}
     	};

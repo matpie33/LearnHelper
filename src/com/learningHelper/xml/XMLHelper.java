@@ -1,4 +1,4 @@
-package com.xml;
+package com.learningHelper.xml;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,14 +8,15 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import com.gui.Frame;
-import com.resources.Resource;
+import com.learningHelper.gui.Frame;
+import com.learningHelper.resources.Resource;
 
 public class XMLHelper {
 	
 	private JTextComponent watched;
 	private String toReplace;
 	private XMLWriter writer;
+	private String xmlFileName = "sources.xml";
 	
 	public XMLHelper (){
 		writer = new XMLWriter();
@@ -23,7 +24,7 @@ public class XMLHelper {
 
 	public void replacePdfPath(String oldPath, String path, Frame frame) throws Exception{		
 		writer.replacePdfResourcePath(oldPath,path);
-		writer.saveToXML("xml.xml");		
+		writer.saveToXML(xmlFileName);		
 	}
 	
 	public void saveUrlPath() throws Exception{
@@ -31,8 +32,7 @@ public class XMLHelper {
 			return;
 		}
 		writer.replaceUrlResourcePath(toReplace, watched.getText());
-		writer.saveToXML("xml.xml");
-		System.out.println("saving: "+toReplace+" into "+watched.getText());
+		writer.saveToXML(xmlFileName);
 		
 	}
 	
@@ -44,7 +44,7 @@ public class XMLHelper {
 	}
 	
 	public void save(){
-		writer.saveToXML("xml.xml");		
+		writer.saveToXML(xmlFileName);		
 	}
 	
 	public void addResource(Resource res){
@@ -52,7 +52,7 @@ public class XMLHelper {
 	}
 	
 	public List <Resource> getResources() throws ParserConfigurationException, SAXException, IOException{
-		return writer.readFromXml("xml.xml");
+		return writer.readFromXml(xmlFileName);
 	}
 	
 	

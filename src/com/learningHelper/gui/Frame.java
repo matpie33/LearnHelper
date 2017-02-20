@@ -1,4 +1,4 @@
-package com.gui;
+package com.learningHelper.gui;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -24,12 +24,16 @@ import com.guimaker.panels.GuiMaker;
 import com.guimaker.panels.MainPanel;
 import com.guimaker.row.RowMaker;
 import com.guimaker.window.SimpleWindow;
-import com.kanji.graphicInterface.ActionMaker;
-import com.keyListeners.FocusListeners;
-import com.keyListeners.KeyListener;
-import com.resources.PdfResource;
-import com.resources.Resource;
-import com.resources.UrlResource;
+import com.learningHelper.keyListeners.FocusListeners;
+import com.learningHelper.keyListeners.KeyListener;
+import com.learningHelper.resources.PdfResource;
+import com.learningHelper.resources.Resource;
+import com.learningHelper.resources.UrlResource;
+import com.learningHelper.strings.ButtonsLabels;
+import com.learningHelper.strings.Exceptions;
+import com.learningHelper.strings.Labels;
+import com.learningHelper.strings.Titles;
+import com.learningHelper.xml.XMLHelper;
 
 public class Frame extends SimpleWindow { 
 	private MainPanel  panel;
@@ -48,11 +52,13 @@ public class Frame extends SimpleWindow {
 		addElements();
 		createWindowProperties();	
 		List<Resource> resources = new ArrayList <>();
+		XMLHelper helper = FrameManager.getInstance().getHelper();
 		try {
-			resources = FrameManager.getInstance().getHelper().getResources();
+			resources = helper.getResources();
 			FrameManager.getInstance().setFrame(this);
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			showMessageDialog("Exception initializing xml helper", true);
+		} 
+		catch (ParserConfigurationException | SAXException | IOException e) {
+			showMessageDialog(Exceptions.EXCEPTION_READING_XML_FILE, true);
 		}
 		for (Resource r: resources){
 			createResource(r);
@@ -67,7 +73,7 @@ public class Frame extends SimpleWindow {
 		frame.setSize(new Dimension(800,600));
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setTitle("Pomocnik do nauki");
+		frame.setTitle(Titles.APPLICATION_TITLE);
 	}
 	
 	public void createResource(Resource type){
@@ -81,10 +87,10 @@ public class Frame extends SimpleWindow {
 				PdfResource pdf = (PdfResource) type;
 				textResourcePath =  GuiMaker.createTextField(10, pdf.getPath(), false);
 				textFinishedPlace.setText(""+pdf.getPage());
-				resourceLabel = "Lokalizacja pliku: ";
-				finishedPlaceLabel = "Na której stronie skończyłem naukę: ";
+				resourceLabel = Labels.FILE_LOCATION;
+				finishedPlaceLabel = Labels.FINISHED_PAGE_LOCATION;
 				goToResourceListener = ActionMaker.goToPdfResource(textResourcePath, this);
-				specifyFile = GuiMaker.createButton("Wskaż plik", ActionMaker.openFile(this, textResourcePath));
+				specifyFile = GuiMaker.createButton(ButtonsLabels.SELECT_FILE, ActionMaker.openFile(this, textResourcePath));
 			}
 			else if (type instanceof UrlResource){
 				UrlResource url = (UrlResource) type;
@@ -93,8 +99,8 @@ public class Frame extends SimpleWindow {
 				textResourcePath.addFocusListener(FocusListeners.stopTimerWhenFocusLost());
 				textResourcePath.addFocusListener(FocusListeners.setComponentToWatchWhenFocused());
 				textFinishedPlace.setText(url.getStartingPlace());
-				resourceLabel = "Adres URL: ";
-				finishedPlaceLabel = "Miejsce na którym przerwałem: ";
+				resourceLabel = Labels.URL_ADDRESS;
+				finishedPlaceLabel = Labels.FINISHED_WORD_LOCATION;
 				goToResourceListener = ActionMaker.goToResourceURL(textResourcePath, this);
 				
 			}
@@ -103,12 +109,12 @@ public class Frame extends SimpleWindow {
 		textFinishedPlace.addFocusListener(FocusListeners.stopTimerWhenFocusLost());
 		textFinishedPlace.addFocusListener(FocusListeners.setComponentToWatchWhenFocused());
 			
-		JButton buttonGoToResource=GuiMaker.createButton("Otwórz źródło", goToResourceListener);
+		JButton buttonGoToResource=GuiMaker.createButton(ButtonsLabels.GO_TO_SOURCE, goToResourceListener);
 		
 		JLabel labelResourceName = GuiMaker.createLabel(resourceLabel);
 		JLabel labelFinishedPlace = GuiMaker.createLabel(finishedPlaceLabel);
 				
-		MainPanel panel = new MainPanel(BasicColors.DARK_GREEN);
+		MainPanel panel = new MainPanel(BasicColors.DARK_GREEN, true);
 		panelWithLearningResources.add(panel);
 		
 		panel.addRow(RowMaker.createHorizontallyFilledRow(labelResourceName, textResourcePath).
@@ -127,8 +133,9 @@ public class Frame extends SimpleWindow {
 	}
 	
 	private void addElements(){
-		buttonAddPdfResource = GuiMaker.createButton("Dodaj źródło pdfowe", ActionMaker.createPdfResource(this));
-		buttonAddURLResource = GuiMaker.createButton("Dodaj źródło URL", ActionMaker.createURLResource(this));
+		buttonAddPdfResource = GuiMaker.createButton(ButtonsLabels.ADD_PDF_RESOURCE, 
+				ActionMaker.createPdfResource(this));
+		buttonAddURLResource = GuiMaker.createButton(ButtonsLabels.ADD_URL_RESOURCE, ActionMaker.createURLResource(this));
 		panel.addRow(RowMaker.createUnfilledRow(GridBagConstraints.NORTHWEST, buttonAddPdfResource,
 				buttonAddURLResource));
 		scrollPane = new JScrollPane(scrollPanel.getPanel());

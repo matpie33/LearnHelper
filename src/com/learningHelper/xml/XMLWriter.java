@@ -1,4 +1,4 @@
-package com.xml;
+package com.learningHelper.xml;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,9 +22,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.resources.PdfResource;
-import com.resources.Resource;
-import com.resources.UrlResource;
+import com.learningHelper.resources.PdfResource;
+import com.learningHelper.resources.Resource;
+import com.learningHelper.resources.UrlResource;
 
 public class XMLWriter {
 	
@@ -153,6 +153,9 @@ public class XMLWriter {
 	
 	public List <Resource> readFromXml(String filename) throws ParserConfigurationException, SAXException, IOException{
 		File file = new File(filename);
+		if (!file.exists()){
+			return new ArrayList <>();
+		}
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
 		        .newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();

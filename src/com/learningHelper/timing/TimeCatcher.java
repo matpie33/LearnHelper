@@ -1,9 +1,9 @@
-package com.timing;
+package com.learningHelper.timing;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.gui.FrameManager;
+import com.learningHelper.gui.FrameManager;
 
 public class TimeCatcher {
 
@@ -11,8 +11,6 @@ public class TimeCatcher {
 	private int time;
 	private byte TIME_DELAY=10;
 	private boolean isRunning;
-	private long lastKeyReleasedTime;
-	private long lastKeyPressedTime;
 	private long maxBreakTime = 5_000;
 	private FrameManager manager;
 	
@@ -48,8 +46,7 @@ public class TimeCatcher {
 	    timer.scheduleAtFixedRate(task, 0, TIME_DELAY);
 	}
 
-	public void stopTimer(){
-		
+	public void stopTimer(){		
 		if (!isRunning){
 			return;
 		}

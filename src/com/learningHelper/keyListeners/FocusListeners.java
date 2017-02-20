@@ -1,9 +1,9 @@
-package com.keyListeners;
+package com.learningHelper.keyListeners;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-import com.gui.FrameManager;
+import com.learningHelper.gui.FrameManager;
 
 public class FocusListeners {
 	

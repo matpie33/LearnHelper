@@ -1,4 +1,4 @@
-package com.resources;
+package com.learningHelper.resources;
 
 public class UrlResource implements Resource {
 	
