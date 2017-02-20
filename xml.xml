@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Zrodla>
+    <Internetowe>
+        <Adres>www.tibia.pl</Adres>
+        <MiejsceStartu/>
+    </Internetowe>
+    <Internetowe>
+        <Adres>七月十日は</Adres>
+        <MiejsceStartu/>
+    </Internetowe>
+    <Pdf>
+        <Sciezka>C:\Users\Viruss\Documents\irisdata.arff</Sciezka>
+        <Strona>0</Strona>
+    </Pdf>
+    <Pdf>
+        <Sciezka>C:\Users\Viruss\Desktop\git tutorial.txt</Sciezka>
+        <Strona>0</Strona>
+    </Pdf>
+    <Internetowe>
+        <Adres>abac</Adres>
+        <MiejsceStartu/>
+    </Internetowe>
+</Zrodla>
