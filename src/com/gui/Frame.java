@@ -19,19 +19,20 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import com.guimaker.colors.BasicColors;
+import com.guimaker.panels.GuiMaker;
+import com.guimaker.panels.MainPanel;
+import com.guimaker.row.RowMaker;
+import com.guimaker.window.SimpleWindow;
 import com.kanji.graphicInterface.ActionMaker;
-import com.kanji.graphicInterface.GuiMaker;
-import com.kanji.graphicInterface.MainPanel;
-import com.kanji.graphicInterface.MyColors;
-import com.kanji.graphicInterface.SimpleWindow;
 import com.keyListeners.FocusListeners;
 import com.keyListeners.KeyListener;
 import com.resources.PdfResource;
 import com.resources.Resource;
 import com.resources.UrlResource;
 
-public class Frame extends SimpleWindow {
-	private MainPanel panel;
+public class Frame extends SimpleWindow { 
+	private MainPanel  panel;
 	private SimpleWindow subWindow;
 	private List <MainPanel> panelWithLearningResources;
 	private JButton buttonAddPdfResource;
@@ -41,8 +42,8 @@ public class Frame extends SimpleWindow {
 	
 	public Frame(){	
 		panelWithLearningResources = new ArrayList <MainPanel> ();
-		panel = new MainPanel(MyColors.LIGHT_VIOLET);
-		scrollPanel = new MainPanel (MyColors.LIGHT_BLUE);
+		panel = new MainPanel(BasicColors.LIGHT_VIOLET);
+		scrollPanel = new MainPanel (BasicColors.LIGHT_BLUE);
 		subWindow = new SimpleWindow();		
 		addElements();
 		createWindowProperties();	
@@ -107,20 +108,20 @@ public class Frame extends SimpleWindow {
 		JLabel labelResourceName = GuiMaker.createLabel(resourceLabel);
 		JLabel labelFinishedPlace = GuiMaker.createLabel(finishedPlaceLabel);
 				
-		MainPanel panel = new MainPanel(MyColors.DARK_GREEN);
+		MainPanel panel = new MainPanel(BasicColors.DARK_GREEN);
 		panelWithLearningResources.add(panel);
 		
-		panel.addRow(panel.createHorizontallyFilledRow(labelResourceName, textResourcePath).
+		panel.addRow(RowMaker.createHorizontallyFilledRow(labelResourceName, textResourcePath).
 				fillHorizontallySomeElements(textResourcePath));
 		
-		panel.addRow(panel.createHorizontallyFilledRow(labelFinishedPlace, textFinishedPlace).
+		panel.addRow(RowMaker.createHorizontallyFilledRow(labelFinishedPlace, textFinishedPlace).
 				fillHorizontallySomeElements(textFinishedPlace));
-		JPanel newPanel = panel.addRow(panel.createUnfilledRow(GridBagConstraints.WEST, buttonGoToResource));
+		JPanel newPanel = panel.addRow(RowMaker.createUnfilledRow(GridBagConstraints.WEST, buttonGoToResource));
 		if (specifyFile != null){
 			panel.addElementsToRow(newPanel, specifyFile);
 		}
 		
-		scrollPanel.addRow(scrollPanel.createHorizontallyFilledRow(panel.getPanel()));
+		scrollPanel.addRow(RowMaker.createHorizontallyFilledRow(panel.getPanel()));
 		scrollBottom();
 		
 	}
@@ -128,10 +129,10 @@ public class Frame extends SimpleWindow {
 	private void addElements(){
 		buttonAddPdfResource = GuiMaker.createButton("Dodaj źródło pdfowe", ActionMaker.createPdfResource(this));
 		buttonAddURLResource = GuiMaker.createButton("Dodaj źródło URL", ActionMaker.createURLResource(this));
-		panel.addRow(panel.createUnfilledRow(GridBagConstraints.NORTHWEST, buttonAddPdfResource,
+		panel.addRow(RowMaker.createUnfilledRow(GridBagConstraints.NORTHWEST, buttonAddPdfResource,
 				buttonAddURLResource));
 		scrollPane = new JScrollPane(scrollPanel.getPanel());
-		panel.addRow(panel.createBothSidesFilledRow(scrollPane));
+		panel.addRow(RowMaker.createBothSidesFilledRow(scrollPane));
 	}
 	
 	private void scrollBottom(){

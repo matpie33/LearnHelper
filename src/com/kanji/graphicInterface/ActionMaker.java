@@ -2,9 +2,6 @@ package com.kanji.graphicInterface;
 
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -16,46 +13,18 @@ import javax.swing.text.JTextComponent;
 
 import com.gui.Frame;
 import com.gui.FrameManager;
-import com.kanji.panels.ConfirmPanel;
+import com.guimaker.keyBinding.SimpleActionMaker;
 import com.resources.PdfResource;
 import com.resources.UrlResource;
 import com.xml.XMLHelper;
 
-public class ActionMaker {
+public class ActionMaker extends SimpleActionMaker {
 	
 	private static XMLHelper helper = FrameManager.getInstance().getHelper();
 	
 	public static void foo(){
 		//force instantiating of the xml helper
 	}
-	
-	public static AbstractAction createConfirmingAction (final ConfirmPanel panel, final boolean chosen){
-		return new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				panel.setAccepted(chosen);
-			}
-		};
-	}
-
-	public static WindowListener createClosingListener (final SimpleWindow window){
-		return new WindowAdapter (){
-			@Override
-			public void windowClosed(WindowEvent e){
-				window.close();
-			}
-		};
-	}
-	
-    public static AbstractAction createDisposingAction(final SimpleWindow dialog){
-		return new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(dialog);
-				dialog.dispose();
-			}
-		};
-    }
     
     public static AbstractAction createPdfResource(final Frame frame){
 		return new AbstractAction() {
