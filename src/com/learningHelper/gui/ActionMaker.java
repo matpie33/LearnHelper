@@ -12,15 +12,17 @@ import javax.swing.JFileChooser;
 import javax.swing.text.JTextComponent;
 
 import com.guimaker.keyBinding.SimpleActionMaker;
-import com.learningHelper.resources.PdfResource;
-import com.learningHelper.resources.UrlResource;
+import com.learningHelper.resources.Resource;
+import com.learningHelper.resources.ResourceType;
 import com.learningHelper.strings.Exceptions;
 import com.learningHelper.xml.XMLHelper;
 
 public class ActionMaker extends SimpleActionMaker {
 	
 	private static XMLHelper helper = FrameManager.getInstance().getHelper();
-	private final static String REQUIRED_URI_PREFIX="http://";
+	private final static String PROTOCOL_HTTP = "http";
+	private final static String PROTOCOL_HTTPS = "https";
+	private final static String AFTER_PROTOCOL = "://";
 	
 	public static void foo(){
 		//force instantiating of the xml helper
@@ -30,7 +32,7 @@ public class ActionMaker extends SimpleActionMaker {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PdfResource pdf = new PdfResource("");
+				Resource pdf = new Resource(ResourceType.PDF);
 				helper.addResource(pdf);
 				frame.createResource(pdf);
 			}
@@ -41,10 +43,9 @@ public class ActionMaker extends SimpleActionMaker {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UrlResource url = new UrlResource();
+				Resource url = new Resource(ResourceType.URL);
 				helper.addResource(url);
 				frame.createResource(url);
-				frame.showMessageDialog(Exceptions.CANNOT_CREATE_URL_RESOURCE, true);
 			}
 		};
     }
@@ -82,9 +83,8 @@ public class ActionMaker extends SimpleActionMaker {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String uriText = textFieldWithUri.getText();
-				String requiredPrefix = REQUIRED_URI_PREFIX;
-				if (!uriText.startsWith(requiredPrefix)){
-					uriText=requiredPrefix+uriText;
+				if (!uriText.startsWith(PROTOCOL_HTTP) && !uriText.startsWith(PROTOCOL_HTTPS)){
+					uriText = PROTOCOL_HTTP+AFTER_PROTOCOL+uriText;
 				}
 				URI uriObject = null;
 				try {
@@ -99,6 +99,7 @@ public class ActionMaker extends SimpleActionMaker {
 			            Desktop.getDesktop().browse(uriObject);
 			          }
 			          catch (IOException ex) {
+			        	  ex.printStackTrace();
 			        	  frame.showMessageDialog(Exceptions.CANNOT_OPEN_BROWSER_EXCEPTION, true);			        	  
 			          }
 			        } 
@@ -109,19 +110,18 @@ public class ActionMaker extends SimpleActionMaker {
     	};
     }
 		
-    public static AbstractAction openFile(Frame frame, JTextComponent componentWithPath){
+    public static AbstractAction openFile(Frame frame, JTextComponent componentWithPath, Resource resource){
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser ();
 				int option = chooser.showOpenDialog(frame.getWindow());
 				if (option == JFileChooser.APPROVE_OPTION){
-					String oldPath = componentWithPath.getText();
 					File file = chooser.getSelectedFile();
 					String path = file.getAbsolutePath();
 					componentWithPath.setText(path);
 					try {
-						helper.replacePdfPath(oldPath, path, frame);
+						helper.replacePdfPath(resource, path);
 					} 
 					catch (Exception e1) {
 						frame.showMessageDialog(e1.getMessage(), true);

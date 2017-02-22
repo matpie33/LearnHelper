@@ -26,9 +26,10 @@ import com.guimaker.row.RowMaker;
 import com.guimaker.window.SimpleWindow;
 import com.learningHelper.keyListeners.FocusListeners;
 import com.learningHelper.keyListeners.KeyListener;
-import com.learningHelper.resources.PdfResource;
+import com.learningHelper.resources.ChangeType;
 import com.learningHelper.resources.Resource;
-import com.learningHelper.resources.UrlResource;
+import com.learningHelper.resources.ResourceChangeHandler;
+import com.learningHelper.resources.ResourceType;
 import com.learningHelper.strings.ButtonsLabels;
 import com.learningHelper.strings.Exceptions;
 import com.learningHelper.strings.Labels;
@@ -76,38 +77,41 @@ public class Frame extends SimpleWindow {
 		frame.setTitle(Titles.APPLICATION_TITLE);
 	}
 	
-	public void createResource(Resource type){
 		
+	public void createResource(Resource resource){
 		JTextField textResourcePath = null;
 		JTextField textFinishedPlace = GuiMaker.createTextField(20);
 		String resourceLabel = null, finishedPlaceLabel = null;
 		ActionListener goToResourceListener = null;
 		JButton specifyFile = null;
-			if (type instanceof PdfResource){
-				PdfResource pdf = (PdfResource) type;
-				textResourcePath =  GuiMaker.createTextField(10, pdf.getPath(), false);
-				textFinishedPlace.setText(""+pdf.getPage());
+			if (resource.getType().equals(ResourceType.PDF)){
+				textResourcePath =  GuiMaker.createTextField(10, resource.getUrlAddress(), false);
+				textFinishedPlace.setText(""+resource.getStartingPlace());
 				resourceLabel = Labels.FILE_LOCATION;
 				finishedPlaceLabel = Labels.FINISHED_PAGE_LOCATION;
 				goToResourceListener = ActionMaker.goToPdfResource(textResourcePath, this);
-				specifyFile = GuiMaker.createButton(ButtonsLabels.SELECT_FILE, ActionMaker.openFile(this, textResourcePath));
+				
+				specifyFile = GuiMaker.createButton(ButtonsLabels.SELECT_FILE, 
+						ActionMaker.openFile(this, textResourcePath, resource));
 			}
-			else if (type instanceof UrlResource){
-				UrlResource url = (UrlResource) type;
-				textResourcePath = GuiMaker.createTextField(10, url.getUrlAddress(), true);
-				textResourcePath.addKeyListener(KeyListener.saveUrlWhenIdle(textResourcePath));
+			
+			else if (resource instanceof Resource){
+				textResourcePath = GuiMaker.createTextField(10, resource.getUrlAddress(), true);
+				ResourceChangeHandler handler = new ResourceChangeHandler(resource, ChangeType.PATH);
+				textResourcePath.addKeyListener(KeyListener.saveUrlWhenIdle(textResourcePath, handler));
 				textResourcePath.addFocusListener(FocusListeners.stopTimerWhenFocusLost());
-				textResourcePath.addFocusListener(FocusListeners.setComponentToWatchWhenFocused());
-				textFinishedPlace.setText(url.getStartingPlace());
+				textResourcePath.addFocusListener(FocusListeners.setComponentToWatchWhenFocused(handler));
+				textFinishedPlace.setText(resource.getStartingPlace());
 				resourceLabel = Labels.URL_ADDRESS;
 				finishedPlaceLabel = Labels.FINISHED_WORD_LOCATION;
 				goToResourceListener = ActionMaker.goToResourceURL(textResourcePath, this);
 				
 			}
 		
-		textFinishedPlace.addKeyListener(KeyListener.saveUrlWhenIdle(textFinishedPlace));
+		ResourceChangeHandler handler = new ResourceChangeHandler(resource, ChangeType.STARTING_POINT);
+		textFinishedPlace.addKeyListener(KeyListener.saveUrlWhenIdle(textFinishedPlace, handler));
 		textFinishedPlace.addFocusListener(FocusListeners.stopTimerWhenFocusLost());
-		textFinishedPlace.addFocusListener(FocusListeners.setComponentToWatchWhenFocused());
+		textFinishedPlace.addFocusListener(FocusListeners.setComponentToWatchWhenFocused(handler));
 			
 		JButton buttonGoToResource=GuiMaker.createButton(ButtonsLabels.GO_TO_SOURCE, goToResourceListener);
 		

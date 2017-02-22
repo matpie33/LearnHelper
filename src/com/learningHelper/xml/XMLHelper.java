@@ -8,13 +8,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import com.learningHelper.gui.Frame;
 import com.learningHelper.resources.Resource;
+import com.learningHelper.resources.ResourceChangeHandler;
 
 public class XMLHelper {
 	
-	private JTextComponent watched;
-	private String toReplace;
+	private JTextComponent watchedTextComponent;
+	private ResourceChangeHandler resourceChangeHandler;
 	private XMLWriter writer;
 	private String xmlFileName = "sources.xml";
 	
@@ -22,25 +22,33 @@ public class XMLHelper {
 		writer = new XMLWriter();
 	}
 
-	public void replacePdfPath(String oldPath, String path, Frame frame) throws Exception{		
-		writer.replacePdfResourcePath(oldPath,path);
-		writer.saveToXML(xmlFileName);		
+	public void replacePdfPath(Resource resource, String path) throws Exception{		
+		writer.removeResource(resource);
+		System.out.println("removed: "+resource);
+		resource.setUrlAddress(path);
+		writer.addResource(resource);
+		writer.saveToXML(xmlFileName);
+		System.out.println("added: "+resource);
+		System.out.println("replaced");
 	}
 	
 	public void saveUrlPath() throws Exception{
-		if (toReplace.equals(watched.getText())){
+		if (resourceChangeHandler.equals(watchedTextComponent.getText())){
 			return;
 		}
-		writer.replaceUrlResourcePath(toReplace, watched.getText());
+		Resource oldResource = resourceChangeHandler.getResource();
+		writer.removeResource(oldResource);		
+		writer.addResource(resourceChangeHandler.updateAndReturn(watchedTextComponent.getText()));
 		writer.saveToXML(xmlFileName);
-		
 	}
 	
+	public void setTextComponentToWatch(JTextComponent s, ResourceChangeHandler resource){
+		resourceChangeHandler=resource;
+		watchedTextComponent=s;
+	}
 	
-	public void setTextComponentToWatch(JTextComponent s){
-		toReplace=s.getText();
-		watched=s;
-		System.out.println("now watching "+s.getText());
+	public void setResourceHandler(ResourceChangeHandler resource){
+		resourceChangeHandler = resource;
 	}
 	
 	public void save(){

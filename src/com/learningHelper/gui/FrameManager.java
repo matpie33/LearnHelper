@@ -4,6 +4,7 @@ import java.awt.Component;
 
 import javax.swing.text.JTextComponent;
 
+import com.learningHelper.resources.ResourceChangeHandler;
 import com.learningHelper.timing.TimeCatcher;
 import com.learningHelper.xml.XMLHelper;
 
@@ -19,9 +20,9 @@ public class FrameManager {
 		helper = new XMLHelper();
 	}
 
-	public void keyPressed(JTextComponent textComponent){
+	public void keyPressed(JTextComponent textComponent, ResourceChangeHandler res){
 		if (!timer.cleanStopWatch()){
-			helper.setTextComponentToWatch(textComponent);
+			helper.setTextComponentToWatch(textComponent, res);
 		}
 	}
 	
@@ -64,11 +65,11 @@ public class FrameManager {
 		}
 	}
 	
-	public void setComponent (Component text){
+	public void setComponent (Component text, ResourceChangeHandler resource){
 		if (text instanceof JTextComponent == false){
 			System.out.println("errrr");
 		}
-		helper.setTextComponentToWatch((JTextComponent)text);
+		helper.setTextComponentToWatch((JTextComponent)text, resource);
 	}
 	
 	public void setFrame (Frame fr){

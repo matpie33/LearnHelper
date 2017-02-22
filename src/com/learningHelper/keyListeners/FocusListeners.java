@@ -4,6 +4,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 import com.learningHelper.gui.FrameManager;
+import com.learningHelper.resources.ResourceChangeHandler;
 
 public class FocusListeners {
 	
@@ -16,12 +17,12 @@ public class FocusListeners {
 		};
 	}
 	
-	public static FocusAdapter setComponentToWatchWhenFocused(){
+	public static FocusAdapter setComponentToWatchWhenFocused(ResourceChangeHandler res){
 		return new FocusAdapter(){
 			@Override
 			public void focusGained (FocusEvent e){
-				System.out.println("component is: "+e.getComponent().getClass());
-				FrameManager.getInstance().setComponent(e.getComponent());
+				System.out.println("handler is: "+res.getChangeType());
+				FrameManager.getInstance().setComponent(e.getComponent(), res);
 			}
 		};
 	}

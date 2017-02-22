@@ -22,9 +22,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.learningHelper.resources.PdfResource;
 import com.learningHelper.resources.Resource;
-import com.learningHelper.resources.UrlResource;
+import com.learningHelper.resources.ResourceType;
 
 public class XMLWriter {
 	
@@ -46,39 +45,29 @@ public class XMLWriter {
 	
 	public void addResource (Resource r){
 		resources.add(r);
-		for (Resource res: resources){
-			if (res instanceof PdfResource){
-				PdfResource pdf = (PdfResource) res;
-			}
-		}
+		System.out.println(resources);
+//		for (Resource res: resources){
+//			if (res instanceof PdfResource){
+//				PdfResource pdf = (PdfResource) res;
+//			}
+//		}
 	}
 	
 	public void replacePdfResourcePath(String oldPath, String newPath) throws Exception{
-		for (Resource res: resources){
-			if (res instanceof PdfResource){
-				PdfResource pdf = (PdfResource) res;
-				if (pdf.getPath().equals(oldPath)){
-					pdf.setPath(newPath);
-					return;
-				}
-			}
-		}
-		throw new Exception ("Nie znalazlem pdf'a ze sciezka: "+oldPath);
+//		for (Resource res: resources){
+//			if (res instanceof PdfResource){
+//				PdfResource pdf = (PdfResource) res;
+//				if (pdf.getPath().equals(oldPath)){
+//					pdf.setPath(newPath);
+//					return;
+//				}
+//			}
+//		}
+//		throw new Exception ("Nie znalazlem pdf'a ze sciezka: "+oldPath);
 	}
 	
-	public void replaceUrlResourcePath(String oldPath, String newPath) throws Exception{
-		for (Resource res: resources){
-			if (res instanceof UrlResource){
-				UrlResource url = (UrlResource) res;
-				if (url.getUrlAddress().equals(oldPath)){
-					url.setUrlAddress(newPath);
-					resources.remove(res);
-					resources.add(url);
-					return;
-				}
-			}
-		}
-		throw new Exception ("Nie znalazlem URL'a ze sciezka: "+oldPath);
+	public void removeResource (Resource r){
+		resources.remove(r);
 	}
 	
 	
@@ -96,37 +85,25 @@ public class XMLWriter {
 	        Element rootElement = dom.createElement(rootNode);
 	        
 	        for (Resource resource: resources){
-	        	if (resource instanceof PdfResource){
-	        		PdfResource pdf = (PdfResource) resource;
-	        		String path = pdf.getPath();
-	        		int page = pdf.getPage();
-	        		
+	        	String path = resource.getUrlAddress();
+        		String page = resource.getStartingPlace();
+        		Element e1 = null;
+        		Element e2 = null;
+	        	if (resource.getType().equals(ResourceType.PDF)){
 	        		e = dom.createElement(pdfNode);
-	        		
-	    	        Element e1 = dom.createElement(pdfPath);
-	    	        e1.appendChild(dom.createTextNode(path));
-	    	        e.appendChild(e1);
-	    	        
-	    	        e1 = dom.createElement(pdfPage);
-	    	        e1.appendChild(dom.createTextNode(""+page));
-	    	        e.appendChild(e1);
-	    	        rootElement.appendChild(e); 
+	    	        e1 = dom.createElement(pdfPath);
+	    	        e2 = dom.createElement(pdfPage);
 	        	}
-	        	else if (resource instanceof UrlResource){
-	        		UrlResource urlRes = (UrlResource) resource;
-	        		String start = urlRes.getStartingPlace();
-	        		String url = urlRes.getUrlAddress();
-	        		
+	        	else if (resource.getType().equals(ResourceType.URL)){
 	        		e = dom.createElement(urlNode);
-	    	        Element e1 = dom.createElement(urlLocation);
-	    	        e1.appendChild(dom.createTextNode(url));
-	    	        e.appendChild(e1);
-	    	        
-	    	        e1 = dom.createElement(urlStartingPoint);
-	    	        e1.appendChild(dom.createTextNode(start));
-	    	        e.appendChild(e1);
-	    	        rootElement.appendChild(e); 
+	    	        e1 = dom.createElement(urlLocation);
+	    	        e2 = dom.createElement(urlStartingPoint);
 	        	}
+	        	e1.appendChild(dom.createTextNode(path));
+    	        e.appendChild(e1);
+    	        e2.appendChild(dom.createTextNode(page));
+    	        e.appendChild(e2);
+    	        rootElement.appendChild(e); 
 	        }    	        	              
 
 	        dom.appendChild(rootElement);
@@ -166,7 +143,7 @@ public class XMLWriter {
 		for (int i=0; i<list.getLength(); i++){
 			Node node = list.item(i);
 			Element element = getXmlElement(node);			
-			UrlResource url = readUrlResource(element);
+			Resource url = readUrlResource(element);
 			resources.add(url);
 		}
 		
@@ -174,8 +151,8 @@ public class XMLWriter {
 		for (int i=0; i<listPdf.getLength(); i++){
 			Node node = listPdf.item(i);
 			Element element = getXmlElement(node);			
-			PdfResource pdf = readPdfResource(element);
-			System.out.println("pdf: "+pdf.getPath());
+			Resource pdf = readPdfResource(element);
+			System.out.println("pdf: "+pdf.getUrlAddress());
 			resources.add(pdf);
 		}
 		this.resources=resources;
@@ -190,20 +167,20 @@ public class XMLWriter {
 		return element;
 	}
 	
-	private UrlResource readUrlResource (Element element){
+	private Resource readUrlResource (Element element){
 		String location = element.getElementsByTagName(urlLocation).item(0)
 				.getTextContent();
 		String startingPoint = element.getElementsByTagName(urlStartingPoint)
 				.item(0).getTextContent();
-		return new UrlResource(location, startingPoint);		
+		return new Resource(ResourceType.URL, location, startingPoint);		
 	}
 	
-	private PdfResource readPdfResource(Element element){
+	private Resource readPdfResource(Element element){
 		String path = element.getElementsByTagName(pdfPath).item(0)
 				.getTextContent();
-		int page = Integer.parseInt(element.getElementsByTagName(pdfPage)
-				.item(0).getTextContent());
-		return new PdfResource(path, page);
+		String page = element.getElementsByTagName(pdfPage)
+				.item(0).getTextContent();
+		return new Resource(ResourceType.PDF, path, page);
 	}
 	
 }
