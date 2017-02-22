@@ -3,3 +3,5 @@ bin
 .project
 .settings/org.eclipse.jdt.core.prefs
 command.bat
+dist
+sources.xml
