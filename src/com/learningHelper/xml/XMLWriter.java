@@ -24,6 +24,7 @@ import org.xml.sax.SAXException;
 
 import com.learningHelper.resources.Resource;
 import com.learningHelper.resources.ResourceType;
+import com.learningHelper.resources.YoutubeResource;
 
 public class XMLWriter {
 	
@@ -37,7 +38,9 @@ public class XMLWriter {
 	private String urlLocation = "Adres";
 	private String urlStartingPoint = "MiejsceStartu";
 	
-	
+	private String youtubeNode = "Youtube";
+	private String youtubeMinutes = "Minuta";
+	private String youtubeSeconds = "Sekunda";
 	
 	public XMLWriter(){
 		resources = new ArrayList <>();
@@ -45,28 +48,17 @@ public class XMLWriter {
 	
 	public void addResource (Resource r){
 		resources.add(r);
-		System.out.println(resources);
+		System.out.println("adding: "+r);
 //		for (Resource res: resources){
 //			if (res instanceof PdfResource){
 //				PdfResource pdf = (PdfResource) res;
 //			}
 //		}
 	}
-	
-	public void replacePdfResourcePath(String oldPath, String newPath) throws Exception{
-//		for (Resource res: resources){
-//			if (res instanceof PdfResource){
-//				PdfResource pdf = (PdfResource) res;
-//				if (pdf.getPath().equals(oldPath)){
-//					pdf.setPath(newPath);
-//					return;
-//				}
-//			}
-//		}
-//		throw new Exception ("Nie znalazlem pdf'a ze sciezka: "+oldPath);
-	}
+
 	
 	public void removeResource (Resource r){
+		System.out.println("removing: "+r);
 		resources.remove(r);
 	}
 	
@@ -86,23 +78,41 @@ public class XMLWriter {
 	        
 	        for (Resource resource: resources){
 	        	String path = resource.getUrlAddress();
+	        	System.out.println("PATH: "+path);
         		String page = resource.getStartingPlace();
         		Element e1 = null;
         		Element e2 = null;
+        		Element e3 = null;
+        		
 	        	if (resource.getType().equals(ResourceType.PDF)){
 	        		e = dom.createElement(pdfNode);
 	    	        e1 = dom.createElement(pdfPath);
+	    	        e1.appendChild(dom.createTextNode(path));
 	    	        e2 = dom.createElement(pdfPage);
+	    	        e2.appendChild(dom.createTextNode(page));
 	        	}
 	        	else if (resource.getType().equals(ResourceType.URL)){
 	        		e = dom.createElement(urlNode);
 	    	        e1 = dom.createElement(urlLocation);
+	    	        e1.appendChild(dom.createTextNode(path));
 	    	        e2 = dom.createElement(urlStartingPoint);
+	    	        e2.appendChild(dom.createTextNode(page));
 	        	}
-	        	e1.appendChild(dom.createTextNode(path));
+	        	else if (resource.getType().equals(ResourceType.YOUTUBE)){
+	        		YoutubeResource youtubeRes = (YoutubeResource) resource;
+	        		e = dom.createElement(youtubeNode);
+	    	        e1 = dom.createElement(urlLocation);
+	    	        e2 = dom.createElement(youtubeMinutes);
+	    	        e3 = dom.createElement(youtubeSeconds);
+	    	        e1.appendChild(dom.createTextNode(path));
+	    	        e2.appendChild(dom.createTextNode(""+youtubeRes.getMinutes()));
+	    	        e3.appendChild(dom.createTextNode(""+youtubeRes.getSeconds()));
+	        	}
     	        e.appendChild(e1);
-    	        e2.appendChild(dom.createTextNode(page));
     	        e.appendChild(e2);
+    	        if (e3 != null){
+    	        	e.appendChild(e3);
+    	        }
     	        rootElement.appendChild(e); 
 	        }    	        	              
 
@@ -155,6 +165,15 @@ public class XMLWriter {
 			System.out.println("pdf: "+pdf.getUrlAddress());
 			resources.add(pdf);
 		}
+		
+		NodeList listYoutube = document.getElementsByTagName(youtubeNode);
+		for (int i=0; i<listYoutube.getLength(); i++){
+			Node node = listYoutube.item(i);
+			Element element = getXmlElement(node);			
+			Resource pdf = readYoutubeResource(element);
+			System.out.println("pdf: "+pdf.getUrlAddress());
+			resources.add(pdf);
+		}
 		this.resources=resources;
 		return resources;
 	}
@@ -181,6 +200,21 @@ public class XMLWriter {
 		String page = element.getElementsByTagName(pdfPage)
 				.item(0).getTextContent();
 		return new Resource(ResourceType.PDF, path, page);
+	}
+	
+	private Resource readYoutubeResource(Element element){
+		String path = element.getElementsByTagName(urlLocation).item(0)
+				.getTextContent();
+		String minutes = element.getElementsByTagName(youtubeMinutes)
+				.item(0).getTextContent();
+		String seconds = element.getElementsByTagName(youtubeSeconds)
+				.item(0).getTextContent();
+		YoutubeResource r = new YoutubeResource();
+		r.setUrlAddress(path);
+		r.setMinutes(Integer.parseInt(minutes));
+		r.setSeconds(Integer.parseInt(seconds));
+		
+		return r;
 	}
 	
 }

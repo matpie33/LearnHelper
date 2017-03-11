@@ -14,6 +14,7 @@ import javax.swing.text.JTextComponent;
 import com.guimaker.keyBinding.SimpleActionMaker;
 import com.learningHelper.resources.Resource;
 import com.learningHelper.resources.ResourceType;
+import com.learningHelper.resources.YoutubeResource;
 import com.learningHelper.strings.Exceptions;
 import com.learningHelper.xml.XMLHelper;
 
@@ -50,6 +51,17 @@ public class ActionMaker extends SimpleActionMaker {
 		};
     }
     
+    public static AbstractAction createYoutubeResource(final Frame frame){
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Resource url = new YoutubeResource();
+				helper.addResource(url);
+				frame.createResource(url);
+			}
+		};
+    }
+    
     public static AbstractAction goToPdfResource(final JTextComponent componentWithPath, Frame frame){
 		return new AbstractAction() {
 			@Override
@@ -78,6 +90,28 @@ public class ActionMaker extends SimpleActionMaker {
 		};
     }
     
+    public static AbstractAction goToYoutubeURL (JTextComponent textFieldWithUri,
+    		JTextComponent timeMinutesComponent, JTextComponent timeSecondsComponent, Frame frame){
+    	return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String uriText = textFieldWithUri.getText();
+				if (!uriText.startsWith(PROTOCOL_HTTP) && !uriText.startsWith(PROTOCOL_HTTPS)){
+					uriText = PROTOCOL_HTTP+AFTER_PROTOCOL+uriText;
+				}
+				int minutes = Integer.parseInt(timeMinutesComponent.getText());
+				int seconds = Integer.parseInt(timeSecondsComponent.getText());
+				uriText += String.format("&t=%dm%ds", minutes, seconds);
+				System.out.println("URI Text: "+uriText);
+				URI uriObject = constructUriFromText(uriText, frame);
+				if (uriObject != null){
+					openUrlInBrowser(uriObject, frame);
+				}
+				
+			}
+    	};
+    }
+    
     public static AbstractAction goToResourceURL (JTextComponent textFieldWithUri, Frame frame){
     	return new AbstractAction() {
 			@Override
@@ -86,28 +120,40 @@ public class ActionMaker extends SimpleActionMaker {
 				if (!uriText.startsWith(PROTOCOL_HTTP) && !uriText.startsWith(PROTOCOL_HTTPS)){
 					uriText = PROTOCOL_HTTP+AFTER_PROTOCOL+uriText;
 				}
-				URI uriObject = null;
-				try {
-					uriObject = new URI(uriText);
-				} 
-				catch (URISyntaxException e1) {
-					frame.showMessageDialog(Exceptions.URI_SYNTAX_EXCEPTION, true);
-					return;
+				URI uriObject = constructUriFromText(uriText, frame);
+				if (uriObject != null){
+					openUrlInBrowser(uriObject, frame);
 				}
-				  if (Desktop.isDesktopSupported()) {
-			          try {
-			            Desktop.getDesktop().browse(uriObject);
-			          }
-			          catch (IOException ex) {
-			        	  ex.printStackTrace();
-			        	  frame.showMessageDialog(Exceptions.CANNOT_OPEN_BROWSER_EXCEPTION, true);			        	  
-			          }
-			        } 
-				  else { 
-					  frame.showMessageDialog(Exceptions.DESKTOP_NOT_SUPPORTED, true); 
-				  }
+				
 			}
     	};
+    }
+    
+    private static URI constructUriFromText (String text, Frame frame){
+    	URI uriObject = null;
+		try {
+			uriObject = new URI(text);
+		} 
+		catch (URISyntaxException e1) {
+			frame.showMessageDialog(Exceptions.URI_SYNTAX_EXCEPTION, true);
+			return null;
+		}
+		return uriObject;
+    }
+    
+    private static void openUrlInBrowser(URI uriObject, Frame frame){
+    	if (Desktop.isDesktopSupported()) {
+			try {
+				Desktop.getDesktop().browse(uriObject);
+			}
+			catch (IOException ex) {
+				ex.printStackTrace();
+				frame.showMessageDialog(Exceptions.CANNOT_OPEN_BROWSER_EXCEPTION, true);			        	  
+			}
+		} 
+		else { 
+			frame.showMessageDialog(Exceptions.DESKTOP_NOT_SUPPORTED, true); 
+		}
     }
 		
     public static AbstractAction openFile(Frame frame, JTextComponent componentWithPath, Resource resource){

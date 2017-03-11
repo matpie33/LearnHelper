@@ -19,4 +19,16 @@ public class KeyListener {
 			}
 		};
 	}
+	
+	public static KeyAdapter acceptDigitsOnly(JTextComponent textComponent){
+		return new KeyAdapter(){
+			@Override
+			public void keyTyped(KeyEvent e){
+				char c = e.getKeyChar();
+				if (!((""+c).matches("\\d+"))){
+					e.consume();
+				}
+			}
+		};
+	}
 }
