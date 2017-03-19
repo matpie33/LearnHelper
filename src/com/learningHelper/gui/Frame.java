@@ -88,6 +88,7 @@ public class Frame extends SimpleWindow {
 		JTextField youtubeSeconds = null;
 		String resourceLabel = null, finishedPlaceLabel = null;
 		ActionListener goToResourceListener = null;
+		ActionListener copyToClipboardListener = null;
 		JButton specifyFile = null;
 			if (resource.getType().equals(ResourceType.PDF)){
 				textFinishedPlace = GuiMaker.createTextField(20);
@@ -108,6 +109,7 @@ public class Frame extends SimpleWindow {
 				textResourcePath.addFocusListener(FocusListeners.stopTimerWhenFocusLost());
 				textResourcePath.addFocusListener(FocusListeners.setComponentToWatchWhenFocused(handler));
 				textFinishedPlace.setText(resource.getStartingPlace());
+				copyToClipboardListener = ActionMaker.copyToClipboard(textFinishedPlace, this);
 				resourceLabel = Labels.URL_ADDRESS;
 				finishedPlaceLabel = Labels.FINISHED_WORD_LOCATION;
 				goToResourceListener = ActionMaker.goToResourceURL(textResourcePath, this);
@@ -150,6 +152,9 @@ public class Frame extends SimpleWindow {
 			}
 			
 		JButton buttonGoToResource=GuiMaker.createButton(ButtonsLabels.GO_TO_SOURCE, goToResourceListener);
+		if (copyToClipboardListener != null){
+			buttonGoToResource.addActionListener(copyToClipboardListener);
+		}
 		
 		JLabel labelResourceName = GuiMaker.createLabel(resourceLabel);
 		JLabel labelFinishedPlace = GuiMaker.createLabel(finishedPlaceLabel);

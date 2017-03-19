@@ -1,6 +1,9 @@
 package com.learningHelper.gui;
 
 import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -58,6 +61,18 @@ public class ActionMaker extends SimpleActionMaker {
 				Resource url = new YoutubeResource();
 				helper.addResource(url);
 				frame.createResource(url);
+			}
+		};
+    }
+    
+    public static AbstractAction copyToClipboard(final JTextComponent textToCopy, final Frame frame){
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String myString =textToCopy.getText();
+				StringSelection stringSelection = new StringSelection(myString);
+				Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+				clpbrd.setContents(stringSelection, null);
 			}
 		};
     }
