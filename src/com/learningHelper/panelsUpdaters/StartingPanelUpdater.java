@@ -13,7 +13,8 @@ public class StartingPanelUpdater {
 	}
 
 	public void addLearningSourcesGroup (String name){
-		elementsCreator.getTabPane().add(name, new JPanel());
+		elementsCreator.getTabPane().add(name, elementsCreator
+				.createLearningResourcesList().getPanel());
 	}
 
 }

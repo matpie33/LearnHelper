@@ -11,7 +11,8 @@ public class ApplicationConfigurationHolder {
 				Titles.APPLICATION_TITLE).setContentPanelColor(
 				BasicColors.BLUE_NORMAL_6)
 										 .setPanelBackgroundColor(
-												 BasicColors.PURPLE_DARK_2);
+												 BasicColors.PURPLE_DARK_2)
+				.setHotkeysPanelColor(BasicColors.BLUE_NORMAL_1);
 	}
 
 }

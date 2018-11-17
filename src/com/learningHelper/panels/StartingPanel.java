@@ -4,6 +4,7 @@ import com.guimaker.enums.Anchor;
 import com.guimaker.enums.FillType;
 import com.guimaker.panels.AbstractPanelWithHotkeysInfo;
 import com.guimaker.row.SimpleRowBuilder;
+import com.learningHelper.application.ApplicationController;
 import com.learningHelper.application.ResourcesHolder;
 import com.learningHelper.uiElementsCreators.StartingPanelElementsCreator;
 
@@ -12,9 +13,10 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 	private final static String UNIQUE_NAME = "Starting panel";
 	private StartingPanelElementsCreator elementsCreator;
 
-	public StartingPanel(ResourcesHolder resourcesHolder) {
+	public StartingPanel(ResourcesHolder resourcesHolder,
+			ApplicationController applicationController) {
 		elementsCreator = new StartingPanelElementsCreator(
-				resourcesHolder);
+				resourcesHolder, applicationController);
 	}
 
 	@Override

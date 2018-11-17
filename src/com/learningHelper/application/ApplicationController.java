@@ -13,7 +13,7 @@ public class ApplicationController implements ApplicationChangesManager {
 
 	public ApplicationController() {
 		resourcesHolder = new ResourcesHolder();
-		startingPanel = new StartingPanel(resourcesHolder);
+		startingPanel = new StartingPanel(resourcesHolder, this);
 		applicationConfigurationHolder = new ApplicationConfigurationHolder();
 		applicationWindow = new ApplicationWindow(this, startingPanel,
 				applicationConfigurationHolder.getApplicationConfiguration());
