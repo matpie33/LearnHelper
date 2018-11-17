@@ -5,3 +5,5 @@ bin
 command.bat
 dist
 sources.xml
+*.iml
+*.xml
