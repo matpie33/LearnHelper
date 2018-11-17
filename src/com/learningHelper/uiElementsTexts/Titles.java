@@ -1,4 +1,4 @@
-package com.learningHelper.strings;
+package com.learningHelper.uiElementsTexts;
 
 public class Titles {
 

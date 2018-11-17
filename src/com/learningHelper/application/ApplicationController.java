@@ -9,9 +9,11 @@ public class ApplicationController implements ApplicationChangesManager {
 	private ApplicationWindow applicationWindow;
 	private ApplicationConfigurationHolder applicationConfigurationHolder;
 	private StartingPanel startingPanel;
+	private ResourcesHolder resourcesHolder;
 
 	public ApplicationController() {
-		startingPanel = new StartingPanel();
+		resourcesHolder = new ResourcesHolder();
+		startingPanel = new StartingPanel(resourcesHolder);
 		applicationConfigurationHolder = new ApplicationConfigurationHolder();
 		applicationWindow = new ApplicationWindow(this, startingPanel,
 				applicationConfigurationHolder.getApplicationConfiguration());
@@ -23,7 +25,7 @@ public class ApplicationController implements ApplicationChangesManager {
 
 	@Override
 	public boolean isClosingSafe() {
-		return false;
+		return true;
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package com.learningHelper.application;
 
 import com.guimaker.application.ApplicationConfiguration;
 import com.guimaker.colors.BasicColors;
-import com.learningHelper.strings.Titles;
+import com.learningHelper.uiElementsTexts.Titles;
 
 public class ApplicationConfigurationHolder {
 
