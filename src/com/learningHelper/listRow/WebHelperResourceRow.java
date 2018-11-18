@@ -8,14 +8,9 @@ import com.learningHelper.uiElementsCreators.ResourcesListElementsCreator;
 
 public class WebHelperResourceRow {
 
-	private ResourcesListElementsCreator elementsCreator;
-
-	public WebHelperResourceRow() {
-		elementsCreator = new ResourcesListElementsCreator();
-	}
-
 	public void addElementsToPanel(MainPanel panel,
 			CommonListElements commonListElements) {
+		ResourcesListElementsCreator elementsCreator = new ResourcesListElementsCreator();
 		panel.addRowsOfElementsInColumn(
 				SimpleRowBuilder.createRowStartingFromColumn(0, FillType.NONE,
 						commonListElements.getRowNumberLabel(),
