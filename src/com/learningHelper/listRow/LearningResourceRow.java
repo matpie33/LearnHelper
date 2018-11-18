@@ -10,11 +10,20 @@ import com.guimaker.panels.MainPanel;
 import com.learningHelper.model.LearningResource;
 
 public class LearningResourceRow implements ListRowCreator<LearningResource> {
+
+	private WebHelperResourceRow webHelperResourceRow;
+
+	public LearningResourceRow() {
+		webHelperResourceRow = new WebHelperResourceRow();
+	}
+
 	@Override
 	public ListRowData<LearningResource> createListRow(
 			LearningResource learningResource,
 			CommonListElements commonListElements, InputGoal inputGoal) {
-		return new ListRowData<>(new MainPanel(new PanelConfiguration()));
+		MainPanel panel = new MainPanel(new PanelConfiguration());
+		webHelperResourceRow.addElementsToPanel(panel, commonListElements);
+		return new ListRowData<>(panel);
 	}
 
 	@Override

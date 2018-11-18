@@ -15,20 +15,20 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 
 	public StartingPanel(ResourcesHolder resourcesHolder,
 			ApplicationController applicationController) {
-		elementsCreator = new StartingPanelElementsCreator(
-				resourcesHolder, applicationController);
+		elementsCreator = new StartingPanelElementsCreator(resourcesHolder,
+				applicationController);
 	}
 
 	@Override
 	public void createElements() {
-		mainPanel.addRow(
+		mainPanel.addRows(
 				SimpleRowBuilder.createRow(FillType.NONE, Anchor.CENTER,
-						elementsCreator.getTitleLabel()));
-		mainPanel.addRow(SimpleRowBuilder.createRow(FillType.NONE, Anchor.WEST,
-				elementsCreator.getResourcesGroupNameInput(),
-				elementsCreator.getButtonAddResourcesGroup()));
-		mainPanel.addRow(SimpleRowBuilder.createRow(FillType.BOTH,
-				elementsCreator.getTabPane()));
+						elementsCreator.getTitleLabel())
+								.nextRow(FillType.NONE, Anchor.WEST,
+										elementsCreator.getResourcesGroupNameInput(),
+										elementsCreator.getButtonAddResourcesGroup())
+								.nextRow(FillType.BOTH,
+										elementsCreator.getTabPane()));
 	}
 
 	@Override
