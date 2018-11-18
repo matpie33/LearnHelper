@@ -7,7 +7,12 @@ import com.guimaker.listeners.InputValidationListener;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.model.PanelConfiguration;
 import com.guimaker.panels.MainPanel;
+import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.model.LearningResource;
+import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LearningResourceRow implements ListRowCreator<LearningResource> {
 

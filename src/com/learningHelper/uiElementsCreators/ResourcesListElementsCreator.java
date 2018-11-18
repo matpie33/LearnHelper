@@ -1,6 +1,8 @@
 package com.learningHelper.uiElementsCreators;
 
+import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.GuiElementsCreator;
+import com.guimaker.panels.MainPanel;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.uiElementsActionsCreators.ResourcesListActionsCreator;
 import com.learningHelper.uiElementsStyles.UIElementsStyles;
@@ -28,11 +30,15 @@ public class ResourcesListElementsCreator {
 															  .text(Labels.RESOURCE_TYPE));
 	}
 
-	public JComboBox createTypeCombobox() {
-		return GuiElementsCreator.createCombobox(
+	public JComboBox createResourceTypeCombobox(MainPanel panel,
+			CommonListElements commonListElements) {
+		JComboBox combobox = GuiElementsCreator.createCombobox(
 				UIElementsStyles.comboboxStyle()
 								.setComboboxValues(
 										LearningResourceType.getDisplayedValues()));
+		combobox.addItemListener(actionsCreator
+				.createActionChangeResourceType(panel,commonListElements));
+		return combobox;
 	}
 
 	public JLabel createTagLabel() {

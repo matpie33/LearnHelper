@@ -6,8 +6,9 @@ import com.guimaker.panels.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.uiElementsCreators.ResourcesListElementsCreator;
 
-public class WebHelperResourceRow {
+public class WebHelperResourceRow implements ResourceRow {
 
+	@Override
 	public void addElementsToPanel(MainPanel panel,
 			CommonListElements commonListElements) {
 		ResourcesListElementsCreator elementsCreator = new ResourcesListElementsCreator();
@@ -15,7 +16,8 @@ public class WebHelperResourceRow {
 				SimpleRowBuilder.createRowStartingFromColumn(0, FillType.NONE,
 						commonListElements.getRowNumberLabel(),
 						elementsCreator.createTypeLabel(),
-						elementsCreator.createTypeCombobox())
+						elementsCreator.createResourceTypeCombobox(panel,
+								commonListElements))
 								.nextRow(elementsCreator.createTagLabel(),
 										elementsCreator.getTagInput())
 								.setColumnToPutRowInto(1)
