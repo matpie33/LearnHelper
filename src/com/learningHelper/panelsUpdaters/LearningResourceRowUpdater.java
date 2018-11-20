@@ -5,6 +5,7 @@ import com.guimaker.panels.MainPanel;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listRow.ResourceRow;
 import com.learningHelper.listRow.WebHelperResourceRow;
+import com.learningHelper.listRow.WebTextResourceRow;
 import com.learningHelper.listRow.WebVideoResourceRow;
 
 import java.util.HashMap;
@@ -18,6 +19,8 @@ public class LearningResourceRowUpdater {
 				new WebHelperResourceRow());
 		resourceTypeToRowMap.put(LearningResourceType.WEB_VIDEO,
 				new WebVideoResourceRow());
+		resourceTypeToRowMap.put(LearningResourceType.WEB_TEXT_RESOURCE,
+				new WebTextResourceRow());
 	}
 
 	public void changeResourceRowType(MainPanel panel, LearningResourceType type,
