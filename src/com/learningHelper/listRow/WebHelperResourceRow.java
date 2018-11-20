@@ -4,6 +4,7 @@ import com.guimaker.enums.FillType;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
+import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.uiElementsCreators.ResourcesListElementsCreator;
 
 public class WebHelperResourceRow implements ResourceRow {
@@ -16,7 +17,8 @@ public class WebHelperResourceRow implements ResourceRow {
 				SimpleRowBuilder.createRowStartingFromColumn(0, FillType.NONE,
 						commonListElements.getRowNumberLabel(),
 						elementsCreator.createTypeLabel(),
-						elementsCreator.createResourceTypeCombobox(panel,
+						elementsCreator.createResourceTypeCombobox(
+								LearningResourceType.WEB_HELPER_RESOURCE, panel,
 								commonListElements))
 								.nextRow(elementsCreator.createTagLabel(),
 										elementsCreator.getTagInput())

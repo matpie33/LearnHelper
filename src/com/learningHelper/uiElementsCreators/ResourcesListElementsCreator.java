@@ -26,34 +26,39 @@ public class ResourcesListElementsCreator {
 	}
 
 	public JLabel createTypeLabel() {
-		return GuiElementsCreator.createLabel(UIElementsStyles.labelForInputStyle()
-															  .text(Labels.RESOURCE_TYPE));
+		return GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.RESOURCE_TYPE));
 	}
 
-	public JComboBox createResourceTypeCombobox(MainPanel panel,
+	public JComboBox createResourceTypeCombobox(
+			LearningResourceType learningResourceType, MainPanel panel,
 			CommonListElements commonListElements) {
 		JComboBox combobox = GuiElementsCreator.createCombobox(
 				UIElementsStyles.comboboxStyle()
 								.setComboboxValues(
 										LearningResourceType.getDisplayedValues()));
-		combobox.addItemListener(actionsCreator
-				.createActionChangeResourceType(panel,commonListElements));
+		combobox.setSelectedItem(learningResourceType.getDisplayedText());
+		combobox.addItemListener(
+				actionsCreator.createActionChangeResourceType(panel,
+						commonListElements));
 		return combobox;
 	}
 
 	public JLabel createTagLabel() {
-		return GuiElementsCreator.createLabel(UIElementsStyles.labelForInputStyle()
-															  .text(Labels
-																	  .RESOURCE_TAG));
+		return GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.RESOURCE_TAG));
 	}
+
 	public JLabel createLocationLabel() {
-		return GuiElementsCreator.createLabel(UIElementsStyles.labelForInputStyle()
-															  .text(Labels
-																	  .RESOURCE_LOCATIONS));
+		return GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.RESOURCE_LOCATIONS));
 	}
 
 	public JTextComponent getTagInput() {
-		if (tagInput == null){
+		if (tagInput == null) {
 			tagInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.shortTextInputStyle());
 		}
@@ -61,23 +66,25 @@ public class ResourcesListElementsCreator {
 	}
 
 	public JTextComponent getLocationInput() {
-		if (locationInput == null){
+		if (locationInput == null) {
 			locationInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.shortTextInputStyle());
 		}
 		return locationInput;
 	}
 
-	public AbstractButton createAddAlternativeLocationButton (){
-		return GuiElementsCreator.createButtonlikeComponent(UIElementsStyles
-				.buttonStyle().text(Buttons.ADD_ALTERNATIVE_LOCATION), actionsCreator
-				.createAddAlternativeLocationAction());
+	public AbstractButton createAddAlternativeLocationButton() {
+		return GuiElementsCreator.createButtonlikeComponent(
+				UIElementsStyles.buttonStyle()
+								.text(Buttons.ADD_ALTERNATIVE_LOCATION),
+				actionsCreator.createAddAlternativeLocationAction());
 	}
 
-	public AbstractButton createGoToResourceButton (){
-		return GuiElementsCreator.createButtonlikeComponent(UIElementsStyles
-				.buttonStyle().text(Buttons.GO_TO_RESOURCE), actionsCreator
-				.createAddAlternativeLocationAction());
+	public AbstractButton createGoToResourceButton() {
+		return GuiElementsCreator.createButtonlikeComponent(
+				UIElementsStyles.buttonStyle()
+								.text(Buttons.GO_TO_RESOURCE),
+				actionsCreator.createAddAlternativeLocationAction());
 	}
 
 	public AbstractButton createIncreaseVideoNumberButton() {
@@ -88,13 +95,13 @@ public class ResourcesListElementsCreator {
 	}
 
 	public JLabel createStoppedPlaceLabel() {
-		return GuiElementsCreator.createLabel(UIElementsStyles.labelForInputStyle()
-															  .text(Labels
-																	  .STOPPED_PLACE));
+		return GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.STOPPED_PLACE));
 	}
 
 	public JTextComponent createStoppedPlaceTimeRangeStart() {
-		if (timeRangeStartInput == null){
+		if (timeRangeStartInput == null) {
 			timeRangeStartInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.textInputTimeRangeStyle());
 		}
@@ -116,6 +123,5 @@ public class ResourcesListElementsCreator {
 		}
 		return stoppedPlaceTextInput;
 	}
-
 
 }
