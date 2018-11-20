@@ -4,7 +4,7 @@ import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.GuiElementsCreator;
 import com.guimaker.panels.MainPanel;
 import com.learningHelper.enums.LearningResourceType;
-import com.learningHelper.uiElementsActionsCreators.ResourcesListActionsCreator;
+import com.learningHelper.uiElementsActionsCreators.LearningResourceRowActionsCreator;
 import com.learningHelper.uiElementsStyles.UIElementsStyles;
 import com.learningHelper.uiElementsTexts.Buttons;
 import com.learningHelper.uiElementsTexts.Labels;
@@ -12,26 +12,26 @@ import com.learningHelper.uiElementsTexts.Labels;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
-public class ResourcesListElementsCreator {
+public class LearningResourceRowElementsCreator {
 
 	private JTextField tagInput;
 	private JTextField locationInput;
 	private JTextField timeRangeStartInput;
 	private JTextField timeRangeEndInput;
 	private JTextField stoppedPlaceTextInput;
-	private ResourcesListActionsCreator actionsCreator;
+	private LearningResourceRowActionsCreator actionsCreator;
 
-	public ResourcesListElementsCreator() {
-		actionsCreator = new ResourcesListActionsCreator();
+	public LearningResourceRowElementsCreator() {
+		actionsCreator = new LearningResourceRowActionsCreator();
 	}
 
-	public JLabel createTypeLabel() {
+	public JLabel getLabelResourceType() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.RESOURCE_TYPE));
 	}
 
-	public JComboBox createResourceTypeCombobox(
+	public JComboBox getComboboxResourceType(
 			LearningResourceType learningResourceType, MainPanel panel,
 			CommonListElements commonListElements) {
 		JComboBox combobox = GuiElementsCreator.createCombobox(
@@ -45,19 +45,19 @@ public class ResourcesListElementsCreator {
 		return combobox;
 	}
 
-	public JLabel createTagLabel() {
+	public JLabel getLabelResourceTag() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.RESOURCE_TAG));
 	}
 
-	public JLabel createLocationLabel() {
+	public JLabel getLabelResourceLocations() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.RESOURCE_LOCATIONS));
 	}
 
-	public JTextComponent getTagInput() {
+	public JTextComponent getInputResourceTag() {
 		if (tagInput == null) {
 			tagInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.shortTextInputStyle());
@@ -65,7 +65,7 @@ public class ResourcesListElementsCreator {
 		return tagInput;
 	}
 
-	public JTextComponent getLocationInput() {
+	public JTextComponent getInputResourceLocation() {
 		if (locationInput == null) {
 			locationInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.shortTextInputStyle());
@@ -73,34 +73,34 @@ public class ResourcesListElementsCreator {
 		return locationInput;
 	}
 
-	public AbstractButton createAddAlternativeLocationButton() {
+	public AbstractButton getButtonAddAlternativeLocation() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.ADD_ALTERNATIVE_LOCATION),
 				actionsCreator.createAddAlternativeLocationAction());
 	}
 
-	public AbstractButton createGoToResourceButton() {
+	public AbstractButton getButtonGoToResource() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.GO_TO_RESOURCE),
 				actionsCreator.createAddAlternativeLocationAction());
 	}
 
-	public AbstractButton createIncreaseVideoNumberButton() {
+	public AbstractButton getButtonIncreaseVideoNumber() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.INCREASE_VIDEO_NUMBER),
 				actionsCreator.createAddAlternativeLocationAction());
 	}
 
-	public JLabel createStoppedPlaceLabel() {
+	public JLabel getLabelStoppedPlace() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.STOPPED_PLACE));
 	}
 
-	public JTextComponent createStoppedPlaceTimeRangeStart() {
+	public JTextComponent getInputStoppedPlaceTimeRangeStart() {
 		if (timeRangeStartInput == null) {
 			timeRangeStartInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.textInputTimeRangeStyle());
@@ -108,7 +108,7 @@ public class ResourcesListElementsCreator {
 		return timeRangeStartInput;
 	}
 
-	public JTextComponent createStoppedPlaceTimeRangeEnd() {
+	public JTextComponent getInputStoppedPlaceTimeRangeEnd() {
 		if (timeRangeEndInput == null) {
 			timeRangeEndInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.textInputTimeRangeStyle());
@@ -116,7 +116,7 @@ public class ResourcesListElementsCreator {
 		return timeRangeEndInput;
 	}
 
-	public JTextComponent createStoppedPlaceTextInput() {
+	public JTextComponent getTextInputStoppedPlace() {
 		if (stoppedPlaceTextInput == null) {
 			stoppedPlaceTextInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.shortTextInputStyle());

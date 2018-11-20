@@ -10,11 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-public class ResourcesListActionsCreator {
+public class LearningResourceRowActionsCreator {
 
 	private LearningResourceRowUpdater rowUpdater;
 
-	public ResourcesListActionsCreator() {
+	public LearningResourceRowActionsCreator() {
 		this.rowUpdater = new LearningResourceRowUpdater();
 	}
 
