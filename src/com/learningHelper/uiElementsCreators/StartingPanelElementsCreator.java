@@ -53,7 +53,7 @@ public class StartingPanelElementsCreator {
 	public AbstractButton getButtonAddResourcesGroup() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
-								.text(Buttons.ADD_GROUP_RESOURCE),
+								.text(Buttons.ADD),
 				actionsCreator.createActionAddGroupResource());
 	}
 
@@ -63,6 +63,10 @@ public class StartingPanelElementsCreator {
 					UIElementsStyles.shortTextInputStyle());
 		}
 		return resourcesGroupName;
+	}
+	public JLabel getResourcesGroupNameLabel() {
+		return GuiElementsCreator.createLabel(UIElementsStyles
+				.labelForInputStyle().text(Labels.RESOURCES_GROUP_NAME));
 	}
 
 	public MyList<LearningResource> createLearningResourcesList() {

@@ -1,6 +1,5 @@
 package com.learningHelper.uiElementsStyles;
 
-import com.guimaker.colors.BasicColors;
 import com.guimaker.enums.ButtonType;
 import com.guimaker.options.ButtonOptions;
 import com.guimaker.options.ComboboxOptions;
@@ -12,7 +11,7 @@ import java.awt.*;
 public class UIElementsStyles {
 
 	public static ComponentOptions titleLabelStyle() {
-		return new ComponentOptions().foregroundColor(BasicColors.BLUE_BRIGHT_1)
+		return new ComponentOptions().foregroundColor(Color.WHITE)
 									 .fontSize(20F);
 	}
 
