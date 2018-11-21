@@ -30,9 +30,4 @@ public class LearningResourceRow implements ListRowCreator<LearningResource> {
 		return new ListRowData<>(panel);
 	}
 
-	@Override
-	public void addValidationListener(
-			InputValidationListener<LearningResource> inputValidationListener) {
-
-	}
 }
