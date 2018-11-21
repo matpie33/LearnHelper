@@ -34,6 +34,7 @@ public class WebTextResourceRow implements ResourceRow {
 								commonListElements))
 								.nextRow(elementsCreator.getLabelResourceTag(),
 										elementsCreator.getInputResourceTag(
+												learningResource.getTag(),
 												learningResource))
 								.setColumnToPutRowInto(1)
 								.nextRow(

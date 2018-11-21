@@ -35,6 +35,7 @@ public class WebVideoResourceRow implements ResourceRow {
 								commonListElements))
 								.nextRow(elementsCreator.getLabelResourceTag(),
 										elementsCreator.getInputResourceTag(
+												learningResource.getTag(),
 												learningResource))
 								.setColumnToPutRowInto(1)
 								.nextRow(elementsCreator.getLabelResourceLocations(),

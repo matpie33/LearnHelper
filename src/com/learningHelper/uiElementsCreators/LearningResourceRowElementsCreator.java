@@ -61,12 +61,11 @@ public class LearningResourceRowElementsCreator {
 								.text(Labels.RESOURCE_LOCATIONS));
 	}
 
-	public JTextComponent getInputResourceTag(
-			LearningResource learningResource) {
+	public JTextComponent getInputResourceTag(String tag, LearningResource learningResource) {
 		if (tagInput == null) {
 			tagInput = actionsCreator.addTagChangeListener(learningResource,
 					GuiElementsCreator.createTextField(
-							UIElementsStyles.shortTextInputStyle()));
+							UIElementsStyles.shortTextInputStyle().text(tag)));
 		}
 		return tagInput;
 	}

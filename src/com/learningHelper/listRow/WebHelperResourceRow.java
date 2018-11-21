@@ -34,7 +34,8 @@ public class WebHelperResourceRow implements ResourceRow {
 								LearningResourceType.WEB_HELPER_RESOURCE, panel,
 								commonListElements))
 								.nextRow(elementsCreator.getLabelResourceTag(),
-										elementsCreator.getInputResourceTag(
+										elementsCreator.getInputResourceTag
+												(learningResource.getTag(),
 												learningResource))
 								.setColumnToPutRowInto(1)
 								.nextRow(FillType.HORIZONTAL,
