@@ -3,7 +3,9 @@ package com.learningHelper.uiElementsCreators;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.GuiElementsCreator;
 import com.guimaker.panels.MainPanel;
+import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
+import com.learningHelper.model.LearningResource;
 import com.learningHelper.uiElementsActionsCreators.LearningResourceRowActionsCreator;
 import com.learningHelper.uiElementsStyles.UIElementsStyles;
 import com.learningHelper.uiElementsTexts.Buttons;
@@ -21,8 +23,10 @@ public class LearningResourceRowElementsCreator {
 	private JTextField stoppedPlaceTextInput;
 	private LearningResourceRowActionsCreator actionsCreator;
 
-	public LearningResourceRowElementsCreator() {
-		actionsCreator = new LearningResourceRowActionsCreator();
+	public LearningResourceRowElementsCreator(
+			ApplicationController applicationController, String learningResourcesGroupName) {
+		actionsCreator = new LearningResourceRowActionsCreator
+				(applicationController, learningResourcesGroupName);
 	}
 
 	public JLabel getLabelResourceType() {
@@ -31,7 +35,7 @@ public class LearningResourceRowElementsCreator {
 								.text(Labels.RESOURCE_TYPE));
 	}
 
-	public JComboBox getComboboxResourceType(
+	public JComboBox getComboboxResourceType(LearningResource learningResource,
 			LearningResourceType learningResourceType, MainPanel panel,
 			CommonListElements commonListElements) {
 		JComboBox combobox = GuiElementsCreator.createCombobox(
@@ -40,8 +44,8 @@ public class LearningResourceRowElementsCreator {
 										LearningResourceType.getDisplayedValues()));
 		combobox.setSelectedItem(learningResourceType.getDisplayedText());
 		combobox.addItemListener(
-				actionsCreator.createActionChangeResourceType(panel,
-						commonListElements));
+				actionsCreator.createActionChangeResourceType(learningResource,
+						panel, commonListElements));
 		return combobox;
 	}
 
@@ -57,10 +61,12 @@ public class LearningResourceRowElementsCreator {
 								.text(Labels.RESOURCE_LOCATIONS));
 	}
 
-	public JTextComponent getInputResourceTag() {
+	public JTextComponent getInputResourceTag(
+			LearningResource learningResource) {
 		if (tagInput == null) {
-			tagInput = GuiElementsCreator.createTextField(
-					UIElementsStyles.shortTextInputStyle());
+			tagInput = actionsCreator.addTagChangeListener(learningResource,
+					GuiElementsCreator.createTextField(
+							UIElementsStyles.shortTextInputStyle()));
 		}
 		return tagInput;
 	}

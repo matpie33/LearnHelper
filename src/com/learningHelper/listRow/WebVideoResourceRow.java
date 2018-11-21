@@ -5,24 +5,37 @@ import com.guimaker.enums.FillType;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
+import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
+import com.learningHelper.model.LearningResource;
 import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 
 public class WebVideoResourceRow implements ResourceRow {
 
+	private String learningResourcesGroupName;
+	private ApplicationController applicationController;
+
+	public WebVideoResourceRow(ApplicationController applicationController,
+			String learningResourcesGroupName) {
+		this.learningResourcesGroupName = learningResourcesGroupName;
+		this.applicationController = applicationController;
+	}
+
 	@Override
-	public void addElementsToPanel(MainPanel panel,
+	public void addElementsToPanel(LearningResource learningResource, MainPanel panel,
 			CommonListElements commonListElements) {
-		LearningResourceRowElementsCreator elementsCreator = new LearningResourceRowElementsCreator();
+		LearningResourceRowElementsCreator elementsCreator = new LearningResourceRowElementsCreator(
+				applicationController, learningResourcesGroupName);
 		panel.addRowsOfElementsInColumn(
 				SimpleRowBuilder.createRowStartingFromColumn(0, FillType.NONE,
 						Anchor.WEST, commonListElements.getRowNumberLabel(),
 						elementsCreator.getLabelResourceType(),
 						elementsCreator.getComboboxResourceType(
-								LearningResourceType.WEB_VIDEO, panel,
+								learningResource, LearningResourceType.WEB_VIDEO, panel,
 								commonListElements))
 								.nextRow(elementsCreator.getLabelResourceTag(),
-										elementsCreator.getInputResourceTag())
+										elementsCreator.getInputResourceTag(
+												learningResource))
 								.setColumnToPutRowInto(1)
 								.nextRow(elementsCreator.getLabelResourceLocations(),
 										elementsCreator.getInputResourceLocation(),

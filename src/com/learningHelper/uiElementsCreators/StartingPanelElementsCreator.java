@@ -4,7 +4,6 @@ import com.guimaker.list.myList.ListConfiguration;
 import com.guimaker.list.myList.MyList;
 import com.guimaker.panels.GuiElementsCreator;
 import com.learningHelper.application.ApplicationController;
-import com.learningHelper.application.ResourcesHolder;
 import com.learningHelper.listRow.LearningResourceRow;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.StartingPanelUpdater;
@@ -24,9 +23,9 @@ public class StartingPanelElementsCreator {
 	private JTextField resourcesGroupName;
 	private ApplicationController applicationController;
 
-	public StartingPanelElementsCreator(ResourcesHolder resourcesHolder,
+	public StartingPanelElementsCreator(
 			ApplicationController applicationController) {
-		actionsCreator = new StartingPanelActionsCreator(resourcesHolder,
+		actionsCreator = new StartingPanelActionsCreator(applicationController,
 				new StartingPanelUpdater(this), this);
 		this.applicationController = applicationController;
 	}
@@ -64,23 +63,25 @@ public class StartingPanelElementsCreator {
 		}
 		return resourcesGroupName;
 	}
+
 	public JLabel getResourcesGroupNameLabel() {
-		return GuiElementsCreator.createLabel(UIElementsStyles
-				.labelForInputStyle().text(Labels.RESOURCES_GROUP_NAME));
+		return GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.RESOURCES_GROUP_NAME));
 	}
 
-	public MyList<LearningResource> createLearningResourcesList() {
-		MyList<LearningResource> learningResourcesList = new MyList<>(
+	public MyList<LearningResource> createLearningResourcesList(
+			String groupName) {
+		return new MyList<>(
 				new ListConfiguration<>(
 						UserInformation.LEARNING_RESOURCE_DELETE,
-						new LearningResourceRow(),
+						new LearningResourceRow(applicationController,
+								groupName),
 						LearningResource.getInitializer(),
 						Titles.LEARNING_RESOURCES_LIST,
 						applicationController.getApplicationWindow(),
-						applicationController)
-						.showButtonsLoadNextPreviousWords(false));
-		learningResourcesList.addWord(new LearningResource());
-		return learningResourcesList;
+						applicationController).showButtonsLoadNextPreviousWords(
+						false));
 	}
 
 }

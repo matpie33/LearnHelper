@@ -7,19 +7,17 @@ import com.guimaker.listeners.InputValidationListener;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.model.PanelConfiguration;
 import com.guimaker.panels.MainPanel;
-import com.learningHelper.enums.LearningResourceType;
+import com.learningHelper.application.ApplicationController;
 import com.learningHelper.model.LearningResource;
-import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class LearningResourceRow implements ListRowCreator<LearningResource> {
 
 	private WebHelperResourceRow webHelperResourceRow;
 
-	public LearningResourceRow() {
-		webHelperResourceRow = new WebHelperResourceRow();
+	public LearningResourceRow(ApplicationController applicationController,
+			String groupName) {
+		webHelperResourceRow = new WebHelperResourceRow(applicationController,
+				groupName);
 	}
 
 	@Override
@@ -27,7 +25,8 @@ public class LearningResourceRow implements ListRowCreator<LearningResource> {
 			LearningResource learningResource,
 			CommonListElements commonListElements, InputGoal inputGoal) {
 		MainPanel panel = new MainPanel(new PanelConfiguration());
-		webHelperResourceRow.addElementsToPanel(panel, commonListElements);
+		webHelperResourceRow.addElementsToPanel(learningResource, panel,
+				commonListElements);
 		return new ListRowData<>(panel);
 	}
 
