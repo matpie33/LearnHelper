@@ -5,7 +5,6 @@ import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
-import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 
@@ -30,12 +29,10 @@ public class WebHelperResourceRow implements ResourceRow {
 						commonListElements.getRowNumberLabel(),
 						elementsCreator.getLabelResourceType(),
 						elementsCreator.getComboboxResourceType(
-								learningResource,
-								LearningResourceType.WEB_HELPER_RESOURCE, panel,
-								commonListElements))
+								learningResource, panel, commonListElements))
 								.nextRow(elementsCreator.getLabelResourceTag(),
-										elementsCreator.getInputResourceTag
-												(learningResource.getTag(),
+										elementsCreator.getInputResourceTag(
+												learningResource.getTag(),
 												learningResource))
 								.setColumnToPutRowInto(1)
 								.nextRow(FillType.HORIZONTAL,

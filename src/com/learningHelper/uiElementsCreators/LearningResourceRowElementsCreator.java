@@ -36,13 +36,12 @@ public class LearningResourceRowElementsCreator {
 	}
 
 	public JComboBox getComboboxResourceType(LearningResource learningResource,
-			LearningResourceType learningResourceType, MainPanel panel,
-			CommonListElements commonListElements) {
+			MainPanel panel, CommonListElements commonListElements) {
 		JComboBox combobox = GuiElementsCreator.createCombobox(
 				UIElementsStyles.comboboxStyle()
 								.setComboboxValues(
 										LearningResourceType.getDisplayedValues()));
-		combobox.setSelectedItem(learningResourceType.getDisplayedText());
+		combobox.setSelectedItem(learningResource.getType().getDisplayedText());
 		combobox.addItemListener(
 				actionsCreator.createActionChangeResourceType(learningResource,
 						panel, commonListElements));

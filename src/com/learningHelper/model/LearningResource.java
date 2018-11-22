@@ -11,7 +11,8 @@ import java.util.List;
 
 public class LearningResource implements ListElement{
 
-	private LearningResourceType type;
+	private LearningResourceType type = LearningResourceType
+			.WEB_HELPER_RESOURCE;
 	private String tag = "";
 	private List<String> alternativeLocations = new ArrayList<>();
 	private final static String MEANINGFUL_NAME = "Learning resource";

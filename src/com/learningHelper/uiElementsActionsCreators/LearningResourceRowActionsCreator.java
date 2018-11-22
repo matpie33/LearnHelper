@@ -60,8 +60,10 @@ public class LearningResourceRowActionsCreator {
 					LearningResourceType type = LearningResourceType.getTypeByString(
 							newValue);
 					if (type != null) {
+						learningResource.setType(type);
 						rowUpdater.changeResourceRowType(learningResource,
 								panel, type, commonListElements);
+
 					}
 
 				}
