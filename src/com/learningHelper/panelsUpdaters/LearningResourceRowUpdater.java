@@ -19,12 +19,10 @@ import java.util.Map;
 
 public class LearningResourceRowUpdater {
 	private Map<LearningResourceType, ResourceRow> resourceTypeToRowMap = new HashMap<>();
-	private LearningResourceRowElementsCreator elementsCreator;
 
 	public LearningResourceRowUpdater(
 			ApplicationController applicationController,
-			String learningResourcesGroupName,
-			LearningResourceRowElementsCreator elementsCreator) {
+			String learningResourcesGroupName) {
 		resourceTypeToRowMap.put(LearningResourceType.WEB_HELPER_RESOURCE,
 				new WebHelperResourceRow(applicationController,
 						learningResourcesGroupName));
@@ -34,7 +32,6 @@ public class LearningResourceRowUpdater {
 		resourceTypeToRowMap.put(LearningResourceType.WEB_TEXT_RESOURCE,
 				new WebTextResourceRow(applicationController,
 						learningResourcesGroupName));
-		this.elementsCreator = elementsCreator;
 	}
 
 	public void changeResourceRowType(LearningResource learningResource,

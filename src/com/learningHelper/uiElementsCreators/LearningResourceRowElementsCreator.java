@@ -33,7 +33,7 @@ public class LearningResourceRowElementsCreator {
 			ApplicationController applicationController,
 			String learningResourcesGroupName) {
 		this.applicationController = applicationController;
-		actionsCreator = new LearningResourceRowActionsCreator(this,
+		actionsCreator = new LearningResourceRowActionsCreator(
 				applicationController, learningResourcesGroupName);
 	}
 
