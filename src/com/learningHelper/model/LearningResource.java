@@ -15,7 +15,6 @@ public class LearningResource implements ListElement{
 			.WEB_HELPER_RESOURCE;
 	private String tag = "";
 	private List<String> alternativeLocations = new ArrayList<>();
-	private final static String MEANINGFUL_NAME = "Learning resource";
 
 	public LearningResourceType getType() {
 		return type;
@@ -60,8 +59,4 @@ public class LearningResource implements ListElement{
 		throw new NotImplementedException();
 	}
 
-	@Override
-	public String getMeaningfulName() {
-		return MEANINGFUL_NAME;
-	}
 }
