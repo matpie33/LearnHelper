@@ -10,4 +10,5 @@ public class Labels {
 	public final static String WEB_HELPER_RESOURCE = "Pomoc naukowa";
 	public final static String STOPPED_PLACE= "Miejsce przerwania";
 	public static final String RESOURCES_GROUP_NAME = "Grupa źródeł";
+	public static final String URL = "URL";
 }

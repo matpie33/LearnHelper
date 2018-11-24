@@ -37,11 +37,10 @@ public class WebVideoResourceRow implements ResourceRow {
 												learningResource.getTag(),
 												learningResource))
 								.setColumnToPutRowInto(1)
-								.nextRow(elementsCreator.getLabelResourceLocations(),
-										elementsCreator.getInputResourceLocation(),
-										elementsCreator.getButtonIncreaseVideoNumber(),
-										elementsCreator.getButtonAddAlternativeLocation(
-												panel))
+								.nextRow(FillType.HORIZONTAL,
+										elementsCreator.getLabelResourceLocations(),
+										elementsCreator.createResourceLocations()
+													   .getPanel())
 								.nextRow(
 										elementsCreator.getLabelStoppedPlace(),
 										elementsCreator.getInputStoppedPlaceTimeRangeStart(),

@@ -36,11 +36,10 @@ public class WebTextResourceRow implements ResourceRow {
 												learningResource.getTag(),
 												learningResource))
 								.setColumnToPutRowInto(1)
-								.nextRow(
+								.nextRow(FillType.HORIZONTAL,
 										elementsCreator.getLabelResourceLocations(),
-										elementsCreator.getInputResourceLocation(),
-										elementsCreator.getButtonAddAlternativeLocation(
-												panel))
+										elementsCreator.createResourceLocations()
+													   .getPanel())
 								.nextRow(elementsCreator.getLabelStoppedPlace(),
 										elementsCreator.getTextInputStoppedPlace())
 								.nextRow(

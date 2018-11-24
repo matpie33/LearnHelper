@@ -1,15 +1,20 @@
 package com.learningHelper.uiElementsCreators;
 
+import com.guimaker.list.myList.ListConfiguration;
+import com.guimaker.list.myList.MyList;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.GuiElementsCreator;
 import com.guimaker.panels.MainPanel;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
+import com.learningHelper.listRow.urlLocationList.ResourceLocationRow;
 import com.learningHelper.model.LearningResource;
+import com.learningHelper.model.StringListElement;
 import com.learningHelper.uiElementsActionsCreators.LearningResourceRowActionsCreator;
 import com.learningHelper.uiElementsStyles.UIElementsStyles;
 import com.learningHelper.uiElementsTexts.Buttons;
 import com.learningHelper.uiElementsTexts.Labels;
+import com.learningHelper.uiElementsTexts.UserInformation;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -22,10 +27,12 @@ public class LearningResourceRowElementsCreator {
 	private JTextField timeRangeEndInput;
 	private JTextField stoppedPlaceTextInput;
 	private LearningResourceRowActionsCreator actionsCreator;
+	private ApplicationController applicationController;
 
 	public LearningResourceRowElementsCreator(
 			ApplicationController applicationController,
 			String learningResourcesGroupName) {
+		this.applicationController = applicationController;
 		actionsCreator = new LearningResourceRowActionsCreator(this,
 				applicationController, learningResourcesGroupName);
 	}
@@ -56,6 +63,7 @@ public class LearningResourceRowElementsCreator {
 								.text(Labels.RESOURCE_TAG));
 	}
 
+
 	public JLabel getLabelResourceLocations() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
@@ -73,23 +81,8 @@ public class LearningResourceRowElementsCreator {
 		return tagInput;
 	}
 
-	public JTextComponent getInputResourceLocation() {
-		if (locationInput == null) {
-			locationInput = GuiElementsCreator.createTextField(
-					UIElementsStyles.shortTextInputStyle());
-		}
-		return locationInput;
-	}
 
-	public AbstractButton getButtonAddAlternativeLocation(MainPanel panel) {
-		AbstractButton button = GuiElementsCreator.createButtonlikeComponent(
-				UIElementsStyles.buttonStyle()
-								.text(Buttons.ADD_ALTERNATIVE_LOCATION), null);
-		button.addActionListener(
-				actionsCreator.createAddAlternativeLocationAction(button,
-						panel));
-		return button;
-	}
+
 
 	public AbstractButton getButtonGoToResource() {
 		return GuiElementsCreator.createButtonlikeComponent(
@@ -133,6 +126,20 @@ public class LearningResourceRowElementsCreator {
 					UIElementsStyles.shortTextInputStyle());
 		}
 		return stoppedPlaceTextInput;
+	}
+
+	public MyList<StringListElement> createResourceLocations() {
+		MyList<StringListElement> stringListElementMyList = new MyList<>(
+				new ListConfiguration<>(UserInformation.URL_LOCATION_DELETE,
+						new ResourceLocationRow(),
+						StringListElement.getInitializer(), "",
+						applicationController.getApplicationWindow(),
+						applicationController).skipTitle(true)
+											  .showButtonsLoadNextPreviousWords(
+													  false)
+											  .enableWordAdding(false));
+		stringListElementMyList.addWord(new StringListElement("a"));
+		return stringListElementMyList;
 	}
 
 }

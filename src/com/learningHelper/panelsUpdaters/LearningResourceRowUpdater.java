@@ -48,15 +48,4 @@ public class LearningResourceRowUpdater {
 
 	}
 
-	public void addAlternativeLocation(MainPanel panel, AbstractButton button) {
-		int indexOfRowContainingElements = panel.getIndexOfRowContainingElements(
-				button);
-		panel.insertRow(indexOfRowContainingElements + 1,
-				SimpleRowBuilder.createRowStartingFromColumn(1, FillType.NONE,
-						elementsCreator.getLabelResourceLocations(),
-						elementsCreator.getInputResourceLocation(),
-						elementsCreator.getButtonAddAlternativeLocation
-								(panel)));
-		panel.updateView();
-	}
 }

@@ -34,16 +34,6 @@ public class LearningResourceRowActionsCreator {
 		this.learningResourcesGroupName = learningResourcesGroupName;
 	}
 
-	public AbstractAction createAddAlternativeLocationAction(
-			AbstractButton button, MainPanel panel) {
-		return new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rowUpdater.addAlternativeLocation(panel, button);
-
-			}
-		};
-	}
 
 	public AbstractAction createIncreaseVideoNumberAction() {
 		return new AbstractAction() {
