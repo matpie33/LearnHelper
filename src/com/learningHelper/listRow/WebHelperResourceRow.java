@@ -38,7 +38,8 @@ public class WebHelperResourceRow implements ResourceRow {
 								.nextRow(FillType.HORIZONTAL,
 										elementsCreator.getLabelResourceLocations(),
 										elementsCreator.getInputResourceLocation(),
-										elementsCreator.getButtonAddAlternativeLocation())
+										elementsCreator
+												.getButtonAddAlternativeLocation(panel))
 								.fillHorizontallySomeElements(
 										elementsCreator.getInputResourceLocation())
 								.nextRow(

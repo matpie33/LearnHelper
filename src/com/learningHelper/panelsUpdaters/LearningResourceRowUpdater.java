@@ -1,7 +1,9 @@
 package com.learningHelper.panelsUpdaters;
 
+import com.guimaker.enums.FillType;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.MainPanel;
+import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listRow.ResourceRow;
@@ -9,15 +11,20 @@ import com.learningHelper.listRow.WebHelperResourceRow;
 import com.learningHelper.listRow.WebTextResourceRow;
 import com.learningHelper.listRow.WebVideoResourceRow;
 import com.learningHelper.model.LearningResource;
+import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LearningResourceRowUpdater {
 	private Map<LearningResourceType, ResourceRow> resourceTypeToRowMap = new HashMap<>();
+	private LearningResourceRowElementsCreator elementsCreator;
 
 	public LearningResourceRowUpdater(
-			ApplicationController applicationController, String learningResourcesGroupName) {
+			ApplicationController applicationController,
+			String learningResourcesGroupName,
+			LearningResourceRowElementsCreator elementsCreator) {
 		resourceTypeToRowMap.put(LearningResourceType.WEB_HELPER_RESOURCE,
 				new WebHelperResourceRow(applicationController,
 						learningResourcesGroupName));
@@ -27,6 +34,7 @@ public class LearningResourceRowUpdater {
 		resourceTypeToRowMap.put(LearningResourceType.WEB_TEXT_RESOURCE,
 				new WebTextResourceRow(applicationController,
 						learningResourcesGroupName));
+		this.elementsCreator = elementsCreator;
 	}
 
 	public void changeResourceRowType(LearningResource learningResource,
@@ -34,8 +42,21 @@ public class LearningResourceRowUpdater {
 			CommonListElements commonListElements) {
 		panel.clear();
 		resourceTypeToRowMap.get(type)
-							.addElementsToPanel(learningResource, panel, commonListElements);
+							.addElementsToPanel(learningResource, panel,
+									commonListElements);
 		panel.updateView();
 
+	}
+
+	public void addAlternativeLocation(MainPanel panel, AbstractButton button) {
+		int indexOfRowContainingElements = panel.getIndexOfRowContainingElements(
+				button);
+		panel.insertRow(indexOfRowContainingElements + 1,
+				SimpleRowBuilder.createRowStartingFromColumn(1, FillType.NONE,
+						elementsCreator.getLabelResourceLocations(),
+						elementsCreator.getInputResourceLocation(),
+						elementsCreator.getButtonAddAlternativeLocation
+								(panel)));
+		panel.updateView();
 	}
 }

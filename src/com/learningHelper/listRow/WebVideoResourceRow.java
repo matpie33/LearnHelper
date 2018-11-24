@@ -40,7 +40,8 @@ public class WebVideoResourceRow implements ResourceRow {
 								.nextRow(elementsCreator.getLabelResourceLocations(),
 										elementsCreator.getInputResourceLocation(),
 										elementsCreator.getButtonIncreaseVideoNumber(),
-										elementsCreator.getButtonAddAlternativeLocation())
+										elementsCreator.getButtonAddAlternativeLocation(
+												panel))
 								.nextRow(
 										elementsCreator.getLabelStoppedPlace(),
 										elementsCreator.getInputStoppedPlaceTimeRangeStart(),

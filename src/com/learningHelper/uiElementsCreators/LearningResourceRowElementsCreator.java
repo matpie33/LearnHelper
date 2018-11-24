@@ -24,9 +24,10 @@ public class LearningResourceRowElementsCreator {
 	private LearningResourceRowActionsCreator actionsCreator;
 
 	public LearningResourceRowElementsCreator(
-			ApplicationController applicationController, String learningResourcesGroupName) {
-		actionsCreator = new LearningResourceRowActionsCreator
-				(applicationController, learningResourcesGroupName);
+			ApplicationController applicationController,
+			String learningResourcesGroupName) {
+		actionsCreator = new LearningResourceRowActionsCreator(this,
+				applicationController, learningResourcesGroupName);
 	}
 
 	public JLabel getLabelResourceType() {
@@ -41,7 +42,8 @@ public class LearningResourceRowElementsCreator {
 				UIElementsStyles.comboboxStyle()
 								.setComboboxValues(
 										LearningResourceType.getDisplayedValues()));
-		combobox.setSelectedItem(learningResource.getType().getDisplayedText());
+		combobox.setSelectedItem(learningResource.getType()
+												 .getDisplayedText());
 		combobox.addItemListener(
 				actionsCreator.createActionChangeResourceType(learningResource,
 						panel, commonListElements));
@@ -60,11 +62,13 @@ public class LearningResourceRowElementsCreator {
 								.text(Labels.RESOURCE_LOCATIONS));
 	}
 
-	public JTextComponent getInputResourceTag(String tag, LearningResource learningResource) {
+	public JTextComponent getInputResourceTag(String tag,
+			LearningResource learningResource) {
 		if (tagInput == null) {
 			tagInput = actionsCreator.addTagChangeListener(learningResource,
 					GuiElementsCreator.createTextField(
-							UIElementsStyles.shortTextInputStyle().text(tag)));
+							UIElementsStyles.shortTextInputStyle()
+											.text(tag)));
 		}
 		return tagInput;
 	}
@@ -77,25 +81,28 @@ public class LearningResourceRowElementsCreator {
 		return locationInput;
 	}
 
-	public AbstractButton getButtonAddAlternativeLocation() {
-		return GuiElementsCreator.createButtonlikeComponent(
+	public AbstractButton getButtonAddAlternativeLocation(MainPanel panel) {
+		AbstractButton button = GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
-								.text(Buttons.ADD_ALTERNATIVE_LOCATION),
-				actionsCreator.createAddAlternativeLocationAction());
+								.text(Buttons.ADD_ALTERNATIVE_LOCATION), null);
+		button.addActionListener(
+				actionsCreator.createAddAlternativeLocationAction(button,
+						panel));
+		return button;
 	}
 
 	public AbstractButton getButtonGoToResource() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.GO_TO_RESOURCE),
-				actionsCreator.createAddAlternativeLocationAction());
+				actionsCreator.createActionGoToResource());
 	}
 
 	public AbstractButton getButtonIncreaseVideoNumber() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.INCREASE_VIDEO_NUMBER),
-				actionsCreator.createAddAlternativeLocationAction());
+				actionsCreator.createActionIncreaseVideoNumber());
 	}
 
 	public JLabel getLabelStoppedPlace() {

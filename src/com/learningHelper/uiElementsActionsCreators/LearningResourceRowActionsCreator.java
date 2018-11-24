@@ -1,14 +1,17 @@
 package com.learningHelper.uiElementsActionsCreators;
 
+import com.guimaker.enums.FillType;
 import com.guimaker.enums.InputGoal;
 import com.guimaker.list.myList.ListPropertyChangeHandler;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.MainPanel;
+import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listPropertyManagers.ListTagPropertyManager;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
+import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,18 +25,21 @@ public class LearningResourceRowActionsCreator {
 	private ApplicationController applicationController;
 
 	public LearningResourceRowActionsCreator(
+			LearningResourceRowElementsCreator elementsCreator,
 			ApplicationController applicationController,
 			String learningResourcesGroupName) {
 		this.rowUpdater = new LearningResourceRowUpdater(applicationController,
-				learningResourcesGroupName);
+				learningResourcesGroupName, elementsCreator);
 		this.applicationController = applicationController;
 		this.learningResourcesGroupName = learningResourcesGroupName;
 	}
 
-	public AbstractAction createAddAlternativeLocationAction() {
+	public AbstractAction createAddAlternativeLocationAction(
+			AbstractButton button, MainPanel panel) {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				rowUpdater.addAlternativeLocation(panel, button);
 
 			}
 		};
@@ -83,5 +89,13 @@ public class LearningResourceRowActionsCreator {
 		textField.addFocusListener(listPropertyChangeHandler);
 		return textField;
 
+	}
+
+	public AbstractAction createActionGoToResource() {
+		return null;
+	}
+
+	public AbstractAction createActionIncreaseVideoNumber() {
+		return null;
 	}
 }
