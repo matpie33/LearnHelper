@@ -1,12 +1,11 @@
 package com.learningHelper.listPropertyManagers;
 
 import com.guimaker.list.ListElementPropertyManager;
-import com.learningHelper.listRow.LearningResourceRow;
 import com.learningHelper.model.LearningResource;
 
 import javax.swing.text.JTextComponent;
 
-public class ListTagPropertyManager implements
+public class ResourceTagPropertyManager implements
 		ListElementPropertyManager<String, LearningResource> {
 	@Override
 	public String getInvalidPropertyReason() {
@@ -25,14 +24,15 @@ public class ListTagPropertyManager implements
 	}
 
 	@Override
-	public String validateInputAndConvertToProperty(JTextComponent textInput) {
+	public String validateInputAndConvertToProperty(JTextComponent textInput,
+			LearningResource propertyHolder) {
 		return textInput.getText();
 	}
 
 	@Override
 	public void setProperty(LearningResource learningResource,
-			String propertyValue) {
-		learningResource.setTag(propertyValue);
+			String newValue, String previousValue) {
+		learningResource.setTag(newValue);
 	}
 
 	@Override

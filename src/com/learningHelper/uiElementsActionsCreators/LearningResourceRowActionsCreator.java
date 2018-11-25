@@ -6,7 +6,7 @@ import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.MainPanel;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
-import com.learningHelper.listPropertyManagers.ListTagPropertyManager;
+import com.learningHelper.listPropertyManagers.ResourceTagPropertyManager;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
 
@@ -71,7 +71,7 @@ public class LearningResourceRowActionsCreator {
 				applicationController.getLearningResourcesGroup(
 						learningResourcesGroupName),
 				applicationController.getApplicationWindow(),
-				new ListTagPropertyManager(), InputGoal.EDIT);
+				new ResourceTagPropertyManager(), InputGoal.EDIT);
 		textField.addFocusListener(listPropertyChangeHandler);
 		return textField;
 

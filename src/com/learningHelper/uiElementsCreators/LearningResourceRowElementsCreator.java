@@ -129,7 +129,8 @@ public class LearningResourceRowElementsCreator {
 			LearningResource learningResource) {
 		MyList<StringListElement> stringListElementMyList = new MyList<>(
 				new ListConfiguration<>(UserInformation.URL_LOCATION_DELETE,
-						new ResourceLocationRow(),
+						new ResourceLocationRow(learningResource,
+								applicationController, learningResourcesGroupName),
 						StringListElement.getInitializer(), "",
 						applicationController.getApplicationWindow(),
 						applicationController).skipTitle(true)
