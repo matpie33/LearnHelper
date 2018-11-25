@@ -39,7 +39,8 @@ public class WebVideoResourceRow implements ResourceRow {
 								.setColumnToPutRowInto(1)
 								.nextRow(FillType.HORIZONTAL,
 										elementsCreator.getLabelResourceLocations(),
-										elementsCreator.createResourceLocations()
+										elementsCreator.createResourceLocations(
+												learningResource)
 													   .getPanel())
 								.nextRow(
 										elementsCreator.getLabelStoppedPlace(),

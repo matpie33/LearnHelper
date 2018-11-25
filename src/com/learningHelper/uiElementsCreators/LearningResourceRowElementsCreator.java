@@ -22,17 +22,18 @@ import javax.swing.text.JTextComponent;
 public class LearningResourceRowElementsCreator {
 
 	private JTextField tagInput;
-	private JTextField locationInput;
 	private JTextField timeRangeStartInput;
 	private JTextField timeRangeEndInput;
 	private JTextField stoppedPlaceTextInput;
 	private LearningResourceRowActionsCreator actionsCreator;
 	private ApplicationController applicationController;
+	private String learningResourcesGroupName;
 
 	public LearningResourceRowElementsCreator(
 			ApplicationController applicationController,
 			String learningResourcesGroupName) {
 		this.applicationController = applicationController;
+		this.learningResourcesGroupName = learningResourcesGroupName;
 		actionsCreator = new LearningResourceRowActionsCreator(
 				applicationController, learningResourcesGroupName);
 	}
@@ -63,7 +64,6 @@ public class LearningResourceRowElementsCreator {
 								.text(Labels.RESOURCE_TAG));
 	}
 
-
 	public JLabel getLabelResourceLocations() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
@@ -80,9 +80,6 @@ public class LearningResourceRowElementsCreator {
 		}
 		return tagInput;
 	}
-
-
-
 
 	public AbstractButton getButtonGoToResource() {
 		return GuiElementsCreator.createButtonlikeComponent(
@@ -128,7 +125,8 @@ public class LearningResourceRowElementsCreator {
 		return stoppedPlaceTextInput;
 	}
 
-	public MyList<StringListElement> createResourceLocations() {
+	public MyList<StringListElement> createResourceLocations(
+			LearningResource learningResource) {
 		MyList<StringListElement> stringListElementMyList = new MyList<>(
 				new ListConfiguration<>(UserInformation.URL_LOCATION_DELETE,
 						new ResourceLocationRow(),
@@ -137,7 +135,12 @@ public class LearningResourceRowElementsCreator {
 						applicationController).skipTitle(true)
 											  .showButtonsLoadNextPreviousWords(
 													  false)
-											  .enableWordAdding(false));
+											  .inheritScrollbar(true)
+											  .enableWordAdding(false)
+											  .parentListAndWordContainingThisList(
+													  applicationController.getLearningResourcesGroup(
+															  learningResourcesGroupName),
+													  learningResource));
 		stringListElementMyList.addWord(new StringListElement("a"));
 		return stringListElementMyList;
 	}
