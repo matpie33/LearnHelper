@@ -1,8 +1,9 @@
 package com.learningHelper.uiElementsCreators;
 
+import com.guimaker.list.myList.MyList;
 import com.guimaker.panels.GuiElementsCreator;
 import com.learningHelper.application.ApplicationController;
-import com.learningHelper.model.LearningResource;
+import com.learningHelper.model.StringListElement;
 import com.learningHelper.uiElementsActionsCreators.ResourceLocationRowActionsCreator;
 import com.learningHelper.uiElementsStyles.UIElementsStyles;
 import com.learningHelper.uiElementsTexts.Labels;
@@ -15,10 +16,9 @@ public class ResourceLocationRowElementsCreator {
 	private ResourceLocationRowActionsCreator actionsCreator;
 
 	public ResourceLocationRowElementsCreator(
-			ApplicationController applicationController,
-			String learningResourcesGroupName) {
+			ApplicationController applicationController) {
 		this.actionsCreator = new ResourceLocationRowActionsCreator(
-				applicationController, learningResourcesGroupName);
+				applicationController);
 	}
 
 	public JLabel getLabelURL() {
@@ -28,10 +28,10 @@ public class ResourceLocationRowElementsCreator {
 	}
 
 	public JTextComponent getInputResourceLocation(
-			LearningResource learningResource) {
-		return actionsCreator.withPropertyChangeListener(learningResource,
+			StringListElement stringListElement, MyList<StringListElement> list) {
+		return actionsCreator.withPropertyChangeListener(stringListElement,
 				GuiElementsCreator.createTextField(
-						UIElementsStyles.shortTextInputStyle()));
+						UIElementsStyles.shortTextInputStyle()), list);
 	}
 
 }

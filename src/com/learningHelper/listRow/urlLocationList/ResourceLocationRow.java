@@ -9,31 +9,28 @@ import com.guimaker.model.PanelConfiguration;
 import com.guimaker.panels.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
-import com.learningHelper.model.LearningResource;
 import com.learningHelper.model.StringListElement;
 import com.learningHelper.uiElementsCreators.ResourceLocationRowElementsCreator;
 
 public class ResourceLocationRow implements ListRowCreator<StringListElement> {
 
 	private ResourceLocationRowElementsCreator elementsCreator;
-	private LearningResource learningResource;
 
-	public ResourceLocationRow(LearningResource learningResource,
-			ApplicationController applicationController,
-			String learningResourcesGroupName) {
+	public ResourceLocationRow(ApplicationController applicationController) {
 		elementsCreator = new ResourceLocationRowElementsCreator(
-				applicationController, learningResourcesGroupName);
-		this.learningResource = learningResource;
+				applicationController);
 	}
 
 	@Override
 	public ListRowData<StringListElement> createListRow(
 			StringListElement stringListElement,
-			CommonListElements commonListElements, InputGoal inputGoal) {
+			CommonListElements<StringListElement> commonListElements,
+			InputGoal inputGoal) {
 		MainPanel panel = new MainPanel(new PanelConfiguration());
 		panel.addRow(SimpleRowBuilder.createRow(FillType.HORIZONTAL,
 				elementsCreator.getLabelURL(),
-				elementsCreator.getInputResourceLocation(learningResource),
+				elementsCreator.getInputResourceLocation(stringListElement,
+						commonListElements.getList()),
 				commonListElements.getButtonAddRow(),
 				commonListElements.getButtonDelete()));
 		return new ListRowData<>(panel);

@@ -129,8 +129,7 @@ public class LearningResourceRowElementsCreator {
 			LearningResource learningResource) {
 		MyList<StringListElement> stringListElementMyList = new MyList<>(
 				new ListConfiguration<>(UserInformation.URL_LOCATION_DELETE,
-						new ResourceLocationRow(learningResource,
-								applicationController, learningResourcesGroupName),
+						new ResourceLocationRow(applicationController),
 						StringListElement.getInitializer(), "",
 						applicationController.getApplicationWindow(),
 						applicationController).skipTitle(true)
@@ -141,7 +140,8 @@ public class LearningResourceRowElementsCreator {
 											  .parentListAndWordContainingThisList(
 													  applicationController.getLearningResourcesGroup(
 															  learningResourcesGroupName),
-													  learningResource));
+													  learningResource,
+													  learningResource.getAlternativeLocations()));
 		stringListElementMyList.addWord(new StringListElement("a"));
 		return stringListElementMyList;
 	}

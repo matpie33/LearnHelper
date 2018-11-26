@@ -2,13 +2,14 @@ package com.learningHelper.listPropertyManagers;
 
 import com.guimaker.list.ListElementPropertyManager;
 import com.learningHelper.model.LearningResource;
+import com.learningHelper.model.StringListElement;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.text.JTextComponent;
 import java.util.List;
 
 public class ResourceLocationPropertyManager
-		implements ListElementPropertyManager<String, LearningResource> {
+		implements ListElementPropertyManager<String, StringListElement> {
 	@Override
 	public String getInvalidPropertyReason() {
 		throw new NotImplementedException();
@@ -16,36 +17,26 @@ public class ResourceLocationPropertyManager
 
 	@Override
 	public boolean isPropertyFound(String property,
-			LearningResource learningResource) {
-		return learningResource.getAlternativeLocations()
-							   .contains(property);
+			StringListElement stringListElement) {
+		return stringListElement.getValue()
+							   .equals(property);
 	}
 
 	@Override
-	public String getPropertyValue(LearningResource learningResource) {
-		return learningResource.getTag();
+	public String getPropertyValue(StringListElement learningResource) {
+		return learningResource.getValue();
 	}
 
 	@Override
 	public String validateInputAndConvertToProperty(JTextComponent textInput,
-			LearningResource propertyHolder) {
-		String text = textInput.getText();
-		return propertyHolder.getAlternativeLocations()
-							 .contains(text) ? null : text;
+			StringListElement stringListElement) {
+		return textInput.getText();
 	}
 
 	@Override
-	public void setProperty(LearningResource learningResource, String newValue,
+	public void setProperty(StringListElement stringListElement, String newValue,
 			String previousValue) {
-		List<String> alternativeLocations = learningResource.getAlternativeLocations();
-		int previousValueIndex = alternativeLocations.indexOf(previousValue);
-		if (previousValueIndex >= 0) {
-			alternativeLocations.set(previousValueIndex, newValue);
-		}
-		else {
-			alternativeLocations.add(newValue);
-		}
-
+		stringListElement.setValue(newValue);
 	}
 
 	@Override

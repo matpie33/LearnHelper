@@ -12,6 +12,10 @@ public class StringListElement implements ListElement {
 		this.value = value;
 	}
 
+	public String getValue() {
+		return value;
+	}
+
 	public static ListElementInitializer<StringListElement> getInitializer(){
 		return ()-> new StringListElement("");
 	}
@@ -26,4 +30,15 @@ public class StringListElement implements ListElement {
 	public String getDisplayedText() {
 		return null;
 	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String toString (){
+		return value;
+	}
+
+
 }

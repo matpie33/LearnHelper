@@ -12,7 +12,8 @@ public class LearningResource implements ListElement {
 
 	private LearningResourceType type = LearningResourceType.WEB_HELPER_RESOURCE;
 	private String tag = "";
-	private List<String> alternativeLocations = new ArrayList<>();
+	private List<StringListElement> alternativeLocations = new ArrayList<>();
+	//TODO refactor back to string after getting rid of ListElement interface
 
 	public LearningResourceType getType() {
 		return type;
@@ -30,11 +31,11 @@ public class LearningResource implements ListElement {
 		this.tag = tag;
 	}
 
-	public List<String> getAlternativeLocations() {
+	public List<StringListElement> getAlternativeLocations() {
 		return alternativeLocations;
 	}
 
-	public void setAlternativeLocations(List<String> alternativeLocations) {
+	public void setAlternativeLocations(List<StringListElement> alternativeLocations) {
 		this.alternativeLocations = alternativeLocations;
 	}
 
