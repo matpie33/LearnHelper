@@ -1,12 +1,10 @@
 package com.learningHelper.listPropertyManagers;
 
 import com.guimaker.list.ListElementPropertyManager;
-import com.learningHelper.model.LearningResource;
 import com.learningHelper.model.StringListElement;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.text.JTextComponent;
-import java.util.List;
 
 public class ResourceLocationPropertyManager
 		implements ListElementPropertyManager<String, StringListElement> {
@@ -17,9 +15,10 @@ public class ResourceLocationPropertyManager
 
 	@Override
 	public boolean isPropertyFound(String property,
-			StringListElement stringListElement) {
-		return stringListElement.getValue()
-							   .equals(property);
+			StringListElement wordToCheck,
+			StringListElement propertyHolder) {
+		return wordToCheck.getValue()
+						  .equals(property);
 	}
 
 	@Override

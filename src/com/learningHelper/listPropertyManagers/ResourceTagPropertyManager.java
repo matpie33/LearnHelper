@@ -14,8 +14,9 @@ public class ResourceTagPropertyManager implements
 
 	@Override
 	public boolean isPropertyFound(String property,
-			LearningResource learningResource) {
-		return learningResource.getTag().equals(property);
+			LearningResource wordToCheck,
+			LearningResource propertyHolder) {
+		return wordToCheck.getTag().equals(property);
 	}
 
 	@Override
