@@ -71,12 +71,13 @@ public class LearningResourceRowElementsCreator {
 	}
 
 	public JTextComponent getInputResourceTag(String tag,
-			LearningResource learningResource) {
+			LearningResource learningResource,
+			CommonListElements<LearningResource> commonListElements) {
 		if (tagInput == null) {
 			tagInput = actionsCreator.addTagChangeListener(learningResource,
 					GuiElementsCreator.createTextField(
 							UIElementsStyles.shortTextInputStyle()
-											.text(tag)));
+											.text(tag)), commonListElements);
 		}
 		return tagInput;
 	}
@@ -127,7 +128,7 @@ public class LearningResourceRowElementsCreator {
 
 	public MyList<StringListElement> createResourceLocations(
 			LearningResource learningResource) {
-		MyList<StringListElement> stringListElementMyList = new MyList<>(
+		MyList<StringListElement> locationsList = new MyList<>(
 				new ListConfiguration<>(UserInformation.URL_LOCATION_DELETE,
 						new ResourceLocationRow(applicationController),
 						StringListElement.getInitializer(), "",
@@ -142,8 +143,15 @@ public class LearningResourceRowElementsCreator {
 															  learningResourcesGroupName),
 													  learningResource,
 													  learningResource.getAlternativeLocations()));
-		stringListElementMyList.addWord(new StringListElement("a"));
-		return stringListElementMyList;
+		if (learningResource.getAlternativeLocations().isEmpty()){
+			locationsList.addWord(new StringListElement(""));
+		}
+		else{
+			learningResource.getAlternativeLocations()
+							.forEach(locationsList::addWord);
+		}
+
+		return locationsList;
 	}
 
 }

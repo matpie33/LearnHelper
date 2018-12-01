@@ -6,5 +6,5 @@ import com.learningHelper.model.LearningResource;
 
 public interface ResourceRow {
 	public void addElementsToPanel(LearningResource learningResource, MainPanel panel,
-			CommonListElements commonListElements);
+			CommonListElements<LearningResource> commonListElements);
 }

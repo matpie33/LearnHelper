@@ -23,7 +23,8 @@ public class LearningResourceRow implements ListRowCreator<LearningResource> {
 	@Override
 	public ListRowData<LearningResource> createListRow(
 			LearningResource learningResource,
-			CommonListElements commonListElements, InputGoal inputGoal) {
+			CommonListElements<LearningResource> commonListElements, InputGoal
+			inputGoal) {
 		MainPanel panel = new MainPanel(new PanelConfiguration());
 		webHelperResourceRow.addElementsToPanel(learningResource, panel,
 				commonListElements);

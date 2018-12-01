@@ -21,7 +21,8 @@ public class WebHelperResourceRow implements ResourceRow {
 
 	@Override
 	public void addElementsToPanel(LearningResource learningResource,
-			MainPanel panel, CommonListElements commonListElements) {
+			MainPanel panel,
+			CommonListElements<LearningResource> commonListElements) {
 		LearningResourceRowElementsCreator elementsCreator = new LearningResourceRowElementsCreator(
 				applicationController, learningResourcesGroupName);
 		panel.addRowsOfElementsInColumn(
@@ -33,7 +34,8 @@ public class WebHelperResourceRow implements ResourceRow {
 								.nextRow(elementsCreator.getLabelResourceTag(),
 										elementsCreator.getInputResourceTag(
 												learningResource.getTag(),
-												learningResource))
+												learningResource,
+												commonListElements))
 								.setColumnToPutRowInto(1)
 								.nextRow(FillType.HORIZONTAL,
 										elementsCreator.getLabelResourceLocations(),

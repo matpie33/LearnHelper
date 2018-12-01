@@ -17,7 +17,6 @@ import java.awt.event.ItemListener;
 
 public class LearningResourceRowActionsCreator {
 
-	private String learningResourcesGroupName;
 	private LearningResourceRowUpdater rowUpdater;
 	private ApplicationController applicationController;
 
@@ -27,9 +26,7 @@ public class LearningResourceRowActionsCreator {
 		this.rowUpdater = new LearningResourceRowUpdater(applicationController,
 				learningResourcesGroupName);
 		this.applicationController = applicationController;
-		this.learningResourcesGroupName = learningResourcesGroupName;
 	}
-
 
 	public AbstractAction createIncreaseVideoNumberAction() {
 		return new AbstractAction() {
@@ -65,11 +62,10 @@ public class LearningResourceRowActionsCreator {
 	}
 
 	public JTextField addTagChangeListener(LearningResource learningResource,
-			JTextField textField) {
+			JTextField textField,
+			CommonListElements<LearningResource> commonListElements) {
 		ListPropertyChangeHandler listPropertyChangeHandler = new ListPropertyChangeHandler<>(
-				learningResource,
-				applicationController.getLearningResourcesGroup(
-						learningResourcesGroupName),
+				learningResource, commonListElements.getList(),
 				applicationController.getApplicationWindow(),
 				new ResourceTagPropertyManager(), InputGoal.EDIT);
 		textField.addFocusListener(listPropertyChangeHandler);

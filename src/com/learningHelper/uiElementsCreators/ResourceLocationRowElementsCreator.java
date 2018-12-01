@@ -31,7 +31,9 @@ public class ResourceLocationRowElementsCreator {
 			StringListElement stringListElement, MyList<StringListElement> list) {
 		return actionsCreator.withPropertyChangeListener(stringListElement,
 				GuiElementsCreator.createTextField(
-						UIElementsStyles.shortTextInputStyle()), list);
+						UIElementsStyles.shortTextInputStyle().text
+								(stringListElement.getValue())),
+				list);
 	}
 
 }
