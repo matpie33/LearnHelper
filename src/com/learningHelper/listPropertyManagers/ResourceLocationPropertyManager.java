@@ -26,11 +26,6 @@ public class ResourceLocationPropertyManager
 		return learningResource.getValue();
 	}
 
-	@Override
-	public String validateInputAndConvertToProperty(JTextComponent textInput,
-			StringListElement stringListElement) {
-		return textInput.getText();
-	}
 
 	@Override
 	public void setProperty(StringListElement stringListElement, String newValue,

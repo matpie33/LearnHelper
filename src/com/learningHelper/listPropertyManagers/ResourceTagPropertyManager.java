@@ -24,11 +24,6 @@ public class ResourceTagPropertyManager implements
 		return learningResource.getTag();
 	}
 
-	@Override
-	public String validateInputAndConvertToProperty(JTextComponent textInput,
-			LearningResource propertyHolder) {
-		return textInput.getText();
-	}
 
 	@Override
 	public void setProperty(LearningResource learningResource,
