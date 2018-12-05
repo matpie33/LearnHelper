@@ -9,6 +9,7 @@ import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listPropertyManagers.ResourceTagPropertyManager;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
+import com.learningHelper.webBrowsing.WebBrowser;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -73,8 +74,13 @@ public class LearningResourceRowActionsCreator {
 
 	}
 
-	public AbstractAction createActionGoToResource() {
-		return null;
+	public AbstractAction createActionGoToResource(LearningResource learningResource) {
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				WebBrowser.browseResource(learningResource);
+			}
+		};
 	}
 
 	public AbstractAction createActionIncreaseVideoNumber() {

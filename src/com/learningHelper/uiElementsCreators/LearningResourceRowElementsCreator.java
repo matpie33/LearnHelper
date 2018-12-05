@@ -82,11 +82,12 @@ public class LearningResourceRowElementsCreator {
 		return tagInput;
 	}
 
-	public AbstractButton getButtonGoToResource() {
+	public AbstractButton getButtonGoToResource(
+			LearningResource learningResource) {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.GO_TO_RESOURCE),
-				actionsCreator.createActionGoToResource());
+				actionsCreator.createActionGoToResource(learningResource));
 	}
 
 	public AbstractButton getButtonIncreaseVideoNumber() {

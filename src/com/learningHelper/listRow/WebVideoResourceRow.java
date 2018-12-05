@@ -48,7 +48,8 @@ public class WebVideoResourceRow implements ResourceRow {
 										elementsCreator.getInputStoppedPlaceTimeRangeStart(),
 										elementsCreator.getInputStoppedPlaceTimeRangeEnd())
 								.nextRow(
-										elementsCreator.getButtonGoToResource())
+										elementsCreator.getButtonGoToResource(
+												learningResource))
 								.nextRow(commonListElements.getButtonDelete()));
 	}
 }

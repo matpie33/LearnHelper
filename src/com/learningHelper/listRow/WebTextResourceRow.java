@@ -45,7 +45,8 @@ public class WebTextResourceRow implements ResourceRow {
 								.nextRow(elementsCreator.getLabelStoppedPlace(),
 										elementsCreator.getTextInputStoppedPlace())
 								.nextRow(
-										elementsCreator.getButtonGoToResource())
+										elementsCreator.getButtonGoToResource(
+												learningResource))
 								.nextRow(commonListElements.getButtonDelete()));
 	}
 }

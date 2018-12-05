@@ -43,7 +43,8 @@ public class WebHelperResourceRow implements ResourceRow {
 												learningResource)
 													   .getPanel())
 								.nextRow(
-										elementsCreator.getButtonGoToResource())
+										elementsCreator.getButtonGoToResource
+												(learningResource))
 								.nextRow(commonListElements.getButtonDelete()));
 
 	}
