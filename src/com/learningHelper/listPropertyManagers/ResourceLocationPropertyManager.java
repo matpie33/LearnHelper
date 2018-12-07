@@ -2,6 +2,7 @@ package com.learningHelper.listPropertyManagers;
 
 import com.guimaker.list.ListElementPropertyManager;
 import com.learningHelper.model.StringListElement;
+import com.learningHelper.uiElementsTexts.Exceptions;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.text.JTextComponent;
@@ -35,7 +36,7 @@ public class ResourceLocationPropertyManager
 
 	@Override
 	public String getPropertyDefinedException(String property) {
-		throw new NotImplementedException();
+		return Exceptions.URL_LOCATIONS_DUPLICATED;
 	}
 
 }
