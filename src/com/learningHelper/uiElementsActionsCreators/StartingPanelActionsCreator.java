@@ -5,9 +5,12 @@ import com.learningHelper.application.ApplicationController;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.StartingPanelUpdater;
 import com.learningHelper.uiElementsCreators.StartingPanelElementsCreator;
+import com.learningHelper.webBrowsing.WebBrowser;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.Collection;
 
 public class StartingPanelActionsCreator {
 	private ApplicationController applicationController;
@@ -36,6 +39,16 @@ public class StartingPanelActionsCreator {
 				panelUpdater.addLearningSourcesGroup(groupName,
 						learningResourcesList);
 				learningResourcesList.addWord(new LearningResource());
+			}
+		};
+	}
+
+	public AbstractAction createActionBrowseAllResources(
+			MyList<LearningResource> resources) {
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				WebBrowser.browseAllResources(resources.getWords());
 			}
 		};
 	}

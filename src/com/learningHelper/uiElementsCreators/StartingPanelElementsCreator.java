@@ -1,7 +1,11 @@
 package com.learningHelper.uiElementsCreators;
 
+import com.guimaker.enums.ButtonType;
+import com.guimaker.enums.KeyModifiers;
 import com.guimaker.list.myList.ListConfiguration;
 import com.guimaker.list.myList.MyList;
+import com.guimaker.model.HotkeyWrapper;
+import com.guimaker.options.ButtonOptions;
 import com.guimaker.panels.GuiElementsCreator;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.listRow.LearningResourceRow;
@@ -15,6 +19,7 @@ import com.learningHelper.uiElementsTexts.Titles;
 import com.learningHelper.uiElementsTexts.UserInformation;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
 
 public class StartingPanelElementsCreator {
 
@@ -72,16 +77,30 @@ public class StartingPanelElementsCreator {
 
 	public MyList<LearningResource> createLearningResourcesList(
 			String groupName) {
-		return new MyList<>(
+
+		MyList<LearningResource> learningResourceMyList = new MyList<>(
 				new ListConfiguration<>(
 						UserInformation.LEARNING_RESOURCE_DELETE,
 						new LearningResourceRow(applicationController,
-								groupName),
-						LearningResource.getInitializer(),
+								groupName), LearningResource.getInitializer(),
 						Titles.LEARNING_RESOURCES_LIST,
 						applicationController.getApplicationWindow(),
 						applicationController).showButtonsLoadNextPreviousWords(
 						false));
+		learningResourceMyList.addAdditionalNavigationButtons(
+				createButtonOpenAllResourcesFromGroup(learningResourceMyList));
+		return learningResourceMyList;
+
+	}
+
+	public AbstractButton createButtonOpenAllResourcesFromGroup(
+			MyList<LearningResource> learningResources) {
+		return GuiElementsCreator.createButtonlikeComponent(
+				new ButtonOptions(ButtonType.BUTTON).text(
+						Buttons.OPEN_ALL_RESOURCES_IN_GROUP),
+				actionsCreator.createActionBrowseAllResources(
+						learningResources),
+				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_D));
 	}
 
 }

@@ -18,7 +18,7 @@ public class WebBrowser {
 	public static void browseAllResources(
 			Collection<LearningResource> resources) {
 		if (Desktop.isDesktopSupported()) {
-			resources.forEach(WebBrowser::browseResource);
+			resources.forEach(resource -> browseResource(resource, false));
 		}
 	}
 
@@ -34,7 +34,9 @@ public class WebBrowser {
 		if (withCheckForEveryLocation) {
 			checkWhichResourceLocationWorks(resource);
 		}
-		browseUrl(value);
+		if (!value.isEmpty()){
+			browseUrl(value);
+		}
 	}
 
 	private static void browseUrl(String value) {
@@ -66,6 +68,9 @@ public class WebBrowser {
 	private static void checkLocations(LearningResource resource) {
 		boolean isFirst = true;
 		for (StringListElement stringListElement : resource.getAlternativeLocations()) {
+			if (stringListElement.getValue().isEmpty()){
+				continue;
+			}
 			boolean isOk = testIfResourceLocationIsWorking(
 					stringListElement.getValue());
 			if (isOk) {
