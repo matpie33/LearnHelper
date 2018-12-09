@@ -58,7 +58,8 @@ public class StartingPanelElementsCreator {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.ADD),
-				actionsCreator.createActionAddGroupResource());
+				actionsCreator.createActionAddGroupResource(),
+				KeyEvent.VK_ENTER);
 	}
 
 	public JTextField createResourcesGroupNameInput() {

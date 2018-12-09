@@ -13,6 +13,7 @@ import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
 import com.learningHelper.webBrowsing.WebBrowser;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -59,6 +60,11 @@ public class LearningResourceRowActionsCreator {
 						learningResource.setType(type);
 						rowUpdater.changeResourceRowType(learningResource,
 								panel, type, commonListElements);
+						Window windowAncestor = SwingUtilities.getWindowAncestor(
+								panel.getPanel());
+						if (!(windowAncestor instanceof JFrame)) {
+							windowAncestor.pack();
+						}
 
 					}
 
