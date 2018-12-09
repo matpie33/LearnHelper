@@ -14,11 +14,10 @@ import com.learningHelper.uiElementsCreators.ResourceLocationRowElementsCreator;
 
 public class ResourceLocationRow implements ListRowCreator<StringListElement> {
 
-	private ResourceLocationRowElementsCreator elementsCreator;
+	private ApplicationController applicationController;
 
 	public ResourceLocationRow(ApplicationController applicationController) {
-		elementsCreator = new ResourceLocationRowElementsCreator(
-				applicationController);
+		this.applicationController = applicationController;
 	}
 
 	@Override
@@ -27,6 +26,8 @@ public class ResourceLocationRow implements ListRowCreator<StringListElement> {
 			CommonListElements<StringListElement> commonListElements,
 			InputGoal inputGoal) {
 		MainPanel panel = new MainPanel(new PanelConfiguration());
+		ResourceLocationRowElementsCreator elementsCreator = new ResourceLocationRowElementsCreator(
+				applicationController);
 		panel.addRow(SimpleRowBuilder.createRow(FillType.HORIZONTAL,
 				elementsCreator.createLabelURL(),
 				elementsCreator.createInputResourceLocation(stringListElement,

@@ -18,6 +18,7 @@ import javax.swing.text.JTextComponent;
 public class ResourceLocationRowElementsCreator {
 
 	private ResourceLocationRowActionsCreator actionsCreator;
+	private JTextComponent resourceLocationInput;
 
 	public ResourceLocationRowElementsCreator(
 			ApplicationController applicationController) {
@@ -34,11 +35,12 @@ public class ResourceLocationRowElementsCreator {
 	public JTextComponent createInputResourceLocation(
 			StringListElement stringListElement,
 			MyList<StringListElement> list) {
-		return actionsCreator.withPropertyChangeListener(stringListElement,
-				GuiElementsCreator.createTextField(
+		resourceLocationInput = actionsCreator.withPropertyChangeListener(
+				stringListElement, GuiElementsCreator.createTextField(
 						UIElementsStyles.shortTextInputStyle()
 										.text(stringListElement.getValue())),
 				list);
+		return resourceLocationInput;
 	}
 
 	public JComponent createButtonIncreaseVideoNumberIfApplicable(
@@ -50,10 +52,9 @@ public class ResourceLocationRowElementsCreator {
 			return GuiElementsCreator.createButtonlikeComponent(
 					UIElementsStyles.buttonStyle()
 									.text(Buttons.INCREASE_VIDEO_NUMBER),
-					actionsCreator.createIncreaseVideoNumberAction());
+					actionsCreator.createIncreaseVideoNumberAction(resourceLocationInput));
 		}
 		return null;
 	}
-
 
 }
