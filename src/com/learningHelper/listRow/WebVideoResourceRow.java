@@ -23,8 +23,8 @@ public class WebVideoResourceRow implements ResourceRow {
 	}
 
 	@Override
-	public ListRowData<LearningResource> addElementsToPanel(LearningResource learningResource,
-			MainPanel panel,
+	public ListRowData<LearningResource> addElementsToPanel(
+			LearningResource learningResource, MainPanel panel,
 			CommonListElements<LearningResource> commonListElements) {
 		LearningResourceRowDataCreator rowDataCreator = new LearningResourceRowDataCreator(
 				applicationController, learningResourcesGroupName);
@@ -35,7 +35,8 @@ public class WebVideoResourceRow implements ResourceRow {
 						elementsCreator.createLabelResourceType(),
 						elementsCreator.createComboboxResourceType(
 								learningResource, panel, commonListElements))
-								.nextRow(elementsCreator.createLabelResourceTag(),
+								.nextRow(
+										elementsCreator.createLabelResourceTag(),
 										elementsCreator.createInputResourceTag(
 												learningResource.getTag(),
 												learningResource,
@@ -46,11 +47,16 @@ public class WebVideoResourceRow implements ResourceRow {
 										elementsCreator.createResourceLocations(
 												learningResource)
 													   .getPanel())
-								.nextRow(elementsCreator.createLabelStoppedPlace(),
+								.nextRow(
+										elementsCreator.createLabelStoppedPlace(),
 										elementsCreator.createInputStoppedPlaceTimeRangeStart(),
 										elementsCreator.createInputStoppedPlaceTimeRangeEnd())
-								.nextRow(elementsCreator.createButtonGoToResource(
-										learningResource))
+								.inSameColumn(
+										elementsCreator.getTimeRangeStartInput(),
+										elementsCreator.getTimeRangeEndInput())
+								.nextRow(
+										elementsCreator.createButtonGoToResource(
+												learningResource))
 								.nextRow(commonListElements.getButtonDelete()));
 		return rowDataCreator.createRowData(panel);
 	}

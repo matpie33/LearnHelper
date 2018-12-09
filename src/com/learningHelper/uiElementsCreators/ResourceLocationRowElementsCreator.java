@@ -52,7 +52,8 @@ public class ResourceLocationRowElementsCreator {
 			return GuiElementsCreator.createButtonlikeComponent(
 					UIElementsStyles.buttonStyle()
 									.text(Buttons.INCREASE_VIDEO_NUMBER),
-					actionsCreator.createIncreaseVideoNumberAction(resourceLocationInput));
+					actionsCreator.createIncreaseVideoNumberAction(
+							resourceLocationInput));
 		}
 		return null;
 	}

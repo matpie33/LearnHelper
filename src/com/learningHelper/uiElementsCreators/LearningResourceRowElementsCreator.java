@@ -111,6 +111,14 @@ public class LearningResourceRowElementsCreator {
 		return timeRangeStartInput;
 	}
 
+	public JTextField getTimeRangeStartInput() {
+		return timeRangeStartInput;
+	}
+
+	public JTextField getTimeRangeEndInput() {
+		return timeRangeEndInput;
+	}
+
 	public JTextComponent createInputStoppedPlaceTimeRangeEnd() {
 		if (timeRangeEndInput == null) {
 			timeRangeEndInput = GuiElementsCreator.createTextField(
