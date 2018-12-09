@@ -31,6 +31,8 @@ public class ResourceLocationRow implements ListRowCreator<StringListElement> {
 				elementsCreator.createLabelURL(),
 				elementsCreator.createInputResourceLocation(stringListElement,
 						commonListElements.getList()),
+				elementsCreator.createButtonIncreaseVideoNumberIfApplicable(
+						commonListElements),
 				commonListElements.getButtonAddRow(),
 				commonListElements.getButtonDelete()));
 		return new ListRowData<>(panel);

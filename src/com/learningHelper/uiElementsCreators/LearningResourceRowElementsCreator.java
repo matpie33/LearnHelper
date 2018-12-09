@@ -44,8 +44,9 @@ public class LearningResourceRowElementsCreator {
 								.text(Labels.RESOURCE_TYPE));
 	}
 
-	public JComboBox createComboboxResourceType(LearningResource learningResource,
-			MainPanel panel, CommonListElements commonListElements) {
+	public JComboBox createComboboxResourceType(
+			LearningResource learningResource, MainPanel panel,
+			CommonListElements commonListElements) {
 		JComboBox combobox = GuiElementsCreator.createCombobox(
 				UIElementsStyles.comboboxStyle()
 								.setComboboxValues(
@@ -94,12 +95,7 @@ public class LearningResourceRowElementsCreator {
 				actionsCreator.createActionGoToResource(learningResource));
 	}
 
-	public AbstractButton createButtonIncreaseVideoNumber() {
-		return GuiElementsCreator.createButtonlikeComponent(
-				UIElementsStyles.buttonStyle()
-								.text(Buttons.INCREASE_VIDEO_NUMBER),
-				actionsCreator.createActionIncreaseVideoNumber());
-	}
+
 
 	public JLabel createLabelStoppedPlace() {
 		return GuiElementsCreator.createLabel(
@@ -148,10 +144,11 @@ public class LearningResourceRowElementsCreator {
 															  learningResourcesGroupName),
 													  learningResource,
 													  learningResource.getAlternativeLocations()));
-		if (learningResource.getAlternativeLocations().isEmpty()){
+		if (learningResource.getAlternativeLocations()
+							.isEmpty()) {
 			locationsList.addWord(new StringListElement(""));
 		}
-		else{
+		else {
 			learningResource.getAlternativeLocations()
 							.forEach(locationsList::addWord);
 		}

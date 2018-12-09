@@ -36,14 +36,7 @@ public class LearningResourceRowActionsCreator {
 		return tagInputPropertyManager;
 	}
 
-	public AbstractAction createIncreaseVideoNumberAction() {
-		return new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
 
-			}
-		};
-	}
 
 	public ItemListener createActionChangeResourceType(
 			LearningResource learningResource, MainPanel panel,
@@ -97,7 +90,4 @@ public class LearningResourceRowActionsCreator {
 		};
 	}
 
-	public AbstractAction createActionIncreaseVideoNumber() {
-		return null;
-	}
 }

@@ -7,7 +7,9 @@ import com.learningHelper.application.ApplicationController;
 import com.learningHelper.listPropertyManagers.ResourceLocationPropertyManager;
 import com.learningHelper.model.StringListElement;
 
+import javax.swing.*;
 import javax.swing.text.JTextComponent;
+import java.awt.event.ActionEvent;
 
 public class ResourceLocationRowActionsCreator {
 	private ApplicationController applicationController;
@@ -25,6 +27,15 @@ public class ResourceLocationRowActionsCreator {
 						applicationController.getApplicationWindow(),
 						new ResourceLocationPropertyManager(), InputGoal.EDIT));
 		return component;
+	}
+
+	public AbstractAction createIncreaseVideoNumberAction() {
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		};
 	}
 
 }
