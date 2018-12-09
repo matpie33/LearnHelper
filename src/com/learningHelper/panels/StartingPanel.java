@@ -21,13 +21,13 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 	public void createElements() {
 		mainPanel.addRows(
 				SimpleRowBuilder.createRow(FillType.NONE, Anchor.CENTER,
-						elementsCreator.getTitleLabel())
+						elementsCreator.createTitleLabel())
 								.nextRow(FillType.NONE, Anchor.WEST,
-										elementsCreator.getResourcesGroupNameLabel(),
-										elementsCreator.getResourcesGroupNameInput(),
-										elementsCreator.getButtonAddResourcesGroup())
+										elementsCreator.createResourcesGroupNameLabel(),
+										elementsCreator.createResourcesGroupNameInput(),
+										elementsCreator.createButtonAddResourcesGroup())
 								.nextRow(FillType.BOTH,
-										elementsCreator.getTabPane()));
+										elementsCreator.createTabPane()));
 	}
 
 	@Override

@@ -35,12 +35,12 @@ public class StartingPanelElementsCreator {
 		this.applicationController = applicationController;
 	}
 
-	public JLabel getTitleLabel() {
+	public JLabel createTitleLabel() {
 		return GuiElementsCreator.createLabel(UIElementsStyles.titleLabelStyle()
 															  .text(Titles.APPLICATION_TITLE));
 	}
 
-	public JTabbedPane getTabPane() {
+	public JTabbedPane createTabPane() {
 		if (tabPane == null) {
 			tabPane = new JTabbedPane();
 		}
@@ -48,20 +48,20 @@ public class StartingPanelElementsCreator {
 
 	}
 
-	public JLabel getNoResourcesLabel() {
+	public JLabel createNoResourcesLabel() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.informationLabelStyle()
 								.text(Labels.NO_RESOURCES));
 	}
 
-	public AbstractButton getButtonAddResourcesGroup() {
+	public AbstractButton createButtonAddResourcesGroup() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.ADD),
 				actionsCreator.createActionAddGroupResource());
 	}
 
-	public JTextField getResourcesGroupNameInput() {
+	public JTextField createResourcesGroupNameInput() {
 		if (resourcesGroupName == null) {
 			resourcesGroupName = GuiElementsCreator.createTextField(
 					UIElementsStyles.shortTextInputStyle());
@@ -69,7 +69,7 @@ public class StartingPanelElementsCreator {
 		return resourcesGroupName;
 	}
 
-	public JLabel getResourcesGroupNameLabel() {
+	public JLabel createResourcesGroupNameLabel() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.RESOURCES_GROUP_NAME));
@@ -78,7 +78,7 @@ public class StartingPanelElementsCreator {
 	public MyList<LearningResource> createLearningResourcesList(
 			String groupName) {
 
-		MyList<LearningResource> learningResourceMyList = new MyList<>(
+		MyList<LearningResource> learningResourcesList = new MyList<>(
 				new ListConfiguration<>(
 						UserInformation.LEARNING_RESOURCE_DELETE,
 						new LearningResourceRow(applicationController,
@@ -87,13 +87,13 @@ public class StartingPanelElementsCreator {
 						applicationController.getApplicationWindow(),
 						applicationController).showButtonsLoadNextPreviousWords(
 						false));
-		learningResourceMyList.addAdditionalNavigationButtons(
-				createButtonOpenAllResourcesFromGroup(learningResourceMyList));
-		return learningResourceMyList;
+		learningResourcesList.addAdditionalNavigationButtons(
+				createButtonOpenAllResourcesFromGroup(learningResourcesList));
+		return learningResourcesList;
 
 	}
 
-	public AbstractButton createButtonOpenAllResourcesFromGroup(
+	private AbstractButton createButtonOpenAllResourcesFromGroup(
 			MyList<LearningResource> learningResources) {
 		return GuiElementsCreator.createButtonlikeComponent(
 				new ButtonOptions(ButtonType.BUTTON).text(

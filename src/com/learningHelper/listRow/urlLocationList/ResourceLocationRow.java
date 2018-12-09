@@ -28,8 +28,8 @@ public class ResourceLocationRow implements ListRowCreator<StringListElement> {
 			InputGoal inputGoal) {
 		MainPanel panel = new MainPanel(new PanelConfiguration());
 		panel.addRow(SimpleRowBuilder.createRow(FillType.HORIZONTAL,
-				elementsCreator.getLabelURL(),
-				elementsCreator.getInputResourceLocation(stringListElement,
+				elementsCreator.createLabelURL(),
+				elementsCreator.createInputResourceLocation(stringListElement,
 						commonListElements.getList()),
 				commonListElements.getButtonAddRow(),
 				commonListElements.getButtonDelete()));

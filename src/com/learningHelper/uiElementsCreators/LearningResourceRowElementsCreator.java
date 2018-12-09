@@ -38,13 +38,13 @@ public class LearningResourceRowElementsCreator {
 		this.actionsCreator = actionsCreator;
 	}
 
-	public JLabel getLabelResourceType() {
+	public JLabel createLabelResourceType() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.RESOURCE_TYPE));
 	}
 
-	public JComboBox getComboboxResourceType(LearningResource learningResource,
+	public JComboBox createComboboxResourceType(LearningResource learningResource,
 			MainPanel panel, CommonListElements commonListElements) {
 		JComboBox combobox = GuiElementsCreator.createCombobox(
 				UIElementsStyles.comboboxStyle()
@@ -58,19 +58,19 @@ public class LearningResourceRowElementsCreator {
 		return combobox;
 	}
 
-	public JLabel getLabelResourceTag() {
+	public JLabel createLabelResourceTag() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.RESOURCE_TAG));
 	}
 
-	public JLabel getLabelResourceLocations() {
+	public JLabel createLabelResourceLocations() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.RESOURCE_LOCATIONS));
 	}
 
-	public JTextComponent getInputResourceTag(String tag,
+	public JTextComponent createInputResourceTag(String tag,
 			LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements) {
 		if (tagInput == null) {
@@ -83,11 +83,10 @@ public class LearningResourceRowElementsCreator {
 	}
 
 	public JTextField getTagInput() {
-		//TODO change the get methods name to create
 		return tagInput;
 	}
 
-	public AbstractButton getButtonGoToResource(
+	public AbstractButton createButtonGoToResource(
 			LearningResource learningResource) {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
@@ -95,20 +94,20 @@ public class LearningResourceRowElementsCreator {
 				actionsCreator.createActionGoToResource(learningResource));
 	}
 
-	public AbstractButton getButtonIncreaseVideoNumber() {
+	public AbstractButton createButtonIncreaseVideoNumber() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.INCREASE_VIDEO_NUMBER),
 				actionsCreator.createActionIncreaseVideoNumber());
 	}
 
-	public JLabel getLabelStoppedPlace() {
+	public JLabel createLabelStoppedPlace() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.STOPPED_PLACE));
 	}
 
-	public JTextComponent getInputStoppedPlaceTimeRangeStart() {
+	public JTextComponent createInputStoppedPlaceTimeRangeStart() {
 		if (timeRangeStartInput == null) {
 			timeRangeStartInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.textInputTimeRangeStyle());
@@ -116,7 +115,7 @@ public class LearningResourceRowElementsCreator {
 		return timeRangeStartInput;
 	}
 
-	public JTextComponent getInputStoppedPlaceTimeRangeEnd() {
+	public JTextComponent createInputStoppedPlaceTimeRangeEnd() {
 		if (timeRangeEndInput == null) {
 			timeRangeEndInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.textInputTimeRangeStyle());
@@ -124,7 +123,7 @@ public class LearningResourceRowElementsCreator {
 		return timeRangeEndInput;
 	}
 
-	public JTextComponent getTextInputStoppedPlace() {
+	public JTextComponent createTextInputStoppedPlace() {
 		if (stoppedPlaceTextInput == null) {
 			stoppedPlaceTextInput = GuiElementsCreator.createTextField(
 					UIElementsStyles.shortTextInputStyle());

@@ -21,13 +21,13 @@ public class ResourceLocationRowElementsCreator {
 				applicationController);
 	}
 
-	public JLabel getLabelURL() {
+	public JLabel createLabelURL() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.URL));
 	}
 
-	public JTextComponent getInputResourceLocation(
+	public JTextComponent createInputResourceLocation(
 			StringListElement stringListElement, MyList<StringListElement> list) {
 		return actionsCreator.withPropertyChangeListener(stringListElement,
 				GuiElementsCreator.createTextField(

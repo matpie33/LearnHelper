@@ -3,8 +3,6 @@ package com.learningHelper.panelsUpdaters;
 import com.guimaker.list.myList.MyList;
 import com.learningHelper.uiElementsCreators.StartingPanelElementsCreator;
 
-import javax.swing.*;
-
 public class StartingPanelUpdater {
 
 	private StartingPanelElementsCreator elementsCreator;
@@ -14,7 +12,7 @@ public class StartingPanelUpdater {
 	}
 
 	public void addLearningSourcesGroup (String name, MyList myList){
-		elementsCreator.getTabPane().add(name, myList.getPanel());
+		elementsCreator.createTabPane().add(name, myList.getPanel());
 	}
 
 }

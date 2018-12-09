@@ -8,9 +8,7 @@ import com.learningHelper.uiElementsCreators.StartingPanelElementsCreator;
 import com.learningHelper.webBrowsing.WebBrowser;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.Collection;
 
 public class StartingPanelActionsCreator {
 	private ApplicationController applicationController;
@@ -30,7 +28,7 @@ public class StartingPanelActionsCreator {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String groupName = elementsCreator.getResourcesGroupNameInput()
+				String groupName = elementsCreator.createResourcesGroupNameInput()
 												  .getText();
 				MyList<LearningResource> learningResourcesList = elementsCreator.createLearningResourcesList(
 						groupName);

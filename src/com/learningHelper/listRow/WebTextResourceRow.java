@@ -30,23 +30,23 @@ public class WebTextResourceRow implements ResourceRow {
 		panel.addRowsOfElementsInColumn(
 				SimpleRowBuilder.createRowStartingFromColumn(0, FillType.NONE,
 						commonListElements.getRowNumberLabel(),
-						elementsCreator.getLabelResourceType(),
-						elementsCreator.getComboboxResourceType(
+						elementsCreator.createLabelResourceType(),
+						elementsCreator.createComboboxResourceType(
 								learningResource, panel, commonListElements))
-								.nextRow(elementsCreator.getLabelResourceTag(),
-										elementsCreator.getInputResourceTag(
+								.nextRow(elementsCreator.createLabelResourceTag(),
+										elementsCreator.createInputResourceTag(
 												learningResource.getTag(),
 												learningResource,
 												commonListElements))
 								.setColumnToPutRowInto(1)
 								.nextRow(FillType.HORIZONTAL,
-										elementsCreator.getLabelResourceLocations(),
+										elementsCreator.createLabelResourceLocations(),
 										elementsCreator.createResourceLocations(
 												learningResource)
 													   .getPanel())
-								.nextRow(elementsCreator.getLabelStoppedPlace(),
-										elementsCreator.getTextInputStoppedPlace())
-								.nextRow(elementsCreator.getButtonGoToResource(
+								.nextRow(elementsCreator.createLabelStoppedPlace(),
+										elementsCreator.createTextInputStoppedPlace())
+								.nextRow(elementsCreator.createButtonGoToResource(
 										learningResource))
 								.nextRow(commonListElements.getButtonDelete()));
 		return rowDataCreator.createRowData(panel);
