@@ -2,10 +2,12 @@ package com.learningHelper.listRow;
 
 import com.guimaker.enums.Anchor;
 import com.guimaker.enums.FillType;
+import com.guimaker.list.ListRowData;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
+import com.learningHelper.listRowDataCreators.LearningResourceRowDataCreator;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 
@@ -21,17 +23,18 @@ public class WebVideoResourceRow implements ResourceRow {
 	}
 
 	@Override
-	public void addElementsToPanel(LearningResource learningResource, MainPanel panel,
-			CommonListElements commonListElements) {
-		LearningResourceRowElementsCreator elementsCreator = new LearningResourceRowElementsCreator(
+	public ListRowData<LearningResource> addElementsToPanel(LearningResource learningResource,
+			MainPanel panel,
+			CommonListElements<LearningResource> commonListElements) {
+		LearningResourceRowDataCreator rowDataCreator = new LearningResourceRowDataCreator(
 				applicationController, learningResourcesGroupName);
+		LearningResourceRowElementsCreator elementsCreator = rowDataCreator.getElementsCreator();
 		panel.addRowsOfElementsInColumn(
 				SimpleRowBuilder.createRowStartingFromColumn(0, FillType.NONE,
 						Anchor.WEST, commonListElements.getRowNumberLabel(),
 						elementsCreator.getLabelResourceType(),
 						elementsCreator.getComboboxResourceType(
-								learningResource, panel,
-								commonListElements))
+								learningResource, panel, commonListElements))
 								.nextRow(elementsCreator.getLabelResourceTag(),
 										elementsCreator.getInputResourceTag(
 												learningResource.getTag(),
@@ -43,13 +46,12 @@ public class WebVideoResourceRow implements ResourceRow {
 										elementsCreator.createResourceLocations(
 												learningResource)
 													   .getPanel())
-								.nextRow(
-										elementsCreator.getLabelStoppedPlace(),
+								.nextRow(elementsCreator.getLabelStoppedPlace(),
 										elementsCreator.getInputStoppedPlaceTimeRangeStart(),
 										elementsCreator.getInputStoppedPlaceTimeRangeEnd())
-								.nextRow(
-										elementsCreator.getButtonGoToResource(
-												learningResource))
+								.nextRow(elementsCreator.getButtonGoToResource(
+										learningResource))
 								.nextRow(commonListElements.getButtonDelete()));
+		return rowDataCreator.createRowData(panel);
 	}
 }

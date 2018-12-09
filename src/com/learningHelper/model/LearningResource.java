@@ -3,7 +3,6 @@ package com.learningHelper.model;
 import com.guimaker.list.ListElement;
 import com.guimaker.list.ListElementInitializer;
 import com.learningHelper.enums.LearningResourceType;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,8 @@ public class LearningResource implements ListElement {
 	private LearningResourceType type = LearningResourceType.WEB_HELPER_RESOURCE;
 	private String tag = "";
 	private List<StringListElement> alternativeLocations = new ArrayList<>();
-	//TODO refactor back to string after getting rid of ListElement interface
+	//TODO refactor back to List<String> after getting rid of ListElement
+	// interface
 
 	public LearningResourceType getType() {
 		return type;
@@ -35,7 +35,8 @@ public class LearningResource implements ListElement {
 		return alternativeLocations;
 	}
 
-	public void setAlternativeLocations(List<StringListElement> alternativeLocations) {
+	public void setAlternativeLocations(
+			List<StringListElement> alternativeLocations) {
 		this.alternativeLocations = alternativeLocations;
 	}
 
@@ -55,7 +56,7 @@ public class LearningResource implements ListElement {
 
 	@Override
 	public String getDisplayedText() {
-		throw new NotImplementedException();
+		return toString();
 	}
 
 	@Override

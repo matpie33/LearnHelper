@@ -31,11 +31,11 @@ public class LearningResourceRowElementsCreator {
 
 	public LearningResourceRowElementsCreator(
 			ApplicationController applicationController,
-			String learningResourcesGroupName) {
+			String learningResourcesGroupName,
+			LearningResourceRowActionsCreator actionsCreator) {
 		this.applicationController = applicationController;
 		this.learningResourcesGroupName = learningResourcesGroupName;
-		actionsCreator = new LearningResourceRowActionsCreator(
-				applicationController, learningResourcesGroupName);
+		this.actionsCreator = actionsCreator;
 	}
 
 	public JLabel getLabelResourceType() {
@@ -79,6 +79,11 @@ public class LearningResourceRowElementsCreator {
 							UIElementsStyles.shortTextInputStyle()
 											.text(tag)), commonListElements);
 		}
+		return tagInput;
+	}
+
+	public JTextField getTagInput() {
+		//TODO change the get methods name to create
 		return tagInput;
 	}
 

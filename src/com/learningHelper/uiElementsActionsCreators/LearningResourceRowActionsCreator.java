@@ -1,6 +1,7 @@
 package com.learningHelper.uiElementsActionsCreators;
 
 import com.guimaker.enums.InputGoal;
+import com.guimaker.list.ListElementPropertyManager;
 import com.guimaker.list.myList.ListPropertyChangeHandler;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.MainPanel;
@@ -20,6 +21,7 @@ public class LearningResourceRowActionsCreator {
 
 	private LearningResourceRowUpdater rowUpdater;
 	private ApplicationController applicationController;
+	private ListElementPropertyManager<?, LearningResource> tagInputPropertyManager;
 
 	public LearningResourceRowActionsCreator(
 			ApplicationController applicationController,
@@ -27,6 +29,10 @@ public class LearningResourceRowActionsCreator {
 		this.rowUpdater = new LearningResourceRowUpdater(applicationController,
 				learningResourcesGroupName);
 		this.applicationController = applicationController;
+	}
+
+	public ListElementPropertyManager<?, LearningResource> getTagInputPropertyManager() {
+		return tagInputPropertyManager;
 	}
 
 	public AbstractAction createIncreaseVideoNumberAction() {
@@ -65,16 +71,18 @@ public class LearningResourceRowActionsCreator {
 	public JTextField addTagChangeListener(LearningResource learningResource,
 			JTextField textField,
 			CommonListElements<LearningResource> commonListElements) {
-		ListPropertyChangeHandler listPropertyChangeHandler = new ListPropertyChangeHandler<>(
+		tagInputPropertyManager = new ResourceTagPropertyManager();
+		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
 				learningResource, commonListElements.getList(),
 				applicationController.getApplicationWindow(),
-				new ResourceTagPropertyManager(), InputGoal.EDIT);
-		textField.addFocusListener(listPropertyChangeHandler);
+				tagInputPropertyManager, InputGoal.EDIT);
+		textField.addFocusListener(tagInputPropertyChangeHandler);
 		return textField;
 
 	}
 
-	public AbstractAction createActionGoToResource(LearningResource learningResource) {
+	public AbstractAction createActionGoToResource(
+			LearningResource learningResource) {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
