@@ -8,14 +8,15 @@ import com.guimaker.model.PanelConfiguration;
 import com.guimaker.panels.MainPanel;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.model.LearningResource;
+import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
 
 public class LearningResourceRow implements ListRowCreator<LearningResource> {
 
-	private ResourceRow defaultLearningResourceRowCreator;
+	private LearningResourceRowUpdater learningResourceRowUpdater;
 
 	public LearningResourceRow(ApplicationController applicationController,
 			String groupName) {
-		defaultLearningResourceRowCreator = new WebHelperResourceRow(
+		learningResourceRowUpdater = new LearningResourceRowUpdater(
 				applicationController, groupName);
 	}
 
@@ -25,8 +26,10 @@ public class LearningResourceRow implements ListRowCreator<LearningResource> {
 			CommonListElements<LearningResource> commonListElements,
 			InputGoal inputGoal) {
 		MainPanel panel = new MainPanel(new PanelConfiguration());
-		return defaultLearningResourceRowCreator.addElementsToPanel(
-				learningResource, panel, commonListElements);
+		return learningResourceRowUpdater.getResourceRowForType(
+				learningResource.getType())
+										 .addElementsToPanel(learningResource,
+												 panel, commonListElements);
 	}
 
 }

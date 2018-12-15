@@ -107,7 +107,10 @@ public class LearningResourceRowElementsCreator {
 		if (timeRangeStartInput == null) {
 			timeRangeStartInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeStartInput(
 					GuiElementsCreator.createTextField(
-							UIElementsStyles.textInputTimeRangeStyle()),
+							UIElementsStyles.textInputTimeRangeStyle()
+											.text(""
+													+ learningResource.getLearningStoppedPlace()
+																	  .getTimeRangeStart())),
 					learningResource, commonListElements);
 		}
 		return timeRangeStartInput;
@@ -127,7 +130,10 @@ public class LearningResourceRowElementsCreator {
 		if (timeRangeEndInput == null) {
 			timeRangeEndInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeEndInput(
 					GuiElementsCreator.createTextField(
-							UIElementsStyles.textInputTimeRangeStyle()),
+							UIElementsStyles.textInputTimeRangeStyle()
+											.text(""
+													+ learningResource.getLearningStoppedPlace()
+																	  .getTimeRangeEnd())),
 					learningResource, commonListElements);
 		}
 		return timeRangeEndInput;

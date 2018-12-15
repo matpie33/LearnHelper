@@ -24,6 +24,17 @@ public class LearningStoppedPlace {
 		return videoTimeRangePlace;
 	}
 
+	public String getTimeRangeStart() {
+		return videoTimeRangePlace != null ?
+				videoTimeRangePlace.getRangeStart() + "" :
+				"";
+	}
+	public String getTimeRangeEnd() {
+		return videoTimeRangePlace != null ?
+				videoTimeRangePlace.getRangeEnd() + "" :
+				"";
+	}
+
 	public void setVideoTimeRangeStart(Integer videoTimeRangeStart) {
 		int rangeEnd = videoTimeRangePlace != null ?
 				videoTimeRangePlace.getRangeEnd() :

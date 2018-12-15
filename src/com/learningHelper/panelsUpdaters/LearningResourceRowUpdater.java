@@ -1,9 +1,7 @@
 package com.learningHelper.panelsUpdaters;
 
-import com.guimaker.enums.FillType;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.panels.MainPanel;
-import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listRow.ResourceRow;
@@ -11,9 +9,7 @@ import com.learningHelper.listRow.WebHelperResourceRow;
 import com.learningHelper.listRow.WebTextResourceRow;
 import com.learningHelper.listRow.WebVideoResourceRow;
 import com.learningHelper.model.LearningResource;
-import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 
-import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,13 +32,18 @@ public class LearningResourceRowUpdater {
 
 	public void changeResourceRowType(LearningResource learningResource,
 			MainPanel panel, LearningResourceType type,
-			CommonListElements commonListElements) {
+			CommonListElements<LearningResource> commonListElements) {
 		panel.clear();
 		resourceTypeToRowMap.get(type)
 							.addElementsToPanel(learningResource, panel,
 									commonListElements);
 		panel.updateView();
 
+	}
+
+	public ResourceRow getResourceRowForType (LearningResourceType
+			learningResourceType){
+		return resourceTypeToRowMap.get(learningResourceType);
 	}
 
 }
