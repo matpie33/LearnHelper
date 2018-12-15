@@ -95,18 +95,20 @@ public class LearningResourceRowElementsCreator {
 				actionsCreator.createActionGoToResource(learningResource));
 	}
 
-
-
 	public JLabel createLabelStoppedPlace() {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.STOPPED_PLACE));
 	}
 
-	public JTextComponent createInputStoppedPlaceTimeRangeStart() {
+	public JTextComponent createInputStoppedPlaceTimeRangeStart(
+			LearningResource learningResource,
+			CommonListElements<LearningResource> commonListElements) {
 		if (timeRangeStartInput == null) {
-			timeRangeStartInput = GuiElementsCreator.createTextField(
-					UIElementsStyles.textInputTimeRangeStyle());
+			timeRangeStartInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeStartInput(
+					GuiElementsCreator.createTextField(
+							UIElementsStyles.textInputTimeRangeStyle()),
+					learningResource, commonListElements);
 		}
 		return timeRangeStartInput;
 	}
@@ -119,18 +121,28 @@ public class LearningResourceRowElementsCreator {
 		return timeRangeEndInput;
 	}
 
-	public JTextComponent createInputStoppedPlaceTimeRangeEnd() {
+	public JTextComponent createInputStoppedPlaceTimeRangeEnd(
+			LearningResource learningResource,
+			CommonListElements<LearningResource> commonListElements) {
 		if (timeRangeEndInput == null) {
-			timeRangeEndInput = GuiElementsCreator.createTextField(
-					UIElementsStyles.textInputTimeRangeStyle());
+			timeRangeEndInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeEndInput(
+					GuiElementsCreator.createTextField(
+							UIElementsStyles.textInputTimeRangeStyle()),
+					learningResource, commonListElements);
 		}
 		return timeRangeEndInput;
 	}
 
-	public JTextComponent createTextInputStoppedPlace() {
+	public JTextComponent createInputStoppedPlace(
+			LearningResource learningResource,
+			CommonListElements<LearningResource> commonListElements) {
 		if (stoppedPlaceTextInput == null) {
-			stoppedPlaceTextInput = GuiElementsCreator.createTextField(
-					UIElementsStyles.shortTextInputStyle());
+			stoppedPlaceTextInput = actionsCreator.listenForChangesInStoppedPlaceTextInput(
+					GuiElementsCreator.createTextField(
+							UIElementsStyles.shortTextInputStyle()
+											.text(learningResource.getLearningStoppedPlace()
+																  .getTextFragmentPlace())),
+					learningResource, commonListElements);
 		}
 		return stoppedPlaceTextInput;
 	}

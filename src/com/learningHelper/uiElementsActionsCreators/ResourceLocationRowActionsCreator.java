@@ -26,7 +26,8 @@ public class ResourceLocationRowActionsCreator {
 		component.addFocusListener(
 				new ListPropertyChangeHandler<>(stringListElement, list,
 						applicationController.getApplicationWindow(),
-						new ResourceLocationPropertyManager(), InputGoal.EDIT));
+						new ResourceLocationPropertyManager(), InputGoal
+						.EDIT, ""));
 		return component;
 	}
 

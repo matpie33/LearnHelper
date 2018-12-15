@@ -22,8 +22,9 @@ public class WebTextResourceRow implements ResourceRow {
 	}
 
 	@Override
-	public ListRowData<LearningResource> addElementsToPanel(LearningResource learningResource,
-			MainPanel panel, CommonListElements commonListElements) {
+	public ListRowData<LearningResource> addElementsToPanel(
+			LearningResource learningResource, MainPanel panel,
+			CommonListElements<LearningResource> commonListElements) {
 		LearningResourceRowDataCreator rowDataCreator = new LearningResourceRowDataCreator(
 				applicationController, learningResourcesGroupName);
 		LearningResourceRowElementsCreator elementsCreator = rowDataCreator.getElementsCreator();
@@ -33,7 +34,8 @@ public class WebTextResourceRow implements ResourceRow {
 						elementsCreator.createLabelResourceType(),
 						elementsCreator.createComboboxResourceType(
 								learningResource, panel, commonListElements))
-								.nextRow(elementsCreator.createLabelResourceTag(),
+								.nextRow(
+										elementsCreator.createLabelResourceTag(),
 										elementsCreator.createInputResourceTag(
 												learningResource.getTag(),
 												learningResource,
@@ -44,10 +46,14 @@ public class WebTextResourceRow implements ResourceRow {
 										elementsCreator.createResourceLocations(
 												learningResource)
 													   .getPanel())
-								.nextRow(elementsCreator.createLabelStoppedPlace(),
-										elementsCreator.createTextInputStoppedPlace())
-								.nextRow(elementsCreator.createButtonGoToResource(
-										learningResource))
+								.nextRow(
+										elementsCreator.createLabelStoppedPlace(),
+										elementsCreator.createInputStoppedPlace(
+												learningResource,
+												commonListElements))
+								.nextRow(
+										elementsCreator.createButtonGoToResource(
+												learningResource))
 								.nextRow(commonListElements.getButtonDelete()));
 		return rowDataCreator.createRowData(panel);
 	}

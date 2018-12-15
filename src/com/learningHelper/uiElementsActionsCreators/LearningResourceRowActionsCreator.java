@@ -8,6 +8,9 @@ import com.guimaker.panels.MainPanel;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listPropertyManagers.ResourceTagPropertyManager;
+import com.learningHelper.listPropertyManagers.StoppedPlaceStringPropertyManager;
+import com.learningHelper.listPropertyManagers.StoppedPlaceTimeRangeEndPropertyManager;
+import com.learningHelper.listPropertyManagers.StoppedPlaceTimeRangeStartPropertyManager;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
 import com.learningHelper.webBrowsing.WebBrowser;
@@ -36,8 +39,6 @@ public class LearningResourceRowActionsCreator {
 		return tagInputPropertyManager;
 	}
 
-
-
 	public ItemListener createActionChangeResourceType(
 			LearningResource learningResource, MainPanel panel,
 			CommonListElements commonListElements) {
@@ -50,6 +51,7 @@ public class LearningResourceRowActionsCreator {
 					LearningResourceType type = LearningResourceType.getTypeByString(
 							newValue);
 					if (type != null) {
+						learningResource.getLearningStoppedPlace().clear();
 						learningResource.setType(type);
 						rowUpdater.changeResourceRowType(learningResource,
 								panel, type, commonListElements);
@@ -74,7 +76,7 @@ public class LearningResourceRowActionsCreator {
 		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
 				learningResource, commonListElements.getList(),
 				applicationController.getApplicationWindow(),
-				tagInputPropertyManager, InputGoal.EDIT);
+				tagInputPropertyManager, InputGoal.EDIT, "");
 		textField.addFocusListener(tagInputPropertyChangeHandler);
 		return textField;
 
@@ -90,4 +92,37 @@ public class LearningResourceRowActionsCreator {
 		};
 	}
 
+	public JTextField listenForChangesInStoppedPlaceTextInput(
+			JTextField textField, LearningResource learningResource,
+			CommonListElements<LearningResource> commonListElements) {
+		ListPropertyChangeHandler propertyChangeListener = new ListPropertyChangeHandler<>(
+				learningResource, commonListElements.getList(),
+				applicationController.getApplicationWindow(),
+				new StoppedPlaceStringPropertyManager(), InputGoal.EDIT, "");
+		textField.addFocusListener(propertyChangeListener);
+		return textField;
+	}
+
+	public JTextField listenForChangesInStoppedPlaceTimeRangeStartInput(
+			JTextField textField, LearningResource learningResource,
+			CommonListElements<LearningResource> commonListElements) {
+		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
+				learningResource, commonListElements.getList(),
+				applicationController.getApplicationWindow(),
+				new StoppedPlaceTimeRangeStartPropertyManager(), InputGoal.EDIT,
+				"");
+		textField.addFocusListener(tagInputPropertyChangeHandler);
+		return textField;
+	}
+	public JTextField listenForChangesInStoppedPlaceTimeRangeEndInput(
+			JTextField textField, LearningResource learningResource,
+			CommonListElements<LearningResource> commonListElements) {
+		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
+				learningResource, commonListElements.getList(),
+				applicationController.getApplicationWindow(),
+				new StoppedPlaceTimeRangeEndPropertyManager(), InputGoal.EDIT,
+				"");
+		textField.addFocusListener(tagInputPropertyChangeHandler);
+		return textField;
+	}
 }

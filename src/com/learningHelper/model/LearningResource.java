@@ -15,6 +15,12 @@ public class LearningResource implements ListElement {
 	//TODO refactor back to List<String> after getting rid of ListElement
 	// interface
 
+	private LearningStoppedPlace learningStoppedPlace = LearningStoppedPlace.empty();
+
+	public LearningStoppedPlace getLearningStoppedPlace() {
+		return learningStoppedPlace;
+	}
+
 	public LearningResourceType getType() {
 		return type;
 	}
@@ -61,7 +67,8 @@ public class LearningResource implements ListElement {
 
 	@Override
 	public String toString() {
-		return tag + ", " + alternativeLocations;
+		return tag + ", " + alternativeLocations + " " + "stop place: "
+				+ learningStoppedPlace;
 	}
 
 }
