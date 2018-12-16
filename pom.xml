@@ -6,20 +6,49 @@
 
     <groupId>LearnHelper</groupId>
     <artifactId>LearnHelper</artifactId>
-    <version>1.0-final</version>
+    <version>1.0</version>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>GuiMaker</groupId>
+            <artifactId>GuiMaker</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${jar.path}/lib
+                            </outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
                 <configuration>
+                    <outputDirectory>${jar.path}</outputDirectory>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.kanji.window.AppStart</mainClass>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.learningHelper.main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -29,10 +58,11 @@
 
 
     <properties>
+        <jar.path>C:\applications\LearnHelper</jar.path>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
     </properties>
-    
+
 </project>

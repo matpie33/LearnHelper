@@ -9,3 +9,4 @@ sources.xml
 *.xml
 !pom.xml
 /target
+/src/main/java/META-INF/MANIFEST.MF
