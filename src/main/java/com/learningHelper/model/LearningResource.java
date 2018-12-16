@@ -3,12 +3,16 @@ package com.learningHelper.model;
 import com.guimaker.list.ListElement;
 import com.guimaker.list.ListElementInitializer;
 import com.learningHelper.enums.LearningResourceType;
+import com.learningHelper.modelConversion.EnumToStringConverter;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LearningResource implements ListElement {
 
+	@XStreamConverter(EnumToStringConverter.class)
 	private LearningResourceType type = LearningResourceType.WEB_HELPER_RESOURCE;
 	private String tag = "";
 	private List<StringListElement> alternativeLocations = new ArrayList<>();
