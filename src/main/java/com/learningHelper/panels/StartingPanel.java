@@ -23,6 +23,8 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 				SimpleRowBuilder.createRow(FillType.NONE, Anchor.CENTER,
 						elementsCreator.createTitleLabel())
 								.nextRow(FillType.NONE, Anchor.WEST,
+										elementsCreator.createButtonSave())
+								.nextRow(
 										elementsCreator.createResourcesGroupNameLabel(),
 										elementsCreator.createResourcesGroupNameInput(),
 										elementsCreator.createButtonAddResourcesGroup())

@@ -6,4 +6,5 @@ public class Buttons {
 	public final static String INCREASE_VIDEO_NUMBER = "Zwiększ nr odcinka";
 	public final static String OPEN_ALL_RESOURCES_IN_GROUP = "Otwórz wszystkie "
 			+ "źródła";
+	public final static String SAVE = "Zapisz";
 }

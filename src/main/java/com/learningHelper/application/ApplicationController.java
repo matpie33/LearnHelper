@@ -4,9 +4,13 @@ import com.guimaker.application.ApplicationChangesManager;
 import com.guimaker.application.ApplicationWindow;
 import com.guimaker.list.myList.MyList;
 import com.learningHelper.model.LearningResource;
+import com.learningHelper.modelConversion.GrouppedResourcesConverter;
 import com.learningHelper.panels.StartingPanel;
+import com.learningHelper.saving.LoadAndSave;
+import com.learningHelper.uiElementsTexts.Exceptions;
 
-import java.util.HashMap;
+import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ApplicationController implements ApplicationChangesManager {
@@ -14,13 +18,15 @@ public class ApplicationController implements ApplicationChangesManager {
 	private ApplicationWindow applicationWindow;
 	private ApplicationConfigurationHolder applicationConfigurationHolder;
 	private StartingPanel startingPanel;
-	private Map<String, MyList<LearningResource>> nameToLearningResourcesGroupMap = new HashMap<>();
+	private Map<String, MyList<LearningResource>> nameToLearningResourcesGroupMap = new LinkedHashMap<>();
+	private LoadAndSave loadAndSave;
 
 	public ApplicationController() {
 		startingPanel = new StartingPanel(this);
 		applicationConfigurationHolder = new ApplicationConfigurationHolder();
 		applicationWindow = new ApplicationWindow(this, startingPanel,
 				applicationConfigurationHolder.getApplicationConfiguration());
+		loadAndSave = new LoadAndSave(applicationWindow.getContainer());
 	}
 
 	public void start() {
@@ -34,7 +40,14 @@ public class ApplicationController implements ApplicationChangesManager {
 
 	@Override
 	public void save() {
-
+		try {
+			loadAndSave.save(GrouppedResourcesConverter.convertMapOfResourcesToListOfGroups(
+					nameToLearningResourcesGroupMap));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			applicationWindow.showMessageDialog(Exceptions.FAILED_TO_SAVE_FILE);
+		}
 	}
 
 	@Override
@@ -51,4 +64,16 @@ public class ApplicationController implements ApplicationChangesManager {
 			String learningResourcesGroupName) {
 		return nameToLearningResourcesGroupMap.get(learningResourcesGroupName);
 	}
+
+	public void openSaveDialog (){
+		try {
+			loadAndSave.createNewFileAndSave(GrouppedResourcesConverter.convertMapOfResourcesToListOfGroups(
+					nameToLearningResourcesGroupMap));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			applicationWindow.showMessageDialog(Exceptions.FAILED_TO_SAVE_FILE);
+		}
+	}
+
 }

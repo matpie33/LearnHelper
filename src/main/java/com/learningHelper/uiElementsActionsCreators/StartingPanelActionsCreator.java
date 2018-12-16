@@ -50,4 +50,13 @@ public class StartingPanelActionsCreator {
 			}
 		};
 	}
+
+	public AbstractAction openSaveDialog() {
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.openSaveDialog();
+			}
+		};
+	}
 }

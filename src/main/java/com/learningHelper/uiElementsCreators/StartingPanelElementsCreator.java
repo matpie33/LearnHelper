@@ -104,4 +104,11 @@ public class StartingPanelElementsCreator {
 				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_D));
 	}
 
+	public AbstractButton createButtonSave() {
+		return GuiElementsCreator.createButtonlikeComponent(
+				new ButtonOptions(ButtonType.BUTTON).text(Buttons.SAVE),
+				actionsCreator.openSaveDialog(),
+				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_S));
+	}
+
 }
