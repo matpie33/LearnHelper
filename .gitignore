@@ -7,3 +7,5 @@ dist
 sources.xml
 *.iml
 *.xml
+!pom.xml
+/target
