@@ -40,7 +40,7 @@ public class StartingPanelElementsCreator {
 															  .text(Titles.APPLICATION_TITLE));
 	}
 
-	public JTabbedPane createTabPane() {
+	public JTabbedPane getTabPane() {
 		if (tabPane == null) {
 			tabPane = new JTabbedPane();
 		}
@@ -88,6 +88,7 @@ public class StartingPanelElementsCreator {
 						applicationController.getApplicationWindow(),
 						applicationController).showButtonsLoadNextPreviousWords(
 						false));
+		applicationController.addResourcesGroup(groupName, learningResourcesList);
 		learningResourcesList.addAdditionalNavigationButtons(
 				createButtonOpenAllResourcesFromGroup(learningResourcesList));
 		return learningResourcesList;
@@ -109,6 +110,13 @@ public class StartingPanelElementsCreator {
 				new ButtonOptions(ButtonType.BUTTON).text(Buttons.SAVE),
 				actionsCreator.openSaveDialog(),
 				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_S));
+	}
+
+	public AbstractButton createButtonLoad() {
+		return GuiElementsCreator.createButtonlikeComponent(
+				new ButtonOptions(ButtonType.BUTTON).text(Buttons.LOAD),
+				actionsCreator.openLoadFileDialog(),
+				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_Q));
 	}
 
 }

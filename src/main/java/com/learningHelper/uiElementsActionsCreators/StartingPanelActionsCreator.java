@@ -32,9 +32,9 @@ public class StartingPanelActionsCreator {
 												  .getText();
 				MyList<LearningResource> learningResourcesList = elementsCreator.createLearningResourcesList(
 						groupName);
-				applicationController.addResource(groupName,
+				applicationController.addResourcesGroup(groupName,
 						learningResourcesList);
-				panelUpdater.addLearningSourcesGroup(groupName,
+				panelUpdater.addLearningResourcesGroupToTabPane(groupName,
 						learningResourcesList);
 				learningResourcesList.addWord(new LearningResource());
 			}
@@ -56,6 +56,15 @@ public class StartingPanelActionsCreator {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				applicationController.openSaveDialog();
+			}
+		};
+	}
+
+	public AbstractAction openLoadFileDialog() {
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.openLoadFileDialog();
 			}
 		};
 	}

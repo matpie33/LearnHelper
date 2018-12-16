@@ -1,10 +1,15 @@
 package com.learningHelper.model;
 
 import com.guimaker.utilities.Range;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+@XStreamAlias("learningStoppedPlace")
 public class LearningStoppedPlace {
 
+	@XStreamAlias("textFragment")
 	private String textFragmentPlace;
+
+	@XStreamAlias("videoRange")
 	private Range videoTimeRangePlace;
 
 	public void setTextFragmentPlace(String textFragmentPlace) {

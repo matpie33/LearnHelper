@@ -4,20 +4,25 @@ import com.guimaker.list.ListElement;
 import com.guimaker.list.ListElementInitializer;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.modelConversion.EnumToStringConverter;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@XStreamAlias("learningResource")
 public class LearningResource implements ListElement {
 
 	@XStreamConverter(EnumToStringConverter.class)
+	@XStreamAlias("type")
 	private LearningResourceType type = LearningResourceType.WEB_HELPER_RESOURCE;
+
+	@XStreamAlias("tag")
 	private String tag = "";
+
+	@XStreamAlias("alternativeLocations")
 	private List<StringListElement> alternativeLocations = new ArrayList<>();
-	//TODO refactor back to List<String> after getting rid of ListElement
-	// interface
 
 	private LearningStoppedPlace learningStoppedPlace = LearningStoppedPlace.empty();
 

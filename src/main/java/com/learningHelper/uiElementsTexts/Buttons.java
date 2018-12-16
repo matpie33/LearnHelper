@@ -7,4 +7,5 @@ public class Buttons {
 	public final static String OPEN_ALL_RESOURCES_IN_GROUP = "Otwórz wszystkie "
 			+ "źródła";
 	public final static String SAVE = "Zapisz";
+	public final static String LOAD = "Wczytaj";
 }

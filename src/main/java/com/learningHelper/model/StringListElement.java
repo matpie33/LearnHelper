@@ -3,9 +3,12 @@ package com.learningHelper.model;
 import com.guimaker.list.ListElement;
 import com.guimaker.list.ListElementInitializer;
 import com.sun.org.apache.xerces.internal.xs.StringList;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+@XStreamAlias("string")
 public class StringListElement implements ListElement {
 
+	@XStreamAlias("value")
 	private String value;
 
 	public StringListElement(String value) {

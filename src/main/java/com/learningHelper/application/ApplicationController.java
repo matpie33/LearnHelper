@@ -3,6 +3,7 @@ package com.learningHelper.application;
 import com.guimaker.application.ApplicationChangesManager;
 import com.guimaker.application.ApplicationWindow;
 import com.guimaker.list.myList.MyList;
+import com.learningHelper.model.GroupOfLearningResources;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.modelConversion.GrouppedResourcesConverter;
 import com.learningHelper.panels.StartingPanel;
@@ -11,6 +12,7 @@ import com.learningHelper.uiElementsTexts.Exceptions;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ApplicationController implements ApplicationChangesManager {
@@ -41,8 +43,9 @@ public class ApplicationController implements ApplicationChangesManager {
 	@Override
 	public void save() {
 		try {
-			loadAndSave.save(GrouppedResourcesConverter.convertMapOfResourcesToListOfGroups(
-					nameToLearningResourcesGroupMap));
+			loadAndSave.save(
+					GrouppedResourcesConverter.convertMapOfResourcesToListOfGroups(
+							nameToLearningResourcesGroupMap));
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -55,7 +58,7 @@ public class ApplicationController implements ApplicationChangesManager {
 		return applicationWindow;
 	}
 
-	public void addResource(String groupName,
+	public void addResourcesGroup(String groupName,
 			MyList<LearningResource> learningResourcesList) {
 		nameToLearningResourcesGroupMap.put(groupName, learningResourcesList);
 	}
@@ -65,15 +68,26 @@ public class ApplicationController implements ApplicationChangesManager {
 		return nameToLearningResourcesGroupMap.get(learningResourcesGroupName);
 	}
 
-	public void openSaveDialog (){
+	public void openSaveDialog() {
 		try {
-			loadAndSave.createNewFileAndSave(GrouppedResourcesConverter.convertMapOfResourcesToListOfGroups(
-					nameToLearningResourcesGroupMap));
+			loadAndSave.createNewFileAndSave(
+					GrouppedResourcesConverter.convertMapOfResourcesToListOfGroups(
+							nameToLearningResourcesGroupMap));
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 			applicationWindow.showMessageDialog(Exceptions.FAILED_TO_SAVE_FILE);
 		}
+	}
+
+	public void openLoadFileDialog() {
+		List<GroupOfLearningResources> groupsOfLearningResources = loadAndSave.showLoadFileDialog();
+		if (!groupsOfLearningResources.isEmpty()) {
+			startingPanel.clearResourcesGroupTabs();
+			nameToLearningResourcesGroupMap.clear();
+			startingPanel.addLearningResourcesGroups(groupsOfLearningResources);
+		}
+
 	}
 
 }

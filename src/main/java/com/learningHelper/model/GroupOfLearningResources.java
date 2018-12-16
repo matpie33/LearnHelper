@@ -1,10 +1,16 @@
 package com.learningHelper.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 import java.util.List;
 
+@XStreamAlias("resourcesGroup")
 public class GroupOfLearningResources {
 
+	@XStreamAlias("groupName")
 	private String groupName;
+
+	@XStreamAlias("resources")
 	private List<LearningResource> learningResources;
 
 	public GroupOfLearningResources(String groupName,
