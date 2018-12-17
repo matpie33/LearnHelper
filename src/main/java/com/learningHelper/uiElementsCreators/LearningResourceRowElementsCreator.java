@@ -1,10 +1,13 @@
 package com.learningHelper.uiElementsCreators;
 
+import com.guimaker.enums.KeyModifiers;
 import com.guimaker.list.myList.ListConfiguration;
 import com.guimaker.list.myList.MyList;
 import com.guimaker.model.CommonListElements;
+import com.guimaker.model.HotkeyWrapper;
 import com.guimaker.panels.GuiElementsCreator;
 import com.guimaker.panels.MainPanel;
+import com.guimaker.utilities.CommonActionsCreator;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listRow.urlLocationList.ResourceLocationRow;
@@ -18,6 +21,7 @@ import com.learningHelper.uiElementsTexts.UserInformation;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
+import java.awt.event.KeyEvent;
 
 public class LearningResourceRowElementsCreator {
 
@@ -53,6 +57,12 @@ public class LearningResourceRowElementsCreator {
 										LearningResourceType.getDisplayedValues()));
 		combobox.setSelectedItem(learningResource.getType()
 												 .getDisplayedText());
+		if (commonListElements.isForSingleRowOnly()) {
+			CommonActionsCreator.addHotkey(
+					new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_SPACE),
+					actionsCreator.createActionSwitchResourceType(combobox),
+					combobox);
+		}
 		combobox.addItemListener(
 				actionsCreator.createActionChangeResourceType(learningResource,
 						panel, commonListElements));

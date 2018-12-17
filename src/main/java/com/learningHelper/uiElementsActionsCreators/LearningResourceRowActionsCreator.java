@@ -51,7 +51,8 @@ public class LearningResourceRowActionsCreator {
 					LearningResourceType type = LearningResourceType.getTypeByString(
 							newValue);
 					if (type != null) {
-						learningResource.getLearningStoppedPlace().clear();
+						learningResource.getLearningStoppedPlace()
+										.clear();
 						learningResource.setType(type);
 						rowUpdater.changeResourceRowType(learningResource,
 								panel, type, commonListElements);
@@ -114,6 +115,7 @@ public class LearningResourceRowActionsCreator {
 		textField.addFocusListener(tagInputPropertyChangeHandler);
 		return textField;
 	}
+
 	public JTextField listenForChangesInStoppedPlaceTimeRangeEndInput(
 			JTextField textField, LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements) {
@@ -124,5 +126,18 @@ public class LearningResourceRowActionsCreator {
 				"");
 		textField.addFocusListener(tagInputPropertyChangeHandler);
 		return textField;
+	}
+
+	public AbstractAction createActionSwitchResourceType(JComboBox combobox) {
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int itemCount = combobox.getItemCount();
+				if (itemCount > 1) {
+					combobox.setSelectedIndex(
+							(combobox.getSelectedIndex() + 1) % itemCount);
+				}
+			}
+		};
 	}
 }
