@@ -24,6 +24,7 @@ public class LearningResource implements ListElement {
 	@XStreamAlias("alternativeLocations")
 	private List<StringListElement> alternativeLocations = new ArrayList<>();
 
+	@XStreamAlias("learningStopPlace")
 	private LearningStoppedPlace learningStoppedPlace = LearningStoppedPlace.empty();
 
 	public LearningStoppedPlace getLearningStoppedPlace() {
