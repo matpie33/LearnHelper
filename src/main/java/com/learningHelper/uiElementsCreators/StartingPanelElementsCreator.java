@@ -7,6 +7,7 @@ import com.guimaker.list.myList.MyList;
 import com.guimaker.model.HotkeyWrapper;
 import com.guimaker.options.ButtonOptions;
 import com.guimaker.panels.GuiElementsCreator;
+import com.guimaker.utilities.CommonActionsCreator;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.listRow.LearningResourceRow;
 import com.learningHelper.model.LearningResource;
@@ -43,6 +44,9 @@ public class StartingPanelElementsCreator {
 	public JTabbedPane getTabPane() {
 		if (tabPane == null) {
 			tabPane = new JTabbedPane();
+			CommonActionsCreator.addHotkey(
+					new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_W),
+					actionsCreator.createActionSwitchTabs(tabPane), tabPane);
 		}
 		return tabPane;
 
@@ -88,7 +92,8 @@ public class StartingPanelElementsCreator {
 						applicationController.getApplicationWindow(),
 						applicationController).showButtonsLoadNextPreviousWords(
 						false));
-		applicationController.addResourcesGroup(groupName, learningResourcesList);
+		applicationController.addResourcesGroup(groupName,
+				learningResourcesList);
 		learningResourcesList.addAdditionalNavigationButtons(
 				createButtonOpenAllResourcesFromGroup(learningResourcesList));
 		return learningResourcesList;

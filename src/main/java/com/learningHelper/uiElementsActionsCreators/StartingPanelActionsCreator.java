@@ -68,4 +68,17 @@ public class StartingPanelActionsCreator {
 			}
 		};
 	}
+
+	public AbstractAction createActionSwitchTabs(JTabbedPane tabPane) {
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int tabCount = tabPane.getTabCount();
+				if (tabCount > 1) {
+					tabPane.setSelectedIndex(
+							(tabPane.getSelectedIndex() + 1) % tabCount);
+				}
+			}
+		};
+	}
 }
