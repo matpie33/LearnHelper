@@ -7,8 +7,10 @@ import com.learningHelper.model.StringListElement;
 import com.thoughtworks.xstream.XStream;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class FromAndToXMLConverter {
@@ -16,7 +18,9 @@ public class FromAndToXMLConverter {
 	public void save(List<GroupOfLearningResources> groupOfLearningSources,
 			File file) throws IOException {
 		XStream xStream = initializeXStream();
-		xStream.toXML(groupOfLearningSources, new FileWriter(file));
+		xStream.toXML(groupOfLearningSources,
+				new OutputStreamWriter(new FileOutputStream(file),
+						StandardCharsets.UTF_8));
 
 	}
 
