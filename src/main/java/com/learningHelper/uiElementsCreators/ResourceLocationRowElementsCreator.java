@@ -44,7 +44,8 @@ public class ResourceLocationRowElementsCreator {
 	}
 
 	public JComponent createButtonIncreaseVideoNumberIfApplicable(
-			CommonListElements<StringListElement> commonListElements) {
+			CommonListElements<StringListElement> commonListElements,
+			StringListElement stringListElement) {
 		LearningResource learningResource = (LearningResource) commonListElements.getList()
 																				 .getRootWord();
 		if (learningResource.getType()
@@ -53,7 +54,7 @@ public class ResourceLocationRowElementsCreator {
 					UIElementsStyles.buttonStyle()
 									.text(Buttons.INCREASE_VIDEO_NUMBER),
 					actionsCreator.createIncreaseVideoNumberAction(
-							resourceLocationInput));
+							resourceLocationInput, stringListElement));
 		}
 		return null;
 	}
