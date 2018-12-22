@@ -35,8 +35,9 @@ public class UIElementsStyles {
 		return defaultTextFieldOption().rowsAndColumns(1, 15);
 	}
 
-	public static TextComponentOptions textInputTimeRangeStyle() {
-		return defaultTextFieldOption().rowsAndColumns(1, 3);
+	public static TextComponentOptions timeRangeInputStyle() {
+		return defaultTextFieldOption().rowsAndColumns(1, 3)
+									   .digitsOnly(true);
 	}
 
 	public static ComboboxOptions comboboxStyle() {

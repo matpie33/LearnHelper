@@ -111,13 +111,13 @@ public class LearningResourceRowElementsCreator {
 								.text(Labels.STOPPED_PLACE));
 	}
 
-	public JTextComponent createInputStoppedPlaceTimeRangeStart(
+	public JTextComponent createInputStoppedPlaceVideoMinute(
 			LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements) {
 		if (timeRangeStartInput == null) {
 			timeRangeStartInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeStartInput(
 					GuiElementsCreator.createTextField(
-							UIElementsStyles.textInputTimeRangeStyle()
+							UIElementsStyles.timeRangeInputStyle()
 											.text(""
 													+ learningResource.getLearningStoppedPlace()
 																	  .getVideoMinute())),
@@ -134,13 +134,13 @@ public class LearningResourceRowElementsCreator {
 		return timeRangeEndInput;
 	}
 
-	public JTextComponent createInputStoppedPlaceTimeRangeEnd(
+	public JTextComponent createInputStoppedPlaceVideoSecond(
 			LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements) {
 		if (timeRangeEndInput == null) {
 			timeRangeEndInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeEndInput(
 					GuiElementsCreator.createTextField(
-							UIElementsStyles.textInputTimeRangeStyle()
+							UIElementsStyles.timeRangeInputStyle()
 											.text(""
 													+ learningResource.getLearningStoppedPlace()
 																	  .getVideoSecond())),
