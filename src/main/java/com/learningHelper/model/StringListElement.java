@@ -2,7 +2,6 @@ package com.learningHelper.model;
 
 import com.guimaker.list.ListElement;
 import com.guimaker.list.ListElementInitializer;
-import com.sun.org.apache.xerces.internal.xs.StringList;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("string")
@@ -19,10 +18,9 @@ public class StringListElement implements ListElement {
 		return value;
 	}
 
-	public static ListElementInitializer<StringListElement> getInitializer(){
-		return ()-> new StringListElement("");
+	public static ListElementInitializer<StringListElement> getInitializer() {
+		return () -> new StringListElement("");
 	}
-
 
 	@Override
 	public boolean isEmpty() {
@@ -39,9 +37,8 @@ public class StringListElement implements ListElement {
 	}
 
 	@Override
-	public String toString (){
+	public String toString() {
 		return value;
 	}
-
 
 }

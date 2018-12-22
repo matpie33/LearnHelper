@@ -5,7 +5,7 @@ import com.learningHelper.model.LearningResource;
 
 import javax.swing.text.JTextComponent;
 
-public class StoppedPlaceTimeRangeEndPropertyManager
+public class StoppedPlaceVideoMinutePropertyManager
 		implements ListElementPropertyManager<Integer, LearningResource> {
 	@Override
 	public String getInvalidPropertyReason() {
@@ -19,16 +19,16 @@ public class StoppedPlaceTimeRangeEndPropertyManager
 	}
 
 	@Override
-	public Integer convertToProperty(JTextComponent input) {
-		return input.getText()
-					.isEmpty() ? 0 : Integer.parseInt(input.getText());
+	public String getPropertyValue(LearningResource learningResource) {
+		return "" + learningResource.getLearningStoppedPlace()
+									.getVideoTimePoint()
+									.getMinute();
 	}
 
 	@Override
-	public String getPropertyValue(LearningResource learningResource) {
-		return "" + learningResource.getLearningStoppedPlace()
-									.getVideoTimeRangePlace()
-									.getRangeEnd();
+	public Integer convertToProperty(JTextComponent input){
+		return input.getText()
+					.isEmpty() ? 0 : Integer.parseInt(input.getText());
 	}
 
 	@Override
@@ -40,6 +40,6 @@ public class StoppedPlaceTimeRangeEndPropertyManager
 	public void setProperty(LearningResource learningResource, Integer newValue,
 			Integer previousValue) {
 		learningResource.getLearningStoppedPlace()
-						.setVideoTimeRangeEnd(newValue);
+						.setVideoMinute(newValue);
 	}
 }

@@ -1,6 +1,5 @@
 package com.learningHelper.model;
 
-import com.guimaker.utilities.Range;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("learningStoppedPlace")
@@ -9,12 +8,13 @@ public class LearningStoppedPlace {
 	@XStreamAlias("textFragment")
 	private String textFragmentPlace;
 
-	@XStreamAlias("videoRange")
-	private Range videoTimeRangePlace;
+	@XStreamAlias("videoTimePoint")
+	private VideoTimePoint videoTimePoint;
+
 
 	public void setTextFragmentPlace(String textFragmentPlace) {
 		this.textFragmentPlace = textFragmentPlace;
-		videoTimeRangePlace = null;
+		videoTimePoint = null;
 	}
 
 	public static LearningStoppedPlace empty() {
@@ -25,45 +25,37 @@ public class LearningStoppedPlace {
 		return textFragmentPlace;
 	}
 
-	public Range getVideoTimeRangePlace() {
-		return videoTimeRangePlace;
+	public VideoTimePoint getVideoTimePoint() {
+		return videoTimePoint;
 	}
 
-	public String getTimeRangeStart() {
-		return videoTimeRangePlace != null ?
-				videoTimeRangePlace.getRangeStart() + "" :
-				"";
-	}
-	public String getTimeRangeEnd() {
-		return videoTimeRangePlace != null ?
-				videoTimeRangePlace.getRangeEnd() + "" :
-				"";
+	public void initializeVideoTimePoint (){
+		videoTimePoint = new VideoTimePoint();
 	}
 
-	public void setVideoTimeRangeStart(Integer videoTimeRangeStart) {
-		int rangeEnd = videoTimeRangePlace != null ?
-				videoTimeRangePlace.getRangeEnd() :
-				Integer.MAX_VALUE;
-		videoTimeRangePlace = new Range(videoTimeRangeStart, rangeEnd);
-		textFragmentPlace = null;
+	public String getVideoMinute() {
+		return "" + videoTimePoint.getMinute();
 	}
 
-	public void setVideoTimeRangeEnd(Integer videoTimeRangeEnd) {
-		int rangeStart = videoTimeRangePlace != null ?
-				videoTimeRangePlace.getRangeStart() :
-				0;
-		videoTimeRangePlace = new Range(rangeStart, videoTimeRangeEnd);
-		textFragmentPlace = null;
+	public String getVideoSecond() {
+		return "" + videoTimePoint.getSecond();
+	}
+
+	public void setVideoMinute(Integer videoMinute) {
+		videoTimePoint.setMinute(videoMinute);
+	}
+
+	public void setVideoSecond(Integer videoSecond) {
+		videoTimePoint.setSecond(videoSecond);
 	}
 
 	@Override
 	public String toString() {
-		return "video range: " + videoTimeRangePlace + " text: "
-				+ textFragmentPlace;
+		return "video range: " + videoTimePoint + " text: " + textFragmentPlace;
 	}
 
 	public void clear() {
-		videoTimeRangePlace = null;
+		videoTimePoint = null;
 		textFragmentPlace = null;
 	}
 }

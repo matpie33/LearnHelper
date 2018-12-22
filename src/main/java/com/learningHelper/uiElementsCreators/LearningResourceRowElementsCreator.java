@@ -120,7 +120,7 @@ public class LearningResourceRowElementsCreator {
 							UIElementsStyles.textInputTimeRangeStyle()
 											.text(""
 													+ learningResource.getLearningStoppedPlace()
-																	  .getTimeRangeStart())),
+																	  .getVideoMinute())),
 					learningResource, commonListElements);
 		}
 		return timeRangeStartInput;
@@ -143,7 +143,7 @@ public class LearningResourceRowElementsCreator {
 							UIElementsStyles.textInputTimeRangeStyle()
 											.text(""
 													+ learningResource.getLearningStoppedPlace()
-																	  .getTimeRangeEnd())),
+																	  .getVideoSecond())),
 					learningResource, commonListElements);
 		}
 		return timeRangeEndInput;

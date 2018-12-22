@@ -9,8 +9,8 @@ import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listPropertyManagers.ResourceTagPropertyManager;
 import com.learningHelper.listPropertyManagers.StoppedPlaceStringPropertyManager;
-import com.learningHelper.listPropertyManagers.StoppedPlaceTimeRangeEndPropertyManager;
-import com.learningHelper.listPropertyManagers.StoppedPlaceTimeRangeStartPropertyManager;
+import com.learningHelper.listPropertyManagers.StoppedPlaceVideoSecondPropertyManager;
+import com.learningHelper.listPropertyManagers.StoppedPlaceVideoMinutePropertyManager;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
 import com.learningHelper.webBrowsing.WebBrowser;
@@ -54,6 +54,9 @@ public class LearningResourceRowActionsCreator {
 						learningResource.getLearningStoppedPlace()
 										.clear();
 						learningResource.setType(type);
+						if (type.equals(LearningResourceType.WEB_VIDEO)){
+							learningResource.initializeVideoTimePoint();
+						}
 						rowUpdater.changeResourceRowType(learningResource,
 								panel, type, commonListElements);
 						Window windowAncestor = SwingUtilities.getWindowAncestor(
@@ -110,7 +113,7 @@ public class LearningResourceRowActionsCreator {
 		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
 				learningResource, commonListElements.getList(),
 				applicationController.getApplicationWindow(),
-				new StoppedPlaceTimeRangeStartPropertyManager(), InputGoal.EDIT,
+				new StoppedPlaceVideoMinutePropertyManager(), InputGoal.EDIT,
 				"");
 		textField.addFocusListener(tagInputPropertyChangeHandler);
 		return textField;
@@ -122,7 +125,7 @@ public class LearningResourceRowActionsCreator {
 		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
 				learningResource, commonListElements.getList(),
 				applicationController.getApplicationWindow(),
-				new StoppedPlaceTimeRangeEndPropertyManager(), InputGoal.EDIT,
+				new StoppedPlaceVideoSecondPropertyManager(), InputGoal.EDIT,
 				"");
 		textField.addFocusListener(tagInputPropertyChangeHandler);
 		return textField;

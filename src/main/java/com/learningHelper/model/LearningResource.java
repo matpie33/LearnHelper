@@ -5,7 +5,6 @@ import com.guimaker.list.ListElementInitializer;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.modelConversion.EnumToStringConverter;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import java.util.ArrayList;
@@ -81,4 +80,7 @@ public class LearningResource implements ListElement {
 				+ learningStoppedPlace;
 	}
 
+	public void initializeVideoTimePoint() {
+		learningStoppedPlace.initializeVideoTimePoint();
+	}
 }
