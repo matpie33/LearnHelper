@@ -48,13 +48,12 @@ public class UIElementsStyles {
 		return new TextComponentOptions().border(
 
 				BorderFactory.createCompoundBorder(
-						BorderFactory.createLineBorder(
-								BasicColors.PURPLE_DARK_3, 1, true),
+						BorderFactory.createLineBorder(Color.WHITE, 1, false),
 						BorderFactory.createEmptyBorder(PADDING_TEXTFIELD,
 								PADDING_TEXTFIELD, PADDING_TEXTFIELD,
 								PADDING_TEXTFIELD)))
 										 .backgroundColor(
-												 BasicColors.PURPLE_LIGHT_1);
+												 BasicColors.BLUE_NORMAL_7);
 		//TODO add the padding as default in guimaker
 	}
 

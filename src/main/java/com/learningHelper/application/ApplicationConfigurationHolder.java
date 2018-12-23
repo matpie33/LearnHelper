@@ -9,10 +9,11 @@ public class ApplicationConfigurationHolder {
 	public ApplicationConfiguration getApplicationConfiguration() {
 		return new ApplicationConfiguration(
 				Titles.APPLICATION_TITLE).setContentPanelColor(
-				BasicColors.BLUE_NORMAL_6)
+				BasicColors.BLUE_BRIGHT_4)
 										 .setPanelBackgroundColor(
-												 BasicColors.PURPLE_DARK_2)
-				.setHotkeysPanelColor(BasicColors.BLUE_NORMAL_1);
+												 BasicColors.GREEN_DARK_1)
+										 .setHotkeysPanelColor(
+												 BasicColors.BLUE_NORMAL_8);
 	}
 
 }

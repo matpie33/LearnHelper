@@ -58,7 +58,6 @@ public class StartingPanelElementsCreator {
 								.text(Labels.NO_RESOURCES));
 	}
 
-
 	public AbstractButton createButtonAddResourcesGroup() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
