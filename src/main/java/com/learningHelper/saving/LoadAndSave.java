@@ -4,6 +4,7 @@ import com.learningHelper.model.GroupOfLearningResources;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +14,16 @@ public class LoadAndSave {
 	private File currentFile;
 	private JFrame rootFrame;
 	private FromAndToXMLConverter fromAndToXMLConverter;
+	private ConfigurationFileHandler configurationFileHandler;
 
 	public LoadAndSave(JFrame rootFrame) {
 		this.rootFrame = rootFrame;
 		fromAndToXMLConverter = new FromAndToXMLConverter();
+		configurationFileHandler = new ConfigurationFileHandler();
+	}
+
+	public void initializeConfigurationFileIfDoesntExist() throws IOException {
+		configurationFileHandler.initializeConfigurationFileIfDoesntExist();
 	}
 
 	public void save(List<GroupOfLearningResources> groupOfLearningSources)
@@ -37,11 +44,22 @@ public class LoadAndSave {
 		}
 	}
 
-	public List<GroupOfLearningResources> showLoadFileDialog() {
+	public List<GroupOfLearningResources> showLoadFileDialog()
+			throws FileNotFoundException {
 		JFileChooser fileChooser = new JFileChooser();
 		int chosenOption = fileChooser.showOpenDialog(rootFrame);
 		if (chosenOption == JFileChooser.APPROVE_OPTION) {
 			currentFile = fileChooser.getSelectedFile();
+			configurationFileHandler.saveCurrentFilePathToConfigurationFile(currentFile);
+			return fromAndToXMLConverter.loadFile(currentFile);
+		}
+		return new ArrayList<>();
+	}
+
+	public List<GroupOfLearningResources> openLastUsedFile() throws IOException {
+		File lastUsedFile = configurationFileHandler.getLastUsedFile();
+		if (lastUsedFile != null){
+			currentFile = lastUsedFile;
 			return fromAndToXMLConverter.loadFile(currentFile);
 		}
 		return new ArrayList<>();

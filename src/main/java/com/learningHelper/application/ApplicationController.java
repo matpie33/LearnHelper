@@ -10,7 +10,9 @@ import com.learningHelper.panels.StartingPanel;
 import com.learningHelper.saving.LoadAndSave;
 import com.learningHelper.uiElementsTexts.Exceptions;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,18 @@ public class ApplicationController implements ApplicationChangesManager {
 
 	public void start() {
 		applicationWindow.initiate();
+		initializeConfigurationFile();
+	}
+
+	private void initializeConfigurationFile() {
+		try {
+			loadAndSave.initializeConfigurationFileIfDoesntExist();
+		}
+		catch (IOException e) {
+			applicationWindow.showMessageDialog(
+					"Nie udało się utworzyć pliku z konfiguracją.");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -81,13 +95,46 @@ public class ApplicationController implements ApplicationChangesManager {
 	}
 
 	public void openLoadFileDialog() {
-		List<GroupOfLearningResources> groupsOfLearningResources = loadAndSave.showLoadFileDialog();
+		List<GroupOfLearningResources> groupsOfLearningResources = loadLearningResourcesFromFile();
+		showResourcesOnUI(groupsOfLearningResources);
+
+	}
+
+	private void showResourcesOnUI(
+			List<GroupOfLearningResources> groupsOfLearningResources) {
 		if (!groupsOfLearningResources.isEmpty()) {
 			startingPanel.clearResourcesGroupTabs();
 			nameToLearningResourcesGroupMap.clear();
 			startingPanel.addLearningResourcesGroups(groupsOfLearningResources);
 		}
+	}
 
+	private List<GroupOfLearningResources> loadLearningResourcesFromFile() {
+		List<GroupOfLearningResources> groupsOfLearningResources = new ArrayList<>();
+		try {
+			groupsOfLearningResources = loadAndSave.showLoadFileDialog();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return groupsOfLearningResources;
+	}
+
+	public void openLastUsedFile() {
+		List<GroupOfLearningResources> resources = openLastUsedFileHandleException();
+		showResourcesOnUI(resources);
+	}
+
+	private List<GroupOfLearningResources> openLastUsedFileHandleException() {
+		try {
+			return loadAndSave.openLastUsedFile();
+		}
+		catch (IOException e) {
+			applicationWindow.showMessageDialog(
+					"Blad przy odczytywaniu pliku konfiguracyjnego.");
+			e.printStackTrace();
+			return new ArrayList<>();
+		}
 	}
 
 }

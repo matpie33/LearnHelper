@@ -41,6 +41,15 @@ public class StartingPanelActionsCreator {
 		};
 	}
 
+	public AbstractAction createActionOpenLastUsedFile (){
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.openLastUsedFile();
+			}
+		};
+	}
+
 	public AbstractAction createActionBrowseAllResources(
 			MyList<LearningResource> resources) {
 		return new AbstractAction() {

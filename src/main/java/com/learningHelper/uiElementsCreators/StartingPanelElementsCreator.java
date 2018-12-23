@@ -58,12 +58,21 @@ public class StartingPanelElementsCreator {
 								.text(Labels.NO_RESOURCES));
 	}
 
+
 	public AbstractButton createButtonAddResourcesGroup() {
 		return GuiElementsCreator.createButtonlikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.ADD),
 				actionsCreator.createActionAddGroupResource(),
 				KeyEvent.VK_ENTER);
+	}
+
+	public AbstractButton createButtonLoadLastUsedFile() {
+		return GuiElementsCreator.createButtonlikeComponent(
+				UIElementsStyles.buttonStyle()
+								.text(Buttons.LOAD_LAST_USED_FILE),
+				actionsCreator.createActionOpenLastUsedFile(),
+				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_E));
 	}
 
 	public JTextField createResourcesGroupNameInput() {

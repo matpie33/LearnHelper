@@ -23,7 +23,8 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 		panelUpdater = new StartingPanelUpdater(elementsCreator);
 	}
 
-	public void addLearningResourcesGroups(List<GroupOfLearningResources> groups){
+	public void addLearningResourcesGroups(
+			List<GroupOfLearningResources> groups) {
 		panelUpdater.addLearningResourcesGroups(groups);
 	}
 
@@ -33,8 +34,11 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 				SimpleRowBuilder.createRow(FillType.NONE, Anchor.CENTER,
 						elementsCreator.createTitleLabel())
 								.nextRow(FillType.NONE, Anchor.WEST,
+										elementsCreator.createButtonLoadLastUsedFile(),
 										elementsCreator.createButtonSave(),
 										elementsCreator.createButtonLoad())
+								.disableBorder()
+								.setNotOpaque()
 								.nextRow(
 										elementsCreator.createResourcesGroupNameLabel(),
 										elementsCreator.createResourcesGroupNameInput(),
