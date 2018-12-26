@@ -24,6 +24,7 @@ public class ApplicationController implements ApplicationChangesManager {
 	private StartingPanel startingPanel;
 	private Map<String, MyList<LearningResource>> nameToLearningResourcesGroupMap = new LinkedHashMap<>();
 	private LoadAndSave loadAndSave;
+	private final static String ICON_NAME = "icon.png";
 
 	public ApplicationController() {
 		startingPanel = new StartingPanel(this);
@@ -34,6 +35,7 @@ public class ApplicationController implements ApplicationChangesManager {
 	}
 
 	public void start() {
+		applicationWindow.setIconName(ICON_NAME);
 		applicationWindow.initiate();
 		initializeConfigurationFile();
 	}
