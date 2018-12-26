@@ -37,7 +37,8 @@ public class UIElementsStyles {
 
 	public static TextComponentOptions timeRangeInputStyle() {
 		return defaultTextFieldOption().rowsAndColumns(1, 3)
-									   .digitsOnly(true);
+									   .digitsOnly(true)
+									   .selectAllOnFocus();
 	}
 
 	public static ComboboxOptions comboboxStyle() {
