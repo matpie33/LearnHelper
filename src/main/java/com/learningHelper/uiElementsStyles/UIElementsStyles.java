@@ -8,6 +8,7 @@ import com.guimaker.options.ComponentOptions;
 import com.guimaker.options.TextComponentOptions;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 
 public class UIElementsStyles {
@@ -49,7 +50,8 @@ public class UIElementsStyles {
 		return new TextComponentOptions().border(
 
 				BorderFactory.createCompoundBorder(
-						BorderFactory.createLineBorder(Color.WHITE, 1, false),
+						BorderFactory.createBevelBorder(BevelBorder.LOWERED,
+								Color.GRAY, Color.WHITE),
 						BorderFactory.createEmptyBorder(PADDING_TEXTFIELD,
 								PADDING_TEXTFIELD, PADDING_TEXTFIELD,
 								PADDING_TEXTFIELD)))
