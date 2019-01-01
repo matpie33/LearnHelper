@@ -1,5 +1,6 @@
 package com.learningHelper.saving;
 
+import com.guimaker.application.ApplicationWindow;
 import com.learningHelper.model.GroupOfLearningResources;
 
 import javax.swing.*;
@@ -12,12 +13,12 @@ import java.util.List;
 public class LoadAndSave {
 
 	private File currentFile;
-	private JFrame rootFrame;
+	private ApplicationWindow applicationWindow;
 	private FromAndToXMLConverter fromAndToXMLConverter;
 	private ConfigurationFileHandler configurationFileHandler;
 
-	public LoadAndSave(JFrame rootFrame) {
-		this.rootFrame = rootFrame;
+	public LoadAndSave(ApplicationWindow applicationWindow) {
+		this.applicationWindow = applicationWindow;
 		fromAndToXMLConverter = new FromAndToXMLConverter();
 		configurationFileHandler = new ConfigurationFileHandler();
 	}
@@ -37,7 +38,8 @@ public class LoadAndSave {
 			List<GroupOfLearningResources> groupOfLearningSources)
 			throws IOException {
 		JFileChooser fileChooser = new JFileChooser();
-		int chosenOption = fileChooser.showOpenDialog(rootFrame);
+		int chosenOption = fileChooser.showOpenDialog(
+				applicationWindow.getContainer());
 		if (chosenOption == JFileChooser.APPROVE_OPTION) {
 			currentFile = fileChooser.getSelectedFile();
 			save(groupOfLearningSources);
@@ -47,21 +49,31 @@ public class LoadAndSave {
 	public List<GroupOfLearningResources> showLoadFileDialog()
 			throws FileNotFoundException {
 		JFileChooser fileChooser = new JFileChooser();
-		int chosenOption = fileChooser.showOpenDialog(rootFrame);
+		int chosenOption = fileChooser.showOpenDialog(
+				applicationWindow.getContainer());
 		if (chosenOption == JFileChooser.APPROVE_OPTION) {
 			currentFile = fileChooser.getSelectedFile();
-			configurationFileHandler.saveCurrentFilePathToConfigurationFile(currentFile);
-			return fromAndToXMLConverter.loadFile(currentFile);
+			configurationFileHandler.saveCurrentFilePathToConfigurationFile(
+					currentFile);
+			return loadResourcesFromFileAndSetTitle();
 		}
 		return new ArrayList<>();
 	}
 
-	public List<GroupOfLearningResources> openLastUsedFile() throws IOException {
+	public List<GroupOfLearningResources> openLastUsedFile()
+			throws IOException {
 		File lastUsedFile = configurationFileHandler.getLastUsedFile();
-		if (lastUsedFile != null){
+		if (lastUsedFile != null) {
 			currentFile = lastUsedFile;
-			return fromAndToXMLConverter.loadFile(currentFile);
+			return loadResourcesFromFileAndSetTitle();
 		}
 		return new ArrayList<>();
+	}
+
+	private List<GroupOfLearningResources> loadResourcesFromFileAndSetTitle() {
+		List<GroupOfLearningResources> groupOfLearningResources = fromAndToXMLConverter.loadFile(
+				currentFile);
+		applicationWindow.addToTitle(currentFile.getPath());
+		return groupOfLearningResources;
 	}
 }

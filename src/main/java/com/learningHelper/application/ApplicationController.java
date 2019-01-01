@@ -31,7 +31,7 @@ public class ApplicationController implements ApplicationChangesManager {
 		applicationConfigurationHolder = new ApplicationConfigurationHolder();
 		applicationWindow = new ApplicationWindow(this, startingPanel,
 				applicationConfigurationHolder.getApplicationConfiguration());
-		loadAndSave = new LoadAndSave(applicationWindow.getContainer());
+		loadAndSave = new LoadAndSave(applicationWindow);
 	}
 
 	public void start() {
