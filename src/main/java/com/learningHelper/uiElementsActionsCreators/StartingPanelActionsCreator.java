@@ -28,7 +28,7 @@ public class StartingPanelActionsCreator {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String groupName = elementsCreator.createResourcesGroupNameInput()
+				String groupName = elementsCreator.getResourcesGroupNameInput()
 												  .getText();
 				MyList<LearningResource> learningResourcesList = elementsCreator.createLearningResourcesList(
 						groupName);

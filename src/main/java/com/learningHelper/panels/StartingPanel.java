@@ -41,7 +41,7 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 								.setNotOpaque()
 								.nextRow(
 										elementsCreator.createResourcesGroupNameLabel(),
-										elementsCreator.createResourcesGroupNameInput(),
+										elementsCreator.getResourcesGroupNameInput(),
 										elementsCreator.createButtonAddResourcesGroup())
 								.nextRow(FillType.BOTH,
 										elementsCreator.getTabPane()));
@@ -54,5 +54,9 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 
 	public void clearResourcesGroupTabs() {
 		panelUpdater.clearResourcesGroupTabs();
+	}
+
+	public void focusResourcesGroupInput() {
+		panelUpdater.focusInputForResourcesGroup();
 	}
 }

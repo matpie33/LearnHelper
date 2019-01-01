@@ -43,7 +43,7 @@ public class StartingPanelElementsCreator {
 
 	public JTabbedPane getTabPane() {
 		if (tabPane == null) {
-			tabPane = new JTabbedPane();
+			tabPane = GuiElementsCreator.createTabbedPane();
 			CommonActionsCreator.addHotkey(
 					new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_W),
 					actionsCreator.createActionSwitchTabs(tabPane), tabPane);
@@ -74,7 +74,7 @@ public class StartingPanelElementsCreator {
 				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_E));
 	}
 
-	public JTextField createResourcesGroupNameInput() {
+	public JTextField getResourcesGroupNameInput() {
 		if (resourcesGroupName == null) {
 			resourcesGroupName = GuiElementsCreator.createTextField(
 					UIElementsStyles.shortTextInputStyle());

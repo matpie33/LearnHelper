@@ -37,6 +37,7 @@ public class ApplicationController implements ApplicationChangesManager {
 	public void start() {
 		applicationWindow.setIconName(ICON_NAME);
 		applicationWindow.initiate();
+		startingPanel.focusResourcesGroupInput();
 		initializeConfigurationFile();
 	}
 

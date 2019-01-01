@@ -15,6 +15,10 @@ public class StartingPanelUpdater {
 		this.elementsCreator = elementsCreator;
 	}
 
+	public void focusInputForResourcesGroup(){
+		elementsCreator.getResourcesGroupNameInput().requestFocusInWindow();
+	}
+
 	public void addLearningResourcesGroupToTabPane(String name, MyList myList) {
 		elementsCreator.getTabPane()
 					   .add(name, myList.getPanel());
