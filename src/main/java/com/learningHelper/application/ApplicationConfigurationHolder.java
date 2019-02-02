@@ -12,10 +12,12 @@ public class ApplicationConfigurationHolder {
 				Titles.APPLICATION_TITLE).setContentPanelColor(
 				BasicColors.BLUE_BRIGHT_4)
 										 .setListColors(
-												 new ListColors().backgroundColor(
+												 new ListColors().rowColor(
 														 BasicColors.BLUE_NORMAL_9)
 																 .filterPanelColor(
-																		 BasicColors.GREEN_BRIGHT_2))
+																		 BasicColors.GREEN_BRIGHT_2)
+																 .backgroundColor(
+																		 BasicColors.BLUE_DARK_2))
 										 .setPanelBackgroundColor(
 												 BasicColors.GREEN_DARK_1)
 										 .setHotkeysPanelColor(

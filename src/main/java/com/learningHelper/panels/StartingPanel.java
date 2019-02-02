@@ -2,13 +2,16 @@ package com.learningHelper.panels;
 
 import com.guimaker.enums.Anchor;
 import com.guimaker.enums.FillType;
+import com.guimaker.model.PanelConfiguration;
 import com.guimaker.panels.AbstractPanelWithHotkeysInfo;
+import com.guimaker.panels.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.model.GroupOfLearningResources;
 import com.learningHelper.panelsUpdaters.StartingPanelUpdater;
 import com.learningHelper.uiElementsCreators.StartingPanelElementsCreator;
 
+import java.awt.*;
 import java.util.List;
 
 public class StartingPanel extends AbstractPanelWithHotkeysInfo {
@@ -30,6 +33,16 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 
 	@Override
 	public void createElements() {
+		MainPanel upperPanel = new MainPanel(
+				new PanelConfiguration().setColorToUse(Color.GREEN));
+		upperPanel.addRows(
+				SimpleRowBuilder.createRow(FillType.NONE, Anchor.WEST,
+						elementsCreator.createResourcesGroupNameLabel(),
+						elementsCreator.getResourcesGroupNameInput(),
+						elementsCreator.createButtonAddResourcesGroup())
+								.nextRow(FillType.BOTH,
+										elementsCreator.getTabPane()));
+
 		mainPanel.addRows(
 				SimpleRowBuilder.createRow(FillType.NONE, Anchor.CENTER,
 						elementsCreator.createTitleLabel())
@@ -37,14 +50,9 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 										elementsCreator.createButtonLoadLastUsedFile(),
 										elementsCreator.createButtonSave(),
 										elementsCreator.createButtonLoad())
-								.disableBorder()
-								.setNotOpaque()
-								.nextRow(
-										elementsCreator.createResourcesGroupNameLabel(),
-										elementsCreator.getResourcesGroupNameInput(),
-										elementsCreator.createButtonAddResourcesGroup())
-								.nextRow(FillType.BOTH,
-										elementsCreator.getTabPane()));
+								.disableBorder().setNotOpaque()
+								.nextRow(FillType.BOTH, Anchor.WEST,
+										upperPanel.getPanel()));
 	}
 
 	@Override
