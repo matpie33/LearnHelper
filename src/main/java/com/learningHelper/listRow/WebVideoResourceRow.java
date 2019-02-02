@@ -49,10 +49,13 @@ public class WebVideoResourceRow implements ResourceRow {
 													   .getPanel())
 								.nextRow(
 										elementsCreator.createLabelStoppedPlace(),
-										elementsCreator
-												.createInputStoppedPlaceVideoMinute(learningResource, commonListElements),
-										elementsCreator
-												.createInputStoppedPlaceVideoSecond(learningResource, commonListElements))
+										elementsCreator.createInputStoppedPlaceVideoMinute(
+												learningResource,
+												commonListElements),
+										elementsCreator.createInputStoppedPlaceVideoSecond(
+												learningResource,
+												commonListElements))
+
 								.inSameColumn(
 										elementsCreator.getTimeRangeStartInput(),
 										elementsCreator.getTimeRangeEndInput())

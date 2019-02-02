@@ -134,6 +134,8 @@ public class LearningResourceRowElementsCreator {
 		return timeRangeEndInput;
 	}
 
+
+
 	public JTextComponent createInputStoppedPlaceVideoSecond(
 			LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements) {
@@ -148,6 +150,8 @@ public class LearningResourceRowElementsCreator {
 		}
 		return timeRangeEndInput;
 	}
+
+
 
 	public JTextComponent createInputStoppedPlace(
 			LearningResource learningResource,
@@ -167,7 +171,7 @@ public class LearningResourceRowElementsCreator {
 			LearningResource learningResource) {
 		MyList<StringListElement> locationsList = new MyList<>(
 				new ListConfiguration<>(UserInformation.URL_LOCATION_DELETE,
-						new ResourceLocationRow(applicationController),
+						new ResourceLocationRow(applicationController, this),
 						StringListElement.getInitializer(), "",
 						applicationController.getApplicationWindow(),
 						applicationController).skipTitle(true)

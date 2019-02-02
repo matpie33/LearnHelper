@@ -6,7 +6,10 @@ import com.guimaker.list.myList.ListPropertyChangeHandler;
 import com.guimaker.list.myList.MyList;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.listPropertyManagers.ResourceLocationPropertyManager;
+import com.learningHelper.model.LearningResource;
 import com.learningHelper.model.StringListElement;
+import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
+import com.learningHelper.uiElementsCreators.ResourceLocationRowElementsCreator;
 import com.learningHelper.urlHandling.VideoSeriesNumberIncrementer;
 
 import javax.swing.*;
@@ -35,7 +38,9 @@ public class ResourceLocationRowActionsCreator {
 
 	public AbstractAction createIncreaseVideoNumberAction(
 			JTextComponent resourceLocationInput,
-			StringListElement stringListElement) {
+			StringListElement stringListElement,
+			LearningResource learningResource,
+			LearningResourceRowElementsCreator elementsCreator) {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -45,6 +50,12 @@ public class ResourceLocationRowActionsCreator {
 				resourceLocationInput.setText(newLocation);
 				propertyChangeHandler.setProperty(stringListElement, newLocation,
 						resourceLocation);
+				learningResource.getLearningStoppedPlace().setVideoSecond(0);
+				learningResource.getLearningStoppedPlace().setVideoMinute(0);
+				elementsCreator.createInputStoppedPlaceVideoMinute
+						(learningResource, null).setText("0");
+				elementsCreator.createInputStoppedPlaceVideoSecond
+						(learningResource, null).setText("0");
 			}
 		};
 	}
