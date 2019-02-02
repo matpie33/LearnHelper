@@ -2,10 +2,7 @@ package com.learningHelper.uiElementsStyles;
 
 import com.guimaker.colors.BasicColors;
 import com.guimaker.enums.ButtonType;
-import com.guimaker.options.ButtonOptions;
-import com.guimaker.options.ComboboxOptions;
-import com.guimaker.options.ComponentOptions;
-import com.guimaker.options.TextComponentOptions;
+import com.guimaker.options.*;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -32,11 +29,11 @@ public class UIElementsStyles {
 		return new ButtonOptions(ButtonType.BUTTON);
 	}
 
-	public static TextComponentOptions shortTextInputStyle() {
+	public static TextAreaOptions shortTextInputStyle() {
 		return defaultTextFieldOption().rowsAndColumns(1, 15);
 	}
 
-	public static TextComponentOptions timeRangeInputStyle() {
+	public static TextAreaOptions timeRangeInputStyle() {
 		return defaultTextFieldOption().rowsAndColumns(1, 3)
 									   .digitsOnly(true)
 									   .selectAllOnFocus();
@@ -46,8 +43,8 @@ public class UIElementsStyles {
 		return new ComboboxOptions();
 	}
 
-	private static TextComponentOptions defaultTextFieldOption() {
-		return new TextComponentOptions().border(
+	private static TextAreaOptions defaultTextFieldOption() {
+		return new TextAreaOptions().border(
 
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createBevelBorder(BevelBorder.LOWERED,
@@ -55,7 +52,7 @@ public class UIElementsStyles {
 						BorderFactory.createEmptyBorder(PADDING_TEXTFIELD,
 								PADDING_TEXTFIELD, PADDING_TEXTFIELD,
 								PADDING_TEXTFIELD)))
-										 .backgroundColor(
+									.backgroundColor(
 												 BasicColors.BLUE_NORMAL_7);
 		//TODO add the padding as default in guimaker
 	}

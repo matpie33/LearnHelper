@@ -20,13 +20,14 @@ import com.learningHelper.uiElementsTexts.Titles;
 import com.learningHelper.uiElementsTexts.UserInformation;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.event.KeyEvent;
 
 public class StartingPanelElementsCreator {
 
 	private StartingPanelActionsCreator actionsCreator;
 	private JTabbedPane tabPane;
-	private JTextField resourcesGroupName;
+	private JTextComponent resourcesGroupName;
 	private ApplicationController applicationController;
 
 	public StartingPanelElementsCreator(
@@ -74,9 +75,9 @@ public class StartingPanelElementsCreator {
 				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_E));
 	}
 
-	public JTextField getResourcesGroupNameInput() {
+	public JTextComponent getResourcesGroupNameInput() {
 		if (resourcesGroupName == null) {
-			resourcesGroupName = GuiElementsCreator.createTextField(
+			resourcesGroupName = GuiElementsCreator.createTextArea(
 					UIElementsStyles.shortTextInputStyle());
 		}
 		return resourcesGroupName;

@@ -16,6 +16,7 @@ import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
 import com.learningHelper.webBrowsing.WebBrowser;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
@@ -73,8 +74,8 @@ public class LearningResourceRowActionsCreator {
 		};
 	}
 
-	public JTextField addTagChangeListener(LearningResource learningResource,
-			JTextField textField,
+	public JTextComponent addTagChangeListener(LearningResource learningResource,
+			JTextComponent textField,
 			CommonListElements<LearningResource> commonListElements) {
 		tagInputPropertyManager = new ResourceTagPropertyManager();
 		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
@@ -96,8 +97,8 @@ public class LearningResourceRowActionsCreator {
 		};
 	}
 
-	public JTextField listenForChangesInStoppedPlaceTextInput(
-			JTextField textField, LearningResource learningResource,
+	public JTextComponent listenForChangesInStoppedPlaceTextInput(
+			JTextComponent textField, LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements) {
 		ListPropertyChangeHandler propertyChangeListener = new ListPropertyChangeHandler<>(
 				learningResource, commonListElements.getList(),
@@ -107,8 +108,8 @@ public class LearningResourceRowActionsCreator {
 		return textField;
 	}
 
-	public JTextField listenForChangesInStoppedPlaceTimeRangeStartInput(
-			JTextField textField, LearningResource learningResource,
+	public JTextComponent listenForChangesInStoppedPlaceTimeRangeStartInput(
+			JTextComponent textField, LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements) {
 		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
 				learningResource, commonListElements.getList(),
@@ -119,8 +120,8 @@ public class LearningResourceRowActionsCreator {
 		return textField;
 	}
 
-	public JTextField listenForChangesInStoppedPlaceTimeRangeEndInput(
-			JTextField textField, LearningResource learningResource,
+	public JTextComponent listenForChangesInStoppedPlaceTimeRangeEndInput(
+			JTextComponent textField, LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements) {
 		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
 				learningResource, commonListElements.getList(),

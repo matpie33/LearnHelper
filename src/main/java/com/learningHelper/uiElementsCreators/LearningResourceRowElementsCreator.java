@@ -25,10 +25,10 @@ import java.awt.event.KeyEvent;
 
 public class LearningResourceRowElementsCreator {
 
-	private JTextField tagInput;
-	private JTextField timeRangeStartInput;
-	private JTextField timeRangeEndInput;
-	private JTextField stoppedPlaceTextInput;
+	private JTextComponent tagInput;
+	private JTextComponent timeRangeStartInput;
+	private JTextComponent timeRangeEndInput;
+	private JTextComponent stoppedPlaceTextInput;
 	private LearningResourceRowActionsCreator actionsCreator;
 	private ApplicationController applicationController;
 	private String learningResourcesGroupName;
@@ -86,14 +86,14 @@ public class LearningResourceRowElementsCreator {
 			CommonListElements<LearningResource> commonListElements) {
 		if (tagInput == null) {
 			tagInput = actionsCreator.addTagChangeListener(learningResource,
-					GuiElementsCreator.createTextField(
+					GuiElementsCreator.createTextArea(
 							UIElementsStyles.shortTextInputStyle()
 											.text(tag)), commonListElements);
 		}
 		return tagInput;
 	}
 
-	public JTextField getTagInput() {
+	public JTextComponent getTagInput() {
 		return tagInput;
 	}
 
@@ -116,7 +116,7 @@ public class LearningResourceRowElementsCreator {
 			CommonListElements<LearningResource> commonListElements) {
 		if (timeRangeStartInput == null) {
 			timeRangeStartInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeStartInput(
-					GuiElementsCreator.createTextField(
+					GuiElementsCreator.createTextArea(
 							UIElementsStyles.timeRangeInputStyle()
 											.text(""
 													+ learningResource.getLearningStoppedPlace()
@@ -126,11 +126,11 @@ public class LearningResourceRowElementsCreator {
 		return timeRangeStartInput;
 	}
 
-	public JTextField getTimeRangeStartInput() {
+	public JTextComponent getTimeRangeStartInput() {
 		return timeRangeStartInput;
 	}
 
-	public JTextField getTimeRangeEndInput() {
+	public JTextComponent getTimeRangeEndInput() {
 		return timeRangeEndInput;
 	}
 
@@ -141,7 +141,7 @@ public class LearningResourceRowElementsCreator {
 			CommonListElements<LearningResource> commonListElements) {
 		if (timeRangeEndInput == null) {
 			timeRangeEndInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeEndInput(
-					GuiElementsCreator.createTextField(
+					GuiElementsCreator.createTextArea(
 							UIElementsStyles.timeRangeInputStyle()
 											.text(""
 													+ learningResource.getLearningStoppedPlace()
@@ -158,7 +158,7 @@ public class LearningResourceRowElementsCreator {
 			CommonListElements<LearningResource> commonListElements) {
 		if (stoppedPlaceTextInput == null) {
 			stoppedPlaceTextInput = actionsCreator.listenForChangesInStoppedPlaceTextInput(
-					GuiElementsCreator.createTextField(
+					GuiElementsCreator.createTextArea(
 							UIElementsStyles.shortTextInputStyle()
 											.text(learningResource.getLearningStoppedPlace()
 																  .getTextFragmentPlace())),
