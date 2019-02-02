@@ -5,6 +5,7 @@ import com.learningHelper.application.ApplicationController;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.StartingPanelUpdater;
 import com.learningHelper.uiElementsCreators.StartingPanelElementsCreator;
+import com.learningHelper.uiElementsTexts.UserInformation;
 import com.learningHelper.webBrowsing.WebBrowser;
 
 import javax.swing.*;
@@ -97,6 +98,13 @@ public class StartingPanelActionsCreator {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				boolean accepted = applicationController.getApplicationWindow()
+									 .showConfirmDialog(String.format(
+											 UserInformation.CONFIRM_REMOVE_RESOURCE_GROUP,
+											 resourceGroupName));
+				if (!accepted){
+					return;
+				}
 				applicationController.removeResourceGroup(resourceGroupName);
 				for (int i = 0; i < elementsCreator.getTabPane()
 												   .getTabCount(); i++) {
