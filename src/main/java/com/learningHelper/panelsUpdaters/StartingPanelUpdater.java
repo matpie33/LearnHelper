@@ -1,6 +1,10 @@
 package com.learningHelper.panelsUpdaters;
 
+import com.guimaker.enums.Anchor;
+import com.guimaker.enums.FillType;
 import com.guimaker.list.myList.MyList;
+import com.guimaker.panels.MainPanel;
+import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.model.GroupOfLearningResources;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.uiElementsCreators.StartingPanelElementsCreator;
@@ -15,13 +19,20 @@ public class StartingPanelUpdater {
 		this.elementsCreator = elementsCreator;
 	}
 
-	public void focusInputForResourcesGroup(){
-		elementsCreator.getResourcesGroupNameInput().requestFocusInWindow();
+	public void focusInputForResourcesGroup() {
+		elementsCreator.getResourcesGroupNameInput()
+					   .requestFocusInWindow();
 	}
 
-	public void addLearningResourcesGroupToTabPane(String name, MyList myList) {
+	public void addLearningResourcesGroupToTabPane(String groupName,
+			MyList myList) {
+		MainPanel panel = new MainPanel();
+		panel.addRows(SimpleRowBuilder.createRow(FillType.NONE, Anchor.WEST,
+				elementsCreator.getButtonRemoveResourcesGroup(groupName))
+									  .nextRow(FillType.BOTH,
+											  myList.getPanel()));
 		elementsCreator.getTabPane()
-					   .add(name, myList.getPanel());
+					   .add(groupName, panel.getPanel());
 	}
 
 	public void addLearningResourcesGroups(
@@ -30,13 +41,14 @@ public class StartingPanelUpdater {
 			MyList<LearningResource> learningResourcesList = elementsCreator.createLearningResourcesList(
 					singleGroup.getGroupName());
 			singleGroup.getLearningResources()
-								   .forEach(learningResourcesList::addWord);
+					   .forEach(learningResourcesList::addWord);
 			addLearningResourcesGroupToTabPane(singleGroup.getGroupName(),
 					learningResourcesList);
 		}
 	}
 
 	public void clearResourcesGroupTabs() {
-		elementsCreator.getTabPane().removeAll();
+		elementsCreator.getTabPane()
+					   .removeAll();
 	}
 }

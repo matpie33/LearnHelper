@@ -8,5 +8,6 @@ public class Buttons {
 			"Otwórz wszystkie źródła";
 	public final static String SAVE = "Zapisz";
 	public final static String LOAD = "Wczytaj";
+	public final static String REMOVE_RESOURCE_GROUP = "Usuń grupę";
 	public final static String LOAD_LAST_USED_FILE = "Wczytaj poprzednio używany plik";
 }

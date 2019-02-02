@@ -41,7 +41,7 @@ public class StartingPanelActionsCreator {
 		};
 	}
 
-	public AbstractAction createActionOpenLastUsedFile (){
+	public AbstractAction createActionOpenLastUsedFile() {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -89,5 +89,27 @@ public class StartingPanelActionsCreator {
 				}
 			}
 		};
+	}
+
+	public AbstractAction createActionRemoveResourceGroup(
+			String resourceGroupName) {
+
+		return new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.removeResourceGroup(resourceGroupName);
+				for (int i = 0; i < elementsCreator.getTabPane()
+												   .getTabCount(); i++) {
+					if (elementsCreator.getTabPane()
+									   .getTitleAt(i)
+									   .equals(resourceGroupName)) {
+						elementsCreator.getTabPane()
+									   .removeTabAt(i);
+					}
+
+				}
+			}
+		};
+
 	}
 }

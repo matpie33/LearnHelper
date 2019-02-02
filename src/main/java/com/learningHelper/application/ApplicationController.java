@@ -140,4 +140,7 @@ public class ApplicationController implements ApplicationChangesManager {
 		}
 	}
 
+	public void removeResourceGroup(String resourceGroupName) {
+		nameToLearningResourcesGroupMap.remove(resourceGroupName);
+	}
 }

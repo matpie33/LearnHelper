@@ -1,5 +1,6 @@
 package com.learningHelper.uiElementsCreators;
 
+import com.guimaker.colors.BasicColors;
 import com.guimaker.enums.ButtonType;
 import com.guimaker.enums.KeyModifiers;
 import com.guimaker.list.myList.ListConfiguration;
@@ -46,12 +47,20 @@ public class StartingPanelElementsCreator {
 	public JTabbedPane getTabPane() {
 		if (tabPane == null) {
 			tabPane = GuiElementsCreator.createTabbedPane();
+			tabPane.setBackground(BasicColors.BLUE_NORMAL_7);
 			CommonActionsCreator.addHotkey(
 					new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_W),
 					actionsCreator.createActionSwitchTabs(tabPane), tabPane);
 		}
 		return tabPane;
 
+	}
+
+	public AbstractButton getButtonRemoveResourcesGroup(String groupName) {
+		return GuiElementsCreator.createButtonlikeComponent(
+				new ButtonOptions(ButtonType.BUTTON).text(
+						Buttons.REMOVE_RESOURCE_GROUP),
+				actionsCreator.createActionRemoveResourceGroup(groupName));
 	}
 
 	public JLabel createNoResourcesLabel() {
