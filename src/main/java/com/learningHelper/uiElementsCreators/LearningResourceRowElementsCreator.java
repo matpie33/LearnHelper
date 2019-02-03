@@ -99,7 +99,7 @@ public class LearningResourceRowElementsCreator {
 
 	public AbstractButton createButtonGoToResource(
 			LearningResource learningResource) {
-		return GuiElementsCreator.createButtonlikeComponent(
+		return GuiElementsCreator.createButtonLikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.GO_TO_RESOURCE),
 				actionsCreator.createActionGoToResource(learningResource));

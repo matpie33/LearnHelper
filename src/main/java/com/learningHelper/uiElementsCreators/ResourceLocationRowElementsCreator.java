@@ -51,7 +51,7 @@ public class ResourceLocationRowElementsCreator {
 																				 .getRootWord();
 		if (learningResource.getType()
 							.equals(LearningResourceType.WEB_VIDEO)) {
-			return GuiElementsCreator.createButtonlikeComponent(
+			return GuiElementsCreator.createButtonLikeComponent(
 					UIElementsStyles.buttonStyle()
 									.text(Buttons.INCREASE_VIDEO_NUMBER),
 					actionsCreator.createIncreaseVideoNumberAction(

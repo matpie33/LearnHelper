@@ -56,7 +56,7 @@ public class StartingPanelElementsCreator {
 	}
 
 	public AbstractButton getButtonRemoveResourcesGroup(String groupName) {
-		return GuiElementsCreator.createButtonlikeComponent(
+		return GuiElementsCreator.createButtonLikeComponent(
 				new ButtonOptions(ButtonType.BUTTON).text(
 						Buttons.REMOVE_RESOURCE_GROUP),
 				actionsCreator.createActionRemoveResourceGroup(groupName));
@@ -126,7 +126,7 @@ public class StartingPanelElementsCreator {
 			MyList<LearningResource> learningResources) {
 		//TODO refactor this button: place it below tab pane, and as action,
 		// get current tab and open all resources inside it
-		return GuiElementsCreator.createButtonlikeComponent(
+		return GuiElementsCreator.createButtonLikeComponent(
 				new ButtonOptions(ButtonType.BUTTON).text(
 						Buttons.OPEN_ALL_RESOURCES_IN_GROUP),
 				actionsCreator.createActionBrowseAllResources(
