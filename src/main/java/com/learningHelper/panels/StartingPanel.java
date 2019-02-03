@@ -22,7 +22,7 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 
 	public StartingPanel(ApplicationController applicationController) {
 		elementsCreator = new StartingPanelElementsCreator(
-				applicationController);
+				applicationController, this);
 		panelUpdater = new StartingPanelUpdater(elementsCreator);
 	}
 

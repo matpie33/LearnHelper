@@ -8,21 +8,17 @@ import com.guimaker.list.myList.MyList;
 import com.guimaker.model.HotkeyWrapper;
 import com.guimaker.options.ButtonOptions;
 import com.guimaker.panels.GuiElementsCreator;
-import com.guimaker.utilities.CommonActionsCreator;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.listRow.LearningResourceRow;
 import com.learningHelper.model.LearningResource;
+import com.learningHelper.panels.StartingPanel;
 import com.learningHelper.panelsUpdaters.StartingPanelUpdater;
 import com.learningHelper.uiElementsActionsCreators.StartingPanelActionsCreator;
 import com.learningHelper.uiElementsStyles.UIElementsStyles;
-import com.learningHelper.uiElementsTexts.Buttons;
-import com.learningHelper.uiElementsTexts.Labels;
-import com.learningHelper.uiElementsTexts.Titles;
-import com.learningHelper.uiElementsTexts.UserInformation;
+import com.learningHelper.uiElementsTexts.*;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class StartingPanelElementsCreator {
@@ -31,12 +27,15 @@ public class StartingPanelElementsCreator {
 	private JTabbedPane tabPane;
 	private JTextComponent resourcesGroupName;
 	private ApplicationController applicationController;
+	private StartingPanel startingPanel;
 
 	public StartingPanelElementsCreator(
-			ApplicationController applicationController) {
+			ApplicationController applicationController,
+			StartingPanel startingPanel) {
 		actionsCreator = new StartingPanelActionsCreator(applicationController,
 				new StartingPanelUpdater(this), this);
 		this.applicationController = applicationController;
+		this.startingPanel = startingPanel;
 	}
 
 	public JLabel createTitleLabel() {
@@ -48,9 +47,9 @@ public class StartingPanelElementsCreator {
 		if (tabPane == null) {
 			tabPane = GuiElementsCreator.createTabbedPane();
 			tabPane.setBackground(BasicColors.BLUE_NORMAL_7);
-			CommonActionsCreator.addHotkey(
-					new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_W),
-					actionsCreator.createActionSwitchTabs(tabPane), tabPane);
+			startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_W,
+					actionsCreator.createActionSwitchTabs(tabPane), tabPane,
+					HotkeysDescription.SWITCH_TABS);
 		}
 		return tabPane;
 
@@ -70,19 +69,23 @@ public class StartingPanelElementsCreator {
 	}
 
 	public AbstractButton createButtonAddResourcesGroup() {
-		return GuiElementsCreator.createButtonlikeComponent(
+		AbstractButton button = GuiElementsCreator.createButtonLikeComponent(
 				UIElementsStyles.buttonStyle()
-								.text(Buttons.ADD),
-				actionsCreator.createActionAddGroupResource(),
-				KeyEvent.VK_ENTER);
+								.text(Buttons.ADD));
+		startingPanel.addHotkey(KeyEvent.VK_ENTER,
+				actionsCreator.createActionAddGroupResource(), button,
+				HotkeysDescription.ADD_RESOURCE_GROUP);
+		return button;
 	}
 
 	public AbstractButton createButtonLoadLastUsedFile() {
-		return GuiElementsCreator.createButtonlikeComponent(
+		AbstractButton button = GuiElementsCreator.createButtonLikeComponent(
 				UIElementsStyles.buttonStyle()
-								.text(Buttons.LOAD_LAST_USED_FILE),
-				actionsCreator.createActionOpenLastUsedFile(),
-				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_E));
+								.text(Buttons.LOAD_LAST_USED_FILE));
+		startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_E,
+				actionsCreator.createActionOpenLastUsedFile(), button,
+				HotkeysDescription.OPEN_LAST_USED_FILE);
+		return button;
 	}
 
 	public JTextComponent getResourcesGroupNameInput() {
@@ -121,6 +124,8 @@ public class StartingPanelElementsCreator {
 
 	private AbstractButton createButtonOpenAllResourcesFromGroup(
 			MyList<LearningResource> learningResources) {
+		//TODO refactor this button: place it below tab pane, and as action,
+		// get current tab and open all resources inside it
 		return GuiElementsCreator.createButtonlikeComponent(
 				new ButtonOptions(ButtonType.BUTTON).text(
 						Buttons.OPEN_ALL_RESOURCES_IN_GROUP),
@@ -130,17 +135,22 @@ public class StartingPanelElementsCreator {
 	}
 
 	public AbstractButton createButtonSave() {
-		return GuiElementsCreator.createButtonlikeComponent(
-				new ButtonOptions(ButtonType.BUTTON).text(Buttons.SAVE),
-				actionsCreator.openSaveDialog(),
-				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_S));
+		AbstractButton button = GuiElementsCreator.createButtonLikeComponent(
+				UIElementsStyles.buttonStyle()
+								.text(Buttons.SAVE));
+		startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_S,
+				actionsCreator.openSaveDialog(), button,
+				HotkeysDescription.SAVE);
+		return button;
 	}
 
 	public AbstractButton createButtonLoad() {
-		return GuiElementsCreator.createButtonlikeComponent(
-				new ButtonOptions(ButtonType.BUTTON).text(Buttons.LOAD),
-				actionsCreator.openLoadFileDialog(),
-				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_Q));
+		AbstractButton button = GuiElementsCreator.createButtonLikeComponent(
+				new ButtonOptions(ButtonType.BUTTON).text(Buttons.LOAD));
+		startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_Q,
+				actionsCreator.openLoadFileDialog(), button,
+				HotkeysDescription.LOAD);
+		return button;
 	}
 
 }
