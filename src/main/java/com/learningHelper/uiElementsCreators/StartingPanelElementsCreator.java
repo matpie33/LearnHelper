@@ -5,7 +5,6 @@ import com.guimaker.enums.ButtonType;
 import com.guimaker.enums.KeyModifiers;
 import com.guimaker.list.myList.ListConfiguration;
 import com.guimaker.list.myList.MyList;
-import com.guimaker.model.HotkeyWrapper;
 import com.guimaker.options.ButtonOptions;
 import com.guimaker.panels.GuiElementsCreator;
 import com.learningHelper.application.ApplicationController;
@@ -55,11 +54,15 @@ public class StartingPanelElementsCreator {
 
 	}
 
-	public AbstractButton getButtonRemoveResourcesGroup(String groupName) {
-		return GuiElementsCreator.createButtonLikeComponent(
-				new ButtonOptions(ButtonType.BUTTON).text(
-						Buttons.REMOVE_RESOURCE_GROUP),
-				actionsCreator.createActionRemoveResourceGroup(groupName));
+	private void addButtonRemoveResourcesGroup(String groupName,
+			MyList<LearningResource> learningResources) {
+		learningResources.addButtonWithHotkey(
+				GuiElementsCreator.createButtonLikeComponent(
+						UIElementsStyles.buttonStyle()
+										.text(Buttons.REMOVE_RESOURCE_GROUP)),
+				KeyModifiers.CONTROL, KeyEvent.VK_G,
+				actionsCreator.createActionRemoveResourceGroup(groupName),
+				HotkeysDescription.REMOVE_RESOURCES_GROUP);
 	}
 
 	public JLabel createNoResourcesLabel() {
@@ -116,22 +119,22 @@ public class StartingPanelElementsCreator {
 						false));
 		applicationController.addResourcesGroup(groupName,
 				learningResourcesList);
-		learningResourcesList.addAdditionalNavigationButtons(
-				createButtonOpenAllResourcesFromGroup(learningResourcesList));
+		addButtonOpenAllResourcesFromGroup(learningResourcesList);
+		addButtonRemoveResourcesGroup(groupName, learningResourcesList);
 		return learningResourcesList;
 
 	}
 
-	private AbstractButton createButtonOpenAllResourcesFromGroup(
+	private void addButtonOpenAllResourcesFromGroup(
 			MyList<LearningResource> learningResources) {
-		//TODO refactor this button: place it below tab pane, and as action,
-		// get current tab and open all resources inside it
-		return GuiElementsCreator.createButtonLikeComponent(
-				new ButtonOptions(ButtonType.BUTTON).text(
-						Buttons.OPEN_ALL_RESOURCES_IN_GROUP),
+		learningResources.addButtonWithHotkey(
+				GuiElementsCreator.createButtonLikeComponent(
+						UIElementsStyles.buttonStyle()
+										.text(Buttons.OPEN_ALL_RESOURCES_IN_GROUP)),
+				KeyModifiers.CONTROL, KeyEvent.VK_D,
 				actionsCreator.createActionBrowseAllResources(
 						learningResources),
-				new HotkeyWrapper(KeyModifiers.CONTROL, KeyEvent.VK_D));
+				HotkeysDescription.OPEN_ALL_RESOURCES_IN_GROUP);
 	}
 
 	public AbstractButton createButtonSave() {

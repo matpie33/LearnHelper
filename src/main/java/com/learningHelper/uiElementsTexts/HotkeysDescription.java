@@ -10,6 +10,7 @@ public class HotkeysDescription {
 			+ "naukowych.";
 	public static final String OPEN_ALL_RESOURCES_IN_GROUP = "Otwiera "
 			+ "wszystkie źródła naukowe w danej grupie.";
+	public static final String REMOVE_RESOURCES_GROUP = "Usuwa grupę źródeł.";
 	public static final String SAVE = "Zapisuje zmiany.";
 	public static final String LOAD = "Wczytuje plik z dysku.";
 
