@@ -9,8 +9,8 @@ import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listPropertyManagers.ResourceTagPropertyManager;
 import com.learningHelper.listPropertyManagers.StoppedPlaceStringPropertyManager;
-import com.learningHelper.listPropertyManagers.StoppedPlaceVideoSecondPropertyManager;
 import com.learningHelper.listPropertyManagers.StoppedPlaceVideoMinutePropertyManager;
+import com.learningHelper.listPropertyManagers.StoppedPlaceVideoSecondPropertyManager;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
 import com.learningHelper.webBrowsing.WebBrowser;
@@ -55,7 +55,7 @@ public class LearningResourceRowActionsCreator {
 						learningResource.getLearningStoppedPlace()
 										.clear();
 						learningResource.setType(type);
-						if (type.equals(LearningResourceType.WEB_VIDEO)){
+						if (type.equals(LearningResourceType.WEB_VIDEO)) {
 							learningResource.initializeVideoTimePoint();
 						}
 						rowUpdater.changeResourceRowType(learningResource,
@@ -74,8 +74,8 @@ public class LearningResourceRowActionsCreator {
 		};
 	}
 
-	public JTextComponent addTagChangeListener(LearningResource learningResource,
-			JTextComponent textField,
+	public JTextComponent addTagChangeListener(
+			LearningResource learningResource, JTextComponent textField,
 			CommonListElements<LearningResource> commonListElements) {
 		tagInputPropertyManager = new ResourceTagPropertyManager();
 		ListPropertyChangeHandler tagInputPropertyChangeHandler = new ListPropertyChangeHandler<>(
@@ -144,4 +144,16 @@ public class LearningResourceRowActionsCreator {
 			}
 		};
 	}
+
+	public ItemListener createActionSkipChoosingVideoPlayerType() {
+		return new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				WebBrowser.setSkipVideoPlayerTypeChossingForNaruto(
+						e.getStateChange() == ItemEvent.SELECTED);
+
+			}
+		};
+	}
+
 }

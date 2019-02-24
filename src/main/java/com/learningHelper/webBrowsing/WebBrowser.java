@@ -3,6 +3,7 @@ package com.learningHelper.webBrowsing;
 import com.guimaker.utilities.ThreadUtilities;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.model.StringListElement;
+import com.learningHelper.naruto.NarutoLinkModifierToSkipChoosingVideoPlayer;
 
 import java.awt.*;
 import java.io.IOException;
@@ -14,6 +15,13 @@ import java.util.Collection;
 public class WebBrowser {
 
 	private static Desktop desktop = Desktop.getDesktop();
+	private static boolean skipVideoPlayerTypeChossingForNaruto = true;
+	private static NarutoLinkModifierToSkipChoosingVideoPlayer narutoLinkModifierToSkipChoosingVideoPlayer = new NarutoLinkModifierToSkipChoosingVideoPlayer();
+
+	public static void setSkipVideoPlayerTypeChossingForNaruto(
+			boolean skipVideoPlayerTypeChossingForNaruto) {
+		WebBrowser.skipVideoPlayerTypeChossingForNaruto = skipVideoPlayerTypeChossingForNaruto;
+	}
 
 	public static void browseAllResources(
 			Collection<LearningResource> resources) {
@@ -34,13 +42,15 @@ public class WebBrowser {
 		if (withCheckForEveryLocation) {
 			checkWhichResourceLocationWorks(resource);
 		}
-		if (!value.isEmpty()){
+		if (!value.isEmpty()) {
 			browseUrl(value);
 		}
 	}
 
 	private static void browseUrl(String value) {
 		try {
+			value = narutoLinkModifierToSkipChoosingVideoPlayer.modifyLinkForNaruto(
+					value, skipVideoPlayerTypeChossingForNaruto);
 			value = appendProtocolIfNeeded(value);
 			desktop.browse(new URI(value));
 		}
@@ -68,7 +78,8 @@ public class WebBrowser {
 	private static void checkLocations(LearningResource resource) {
 		boolean isFirst = true;
 		for (StringListElement stringListElement : resource.getAlternativeLocations()) {
-			if (stringListElement.getValue().isEmpty()){
+			if (stringListElement.getValue()
+								 .isEmpty()) {
 				continue;
 			}
 			boolean isOk = testIfResourceLocationIsWorking(

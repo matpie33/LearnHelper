@@ -9,7 +9,6 @@ import com.guimaker.model.PanelConfiguration;
 import com.guimaker.panels.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
-import com.learningHelper.model.LearningResource;
 import com.learningHelper.model.StringListElement;
 import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 import com.learningHelper.uiElementsCreators.ResourceLocationRowElementsCreator;

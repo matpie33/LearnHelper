@@ -60,6 +60,8 @@ public class WebVideoResourceRow implements ResourceRow {
 										elementsCreator.getTimeRangeStartInput(),
 										elementsCreator.getTimeRangeEndInput())
 								.nextRow(
+										elementsCreator.createCheckboxSkipChoosingVideoPlayerType())
+								.nextRow(
 										elementsCreator.createButtonGoToResource(
 												learningResource))
 								.nextRow(commonListElements.getButtonDelete()));

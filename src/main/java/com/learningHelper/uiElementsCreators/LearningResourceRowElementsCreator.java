@@ -1,10 +1,12 @@
 package com.learningHelper.uiElementsCreators;
 
+import com.guimaker.enums.ButtonType;
 import com.guimaker.enums.KeyModifiers;
 import com.guimaker.list.myList.ListConfiguration;
 import com.guimaker.list.myList.MyList;
 import com.guimaker.model.CommonListElements;
 import com.guimaker.model.HotkeyWrapper;
+import com.guimaker.options.ButtonOptions;
 import com.guimaker.panels.GuiElementsCreator;
 import com.guimaker.panels.MainPanel;
 import com.guimaker.utilities.CommonActionsCreator;
@@ -16,6 +18,7 @@ import com.learningHelper.model.StringListElement;
 import com.learningHelper.uiElementsActionsCreators.LearningResourceRowActionsCreator;
 import com.learningHelper.uiElementsStyles.UIElementsStyles;
 import com.learningHelper.uiElementsTexts.Buttons;
+import com.learningHelper.uiElementsTexts.Checkboxes;
 import com.learningHelper.uiElementsTexts.Labels;
 import com.learningHelper.uiElementsTexts.UserInformation;
 
@@ -46,6 +49,15 @@ public class LearningResourceRowElementsCreator {
 		return GuiElementsCreator.createLabel(
 				UIElementsStyles.labelForInputStyle()
 								.text(Labels.RESOURCE_TYPE));
+	}
+
+	public AbstractButton createCheckboxSkipChoosingVideoPlayerType() {
+		AbstractButton checkbox = GuiElementsCreator.createCheckbox(
+				new ButtonOptions(ButtonType.CHECKBOX).text(
+						Checkboxes.SKIP_CHOOSING_VIDEO_PLAYER_TYPE),
+				actionsCreator.createActionSkipChoosingVideoPlayerType(), null);
+		checkbox.setSelected(true);
+		return checkbox;
 	}
 
 	public JComboBox createComboboxResourceType(
@@ -134,8 +146,6 @@ public class LearningResourceRowElementsCreator {
 		return timeRangeEndInput;
 	}
 
-
-
 	public JTextComponent createInputStoppedPlaceVideoSecond(
 			LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements) {
@@ -150,8 +160,6 @@ public class LearningResourceRowElementsCreator {
 		}
 		return timeRangeEndInput;
 	}
-
-
 
 	public JTextComponent createInputStoppedPlace(
 			LearningResource learningResource,
