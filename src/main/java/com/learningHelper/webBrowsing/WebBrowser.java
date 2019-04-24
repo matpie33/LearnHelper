@@ -43,14 +43,16 @@ public class WebBrowser {
 			checkWhichResourceLocationWorks(resource);
 		}
 		if (!value.isEmpty()) {
-			browseUrl(value);
+			browseUrl(value, resource.isNarutoLink());
 		}
 	}
 
-	private static void browseUrl(String value) {
+	private static void browseUrl(String value, boolean narutoLink) {
 		try {
-			value = narutoLinkModifierToSkipChoosingVideoPlayer.modifyLinkForNaruto(
-					value, skipVideoPlayerTypeChossingForNaruto);
+			if (narutoLink){
+				value = narutoLinkModifierToSkipChoosingVideoPlayer.modifyLinkForNaruto(
+						value, skipVideoPlayerTypeChossingForNaruto);
+			}
 			value = appendProtocolIfNeeded(value);
 			desktop.browse(new URI(value));
 		}
@@ -86,7 +88,8 @@ public class WebBrowser {
 					stringListElement.getValue());
 			if (isOk) {
 				if (!isFirst) {
-					browseUrl(stringListElement.getValue());
+					browseUrl(stringListElement.getValue(),
+							resource.isNarutoLink());
 				}
 				return;
 			}

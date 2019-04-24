@@ -36,12 +36,17 @@ public class WebVideoResourceRow implements ResourceRow {
 						elementsCreator.createComboboxResourceType(
 								learningResource, panel, commonListElements))
 								.nextRow(
+										elementsCreator
+												.createCheckboxIsNarutoVideoLink(learningResource))
+								.setColumnToPutRowInto(1)
+								.nextRow(
+										elementsCreator.createCheckboxSkipChoosingVideoPlayerType())
+								.nextRow(
 										elementsCreator.createLabelResourceTag(),
 										elementsCreator.createInputResourceTag(
 												learningResource.getTag(),
 												learningResource,
 												commonListElements))
-								.setColumnToPutRowInto(1)
 								.nextRow(FillType.HORIZONTAL,
 										elementsCreator.createLabelResourceLocations(),
 										elementsCreator.createResourceLocations(
@@ -59,8 +64,6 @@ public class WebVideoResourceRow implements ResourceRow {
 								.inSameColumn(
 										elementsCreator.getTimeRangeStartInput(),
 										elementsCreator.getTimeRangeEndInput())
-								.nextRow(
-										elementsCreator.createCheckboxSkipChoosingVideoPlayerType())
 								.nextRow(
 										elementsCreator.createButtonGoToResource(
 												learningResource))

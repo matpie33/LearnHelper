@@ -60,6 +60,17 @@ public class LearningResourceRowElementsCreator {
 		return checkbox;
 	}
 
+	public AbstractButton createCheckboxIsNarutoVideoLink(
+			LearningResource learningResource) {
+		AbstractButton checkbox = GuiElementsCreator.createCheckbox(
+				new ButtonOptions(ButtonType.CHECKBOX).text(
+						Checkboxes.NARUTO_VIDEO_LINK),
+				actionsCreator.createActionLinkToNaruto(learningResource),
+				null);
+		checkbox.setSelected(learningResource.isNarutoLink());
+		return checkbox;
+	}
+
 	public JComboBox createComboboxResourceType(
 			LearningResource learningResource, MainPanel panel,
 			CommonListElements commonListElements) {

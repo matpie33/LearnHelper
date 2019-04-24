@@ -156,4 +156,16 @@ public class LearningResourceRowActionsCreator {
 		};
 	}
 
+	public ItemListener createActionLinkToNaruto(
+			LearningResource learningResource) {
+		return new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				learningResource.setIsNarutoLink(
+						e.getStateChange() == ItemEvent.SELECTED);
+
+			}
+		};
+	}
+
 }

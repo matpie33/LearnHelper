@@ -13,8 +13,9 @@ public class NarutoLinkModifierToSkipChoosingVideoPlayer {
 	private static final String ATTRIBUTE_CONTAINING_VIDEO_PLAYER_LINK = "rel";
 	private static final String CLASS_TAG_TABLE_COLUMN = "td";
 	private static final String NARUTO_VIDEO_PLAYER_URL_TEMPLATE = "https://naruto.wbijam.pl/odtwarzacz-%s.html";
-	private static String CLASS_NAME_FOR_TABLE_WITH_VIDEO_PLAYERS_LINKS = "lista";
-	private static String TEXT_IDENTIFYING_CDA_PLAYER_ROW = "cda";
+	private static final String CLASS_NAME_FOR_TABLE_WITH_VIDEO_PLAYERS_LINKS =
+			"lista";
+	private static final String TEXT_IDENTIFYING_CDA_PLAYER_ROW = "cda";
 
 	public String modifyLinkForNaruto(String value,
 			boolean skipVideoPlayerTypeChossingForNaruto) throws IOException {

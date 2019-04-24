@@ -26,6 +26,9 @@ public class LearningResource implements ListElement {
 	@XStreamAlias("learningStopPlace")
 	private LearningStoppedPlace learningStoppedPlace = LearningStoppedPlace.empty();
 
+	@XStreamAlias("isNaruto")
+	private boolean isNarutoLink;
+
 	public LearningStoppedPlace getLearningStoppedPlace() {
 		return learningStoppedPlace;
 	}
@@ -53,6 +56,14 @@ public class LearningResource implements ListElement {
 	public void setAlternativeLocations(
 			List<StringListElement> alternativeLocations) {
 		this.alternativeLocations = alternativeLocations;
+	}
+
+	public boolean isNarutoLink() {
+		return isNarutoLink;
+	}
+
+	public void setIsNarutoLink(boolean narutoLink) {
+		isNarutoLink = narutoLink;
 	}
 
 	public static ListElementInitializer<LearningResource> getInitializer() {
