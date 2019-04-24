@@ -28,25 +28,22 @@ public class WebHelperResourceRow implements ResourceRow {
 		LearningResourceRowDataCreator rowDataCreator = new LearningResourceRowDataCreator(
 				applicationController, learningResourcesGroupName);
 		LearningResourceRowElementsCreator elementsCreator = rowDataCreator.getElementsCreator();
+		elementsCreator.createElements(learningResource, panel,
+				commonListElements);
 		panel.addRowsOfElementsInColumn(
 				SimpleRowBuilder.createRowStartingFromColumn(0, FillType.NONE,
 						commonListElements.getRowNumberLabel(),
-						elementsCreator.createLabelResourceType(),
-						elementsCreator.createComboboxResourceType(
-								learningResource, panel, commonListElements))
-								.nextRow(elementsCreator.createLabelResourceTag(),
-										elementsCreator.createInputResourceTag(
-												learningResource.getTag(),
-												learningResource,
-												commonListElements))
+						elementsCreator.getLabelResourceType(),
+						elementsCreator.getComboboxResourceType())
+								.nextRow(elementsCreator.getLabelResourceTag(),
+										elementsCreator.getInputResourceTag())
 								.setColumnToPutRowInto(1)
 								.nextRow(FillType.HORIZONTAL,
-										elementsCreator.createLabelResourceLocations(),
-										elementsCreator.createResourceLocations(
-												learningResource)
+										elementsCreator.getLabelResourceLocations(),
+										elementsCreator.getResourceLocationsList()
 													   .getPanel())
-								.nextRow(elementsCreator.createButtonGoToResource(
-										learningResource))
+								.nextRow(
+										elementsCreator.getButtonGoToResource())
 								.nextRow(commonListElements.getButtonDelete()));
 
 		return rowDataCreator.createRowData(panel);

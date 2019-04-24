@@ -29,44 +29,33 @@ public class WebVideoResourceRow implements ResourceRow {
 		LearningResourceRowDataCreator rowDataCreator = new LearningResourceRowDataCreator(
 				applicationController, learningResourcesGroupName);
 		LearningResourceRowElementsCreator elementsCreator = rowDataCreator.getElementsCreator();
+		elementsCreator.createElements(learningResource, panel,
+				commonListElements);
 		panel.addRowsOfElementsInColumn(
 				SimpleRowBuilder.createRowStartingFromColumn(0, FillType.NONE,
 						Anchor.WEST, commonListElements.getRowNumberLabel(),
-						elementsCreator.createLabelResourceType(),
-						elementsCreator.createComboboxResourceType(
-								learningResource, panel, commonListElements))
+						elementsCreator.getLabelResourceType(),
+						elementsCreator.getComboboxResourceType())
 								.nextRow(
-										elementsCreator
-												.createCheckboxIsNarutoVideoLink(learningResource))
+										elementsCreator.getCheckboxIsNarutoVideoLink())
 								.setColumnToPutRowInto(1)
 								.nextRow(
-										elementsCreator.createCheckboxSkipChoosingVideoPlayerType())
-								.nextRow(
-										elementsCreator.createLabelResourceTag(),
-										elementsCreator.createInputResourceTag(
-												learningResource.getTag(),
-												learningResource,
-												commonListElements))
+										elementsCreator.getCheckboxSkipChoosingVideoPlayerType())
+								.nextRow(elementsCreator.getLabelResourceTag(),
+										elementsCreator.getInputResourceTag())
 								.nextRow(FillType.HORIZONTAL,
-										elementsCreator.createLabelResourceLocations(),
-										elementsCreator.createResourceLocations(
-												learningResource)
+										elementsCreator.getLabelResourceLocations(),
+										elementsCreator.getResourceLocationsList()
 													   .getPanel())
-								.nextRow(
-										elementsCreator.createLabelStoppedPlace(),
-										elementsCreator.createInputStoppedPlaceVideoMinute(
-												learningResource,
-												commonListElements),
-										elementsCreator.createInputStoppedPlaceVideoSecond(
-												learningResource,
-												commonListElements))
+								.nextRow(elementsCreator.getLabelStoppedPlace(),
+										elementsCreator.getVideoMinuteInput(),
+										elementsCreator.getVideoSecondInput())
 
 								.inSameColumn(
-										elementsCreator.getTimeRangeStartInput(),
-										elementsCreator.getTimeRangeEndInput())
+										elementsCreator.getVideoMinuteInput(),
+										elementsCreator.getVideoSecondInput())
 								.nextRow(
-										elementsCreator.createButtonGoToResource(
-												learningResource))
+										elementsCreator.getButtonGoToResource())
 								.nextRow(commonListElements.getButtonDelete()));
 		return rowDataCreator.createRowData(panel);
 	}

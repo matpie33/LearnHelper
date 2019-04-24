@@ -28,13 +28,22 @@ import java.awt.event.KeyEvent;
 
 public class LearningResourceRowElementsCreator {
 
-	private JTextComponent tagInput;
-	private JTextComponent timeRangeStartInput;
-	private JTextComponent timeRangeEndInput;
+	private JTextComponent resourceTagInput;
+	private JTextComponent videoMinuteInput;
+	private JTextComponent videoSecondInput;
 	private JTextComponent stoppedPlaceTextInput;
 	private LearningResourceRowActionsCreator actionsCreator;
 	private ApplicationController applicationController;
 	private String learningResourcesGroupName;
+	private JLabel labelResourceType;
+	private AbstractButton checkboxSkipChoosingVideoPlayerType;
+	private AbstractButton checkboxIsNarutoVideoLink;
+	private JComboBox comboboxResourceType;
+	private JLabel labelResourceTag;
+	private JLabel labelResourceLocations;
+	private AbstractButton buttonGoToResource;
+	private JLabel labelStoppedPlace;
+	private MyList<StringListElement> resourceLocationsList;
 
 	public LearningResourceRowElementsCreator(
 			ApplicationController applicationController,
@@ -45,33 +54,89 @@ public class LearningResourceRowElementsCreator {
 		this.actionsCreator = actionsCreator;
 	}
 
-	public JLabel createLabelResourceType() {
-		return GuiElementsCreator.createLabel(
-				UIElementsStyles.labelForInputStyle()
-								.text(Labels.RESOURCE_TYPE));
+	public void createElements(LearningResource learningResource,
+			MainPanel panel,
+			CommonListElements<LearningResource> commonListElements) {
+		resourceLocationsList = createResourceLocations(learningResource);
+		createLabels();
+		createButtonsAndBoxes(learningResource, panel, commonListElements);
+		createInputs(learningResource, commonListElements);
 	}
 
-	public AbstractButton createCheckboxSkipChoosingVideoPlayerType() {
-		AbstractButton checkbox = GuiElementsCreator.createCheckbox(
+	private void createLabels() {
+		labelResourceType = GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.RESOURCE_TYPE));
+		labelResourceTag = GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.RESOURCE_TAG));
+		labelResourceLocations = GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.RESOURCE_LOCATIONS));
+		labelStoppedPlace = GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.STOPPED_PLACE));
+	}
+
+	private void createInputs(LearningResource learningResource,
+			CommonListElements<LearningResource> commonListElements) {
+		resourceTagInput = actionsCreator.addTagChangeListener(learningResource,
+				GuiElementsCreator.createTextArea(
+						UIElementsStyles.shortTextInputStyle()
+										.text(learningResource.getTag())),
+				commonListElements);
+
+		if (learningResource.getType()
+							.equals(LearningResourceType.WEB_VIDEO)) {
+			videoMinuteInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeStartInput(
+					GuiElementsCreator.createTextArea(
+							UIElementsStyles.timeRangeInputStyle()
+											.text(""
+													+ learningResource.getLearningStoppedPlace()
+																	  .getVideoMinute())),
+					learningResource, commonListElements);
+			videoSecondInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeEndInput(
+					GuiElementsCreator.createTextArea(
+							UIElementsStyles.timeRangeInputStyle()
+											.text(""
+													+ learningResource.getLearningStoppedPlace()
+																	  .getVideoSecond())),
+					learningResource, commonListElements);
+		}
+		stoppedPlaceTextInput = actionsCreator.listenForChangesInStoppedPlaceTextInput(
+				GuiElementsCreator.createTextArea(
+						UIElementsStyles.shortTextInputStyle()
+										.text(learningResource.getLearningStoppedPlace()
+															  .getTextFragmentPlace())),
+				learningResource, commonListElements);
+
+	}
+
+	private void createButtonsAndBoxes(LearningResource learningResource,
+			MainPanel panel,
+			CommonListElements<LearningResource> commonListElements) {
+		buttonGoToResource = GuiElementsCreator.createButtonLikeComponent(
+				UIElementsStyles.buttonStyle()
+								.text(Buttons.GO_TO_RESOURCE),
+				actionsCreator.createActionGoToResource(learningResource));
+		checkboxSkipChoosingVideoPlayerType = GuiElementsCreator.createCheckbox(
 				new ButtonOptions(ButtonType.CHECKBOX).text(
 						Checkboxes.SKIP_CHOOSING_VIDEO_PLAYER_TYPE),
 				actionsCreator.createActionSkipChoosingVideoPlayerType(), null);
-		checkbox.setSelected(true);
-		return checkbox;
-	}
+		checkboxSkipChoosingVideoPlayerType.setSelected(true);
 
-	public AbstractButton createCheckboxIsNarutoVideoLink(
-			LearningResource learningResource) {
-		AbstractButton checkbox = GuiElementsCreator.createCheckbox(
+		checkboxIsNarutoVideoLink = GuiElementsCreator.createCheckbox(
 				new ButtonOptions(ButtonType.CHECKBOX).text(
 						Checkboxes.NARUTO_VIDEO_LINK),
 				actionsCreator.createActionLinkToNaruto(learningResource),
 				null);
-		checkbox.setSelected(learningResource.isNarutoLink());
-		return checkbox;
+		checkboxIsNarutoVideoLink.setSelected(learningResource.isNarutoLink());
+
+		comboboxResourceType = createComboboxResourceType(learningResource,
+				panel, commonListElements);
 	}
 
-	public JComboBox createComboboxResourceType(
+	private JComboBox createComboboxResourceType(
 			LearningResource learningResource, MainPanel panel,
 			CommonListElements commonListElements) {
 		JComboBox combobox = GuiElementsCreator.createCombobox(
@@ -92,101 +157,7 @@ public class LearningResourceRowElementsCreator {
 		return combobox;
 	}
 
-	public JLabel createLabelResourceTag() {
-		return GuiElementsCreator.createLabel(
-				UIElementsStyles.labelForInputStyle()
-								.text(Labels.RESOURCE_TAG));
-	}
-
-	public JLabel createLabelResourceLocations() {
-		return GuiElementsCreator.createLabel(
-				UIElementsStyles.labelForInputStyle()
-								.text(Labels.RESOURCE_LOCATIONS));
-	}
-
-	public JTextComponent createInputResourceTag(String tag,
-			LearningResource learningResource,
-			CommonListElements<LearningResource> commonListElements) {
-		if (tagInput == null) {
-			tagInput = actionsCreator.addTagChangeListener(learningResource,
-					GuiElementsCreator.createTextArea(
-							UIElementsStyles.shortTextInputStyle()
-											.text(tag)), commonListElements);
-		}
-		return tagInput;
-	}
-
-	public JTextComponent getTagInput() {
-		return tagInput;
-	}
-
-	public AbstractButton createButtonGoToResource(
-			LearningResource learningResource) {
-		return GuiElementsCreator.createButtonLikeComponent(
-				UIElementsStyles.buttonStyle()
-								.text(Buttons.GO_TO_RESOURCE),
-				actionsCreator.createActionGoToResource(learningResource));
-	}
-
-	public JLabel createLabelStoppedPlace() {
-		return GuiElementsCreator.createLabel(
-				UIElementsStyles.labelForInputStyle()
-								.text(Labels.STOPPED_PLACE));
-	}
-
-	public JTextComponent createInputStoppedPlaceVideoMinute(
-			LearningResource learningResource,
-			CommonListElements<LearningResource> commonListElements) {
-		if (timeRangeStartInput == null) {
-			timeRangeStartInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeStartInput(
-					GuiElementsCreator.createTextArea(
-							UIElementsStyles.timeRangeInputStyle()
-											.text(""
-													+ learningResource.getLearningStoppedPlace()
-																	  .getVideoMinute())),
-					learningResource, commonListElements);
-		}
-		return timeRangeStartInput;
-	}
-
-	public JTextComponent getTimeRangeStartInput() {
-		return timeRangeStartInput;
-	}
-
-	public JTextComponent getTimeRangeEndInput() {
-		return timeRangeEndInput;
-	}
-
-	public JTextComponent createInputStoppedPlaceVideoSecond(
-			LearningResource learningResource,
-			CommonListElements<LearningResource> commonListElements) {
-		if (timeRangeEndInput == null) {
-			timeRangeEndInput = actionsCreator.listenForChangesInStoppedPlaceTimeRangeEndInput(
-					GuiElementsCreator.createTextArea(
-							UIElementsStyles.timeRangeInputStyle()
-											.text(""
-													+ learningResource.getLearningStoppedPlace()
-																	  .getVideoSecond())),
-					learningResource, commonListElements);
-		}
-		return timeRangeEndInput;
-	}
-
-	public JTextComponent createInputStoppedPlace(
-			LearningResource learningResource,
-			CommonListElements<LearningResource> commonListElements) {
-		if (stoppedPlaceTextInput == null) {
-			stoppedPlaceTextInput = actionsCreator.listenForChangesInStoppedPlaceTextInput(
-					GuiElementsCreator.createTextArea(
-							UIElementsStyles.shortTextInputStyle()
-											.text(learningResource.getLearningStoppedPlace()
-																  .getTextFragmentPlace())),
-					learningResource, commonListElements);
-		}
-		return stoppedPlaceTextInput;
-	}
-
-	public MyList<StringListElement> createResourceLocations(
+	private MyList<StringListElement> createResourceLocations(
 			LearningResource learningResource) {
 		MyList<StringListElement> locationsList = new MyList<>(
 				new ListConfiguration<>(UserInformation.URL_LOCATION_DELETE,
@@ -215,4 +186,59 @@ public class LearningResourceRowElementsCreator {
 		return locationsList;
 	}
 
+	public JTextComponent getInputResourceTag() {
+		return resourceTagInput;
+	}
+
+	public JTextComponent getVideoMinuteInput() {
+		return videoMinuteInput;
+	}
+
+	public JTextComponent getVideoSecondInput() {
+		return videoSecondInput;
+	}
+
+	public JTextComponent getStoppedPlaceTextInput() {
+		return stoppedPlaceTextInput;
+	}
+
+	public ApplicationController getApplicationController() {
+		return applicationController;
+	}
+
+	public JLabel getLabelResourceType() {
+		return labelResourceType;
+	}
+
+	public AbstractButton getCheckboxSkipChoosingVideoPlayerType() {
+		return checkboxSkipChoosingVideoPlayerType;
+	}
+
+	public AbstractButton getCheckboxIsNarutoVideoLink() {
+		return checkboxIsNarutoVideoLink;
+	}
+
+	public JComboBox getComboboxResourceType() {
+		return comboboxResourceType;
+	}
+
+	public JLabel getLabelResourceTag() {
+		return labelResourceTag;
+	}
+
+	public JLabel getLabelResourceLocations() {
+		return labelResourceLocations;
+	}
+
+	public AbstractButton getButtonGoToResource() {
+		return buttonGoToResource;
+	}
+
+	public JLabel getLabelStoppedPlace() {
+		return labelStoppedPlace;
+	}
+
+	public MyList<StringListElement> getResourceLocationsList() {
+		return resourceLocationsList;
+	}
 }

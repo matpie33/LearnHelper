@@ -9,7 +9,6 @@ import com.learningHelper.listPropertyManagers.ResourceLocationPropertyManager;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.model.StringListElement;
 import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
-import com.learningHelper.uiElementsCreators.ResourceLocationRowElementsCreator;
 import com.learningHelper.urlHandling.VideoSeriesNumberIncrementer;
 
 import javax.swing.*;
@@ -36,7 +35,7 @@ public class ResourceLocationRowActionsCreator {
 		return component;
 	}
 
-	public AbstractAction createIncreaseVideoNumberAction(
+	public AbstractAction createIncreaseVideoSeriesNumberAction(
 			JTextComponent resourceLocationInput,
 			StringListElement stringListElement,
 			LearningResource learningResource,
@@ -48,14 +47,16 @@ public class ResourceLocationRowActionsCreator {
 				String newLocation = VideoSeriesNumberIncrementer.increment(
 						resourceLocation);
 				resourceLocationInput.setText(newLocation);
-				propertyChangeHandler.setProperty(stringListElement, newLocation,
-						resourceLocation);
-				learningResource.getLearningStoppedPlace().setVideoSecond(0);
-				learningResource.getLearningStoppedPlace().setVideoMinute(0);
-				elementsCreator.createInputStoppedPlaceVideoMinute
-						(learningResource, null).setText("0");
-				elementsCreator.createInputStoppedPlaceVideoSecond
-						(learningResource, null).setText("0");
+				propertyChangeHandler.setProperty(stringListElement,
+						newLocation, resourceLocation);
+				learningResource.getLearningStoppedPlace()
+								.setVideoSecond(0);
+				learningResource.getLearningStoppedPlace()
+								.setVideoMinute(0);
+				elementsCreator.getVideoMinuteInput()
+							   .setText("0");
+				elementsCreator.getVideoSecondInput()
+							   .setText("0");
 			}
 		};
 	}

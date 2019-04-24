@@ -32,7 +32,7 @@ public class LearningResourceRowDataCreator {
 	public ListRowData<LearningResource> createRowData(MainPanel mainPanel) {
 		ListRowData<LearningResource> rowData = new ListRowData<>(mainPanel);
 		rowData.addPropertyInformation(FilterProperties.TAG,
-				new ListPropertyInformation<>(elementsCreator.getTagInput(),
+				new ListPropertyInformation<>(elementsCreator.getInputResourceTag(),
 						actionsCreator.getTagInputPropertyManager()));
 		return rowData;
 	}
