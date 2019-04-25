@@ -1,7 +1,6 @@
 package com.learningHelper.uiElementsTexts;
 
 public class Labels {
-	public final static String NO_RESOURCES = "Brak źródeł";
 	public final static String RESOURCE_TYPE = "Typ";
 	public final static String RESOURCE_TAG = "Tag";
 	public final static String RESOURCE_LOCATIONS = "Adresy URL";

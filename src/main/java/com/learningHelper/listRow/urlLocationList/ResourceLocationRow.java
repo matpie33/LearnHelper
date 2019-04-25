@@ -9,6 +9,8 @@ import com.guimaker.model.PanelConfiguration;
 import com.guimaker.panels.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
+import com.learningHelper.enums.LearningResourceType;
+import com.learningHelper.model.LearningResource;
 import com.learningHelper.model.StringListElement;
 import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 import com.learningHelper.uiElementsCreators.ResourceLocationRowElementsCreator;
@@ -16,12 +18,12 @@ import com.learningHelper.uiElementsCreators.ResourceLocationRowElementsCreator;
 public class ResourceLocationRow implements ListRowCreator<StringListElement> {
 
 	private ApplicationController applicationController;
-	private LearningResourceRowElementsCreator elementsCreator;
+	private LearningResourceRowElementsCreator learningResourceRowElementsCreator;
 
 	public ResourceLocationRow(ApplicationController applicationController,
 			LearningResourceRowElementsCreator elementsCreator) {
 		this.applicationController = applicationController;
-		this.elementsCreator = elementsCreator;
+		this.learningResourceRowElementsCreator = elementsCreator;
 	}
 
 	@Override
@@ -32,15 +34,25 @@ public class ResourceLocationRow implements ListRowCreator<StringListElement> {
 		MainPanel panel = new MainPanel(new PanelConfiguration());
 		ResourceLocationRowElementsCreator elementsCreator = new ResourceLocationRowElementsCreator(
 				applicationController);
+		elementsCreator.createElements(stringListElement, commonListElements,
+				this.learningResourceRowElementsCreator);
 		panel.addRow(SimpleRowBuilder.createRow(FillType.HORIZONTAL,
-				elementsCreator.createLabelURL(),
-				elementsCreator.createInputResourceLocation(stringListElement,
-						commonListElements.getList()),
-				elementsCreator.createButtonIncreaseVideoNumberIfApplicable(
-						commonListElements, stringListElement,
-						this.elementsCreator),
+				elementsCreator.getLabelURL(),
+				elementsCreator.getResourceLocationInput(),
+				elementsCreator.getButtonIncreaseVideoNumber(),
 				commonListElements.getButtonAddRow(),
-				commonListElements.getButtonDelete()));
+				commonListElements.getButtonDelete())
+									 .componentOnlyIfConditionMatches(
+											 elementsCreator.getButtonIncreaseVideoNumber(),
+											 isVideoResource(
+													 commonListElements)));
 		return new ListRowData<>(panel);
+	}
+
+	private boolean isVideoResource(
+			CommonListElements<StringListElement> commonListElements) {
+		return ((LearningResource) commonListElements.getList()
+													 .getRootWord()).getType()
+																	.equals(LearningResourceType.WEB_VIDEO);
 	}
 }

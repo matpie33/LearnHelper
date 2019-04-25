@@ -16,7 +16,7 @@ public class StartingPanelUpdater {
 	}
 
 	public void focusInputForResourcesGroup() {
-		elementsCreator.getResourcesGroupNameInput()
+		elementsCreator.getInputResourcesGroupName()
 					   .requestFocusInWindow();
 	}
 
@@ -29,8 +29,8 @@ public class StartingPanelUpdater {
 	public void addLearningResourcesGroups(
 			List<GroupOfLearningResources> groupsOfLearningResources) {
 		for (GroupOfLearningResources singleGroup : groupsOfLearningResources) {
-			MyList<LearningResource> learningResourcesList = elementsCreator.createLearningResourcesList(
-					singleGroup.getGroupName());
+			MyList<LearningResource> learningResourcesList = elementsCreator
+					.createLearningResourcesList(singleGroup.getGroupName());
 			singleGroup.getLearningResources()
 					   .forEach(learningResourcesList::addWord);
 			addLearningResourcesGroupToTabPane(singleGroup.getGroupName(),

@@ -33,23 +33,24 @@ public class StartingPanel extends AbstractPanelWithHotkeysInfo {
 
 	@Override
 	public void createElements() {
+		elementsCreator.createElements();
 		MainPanel upperPanel = new MainPanel(
 				new PanelConfiguration().setColorToUse(Color.GREEN));
 		upperPanel.addRows(
 				SimpleRowBuilder.createRow(FillType.NONE, Anchor.WEST,
-						elementsCreator.createResourcesGroupNameLabel(),
-						elementsCreator.getResourcesGroupNameInput(),
-						elementsCreator.createButtonAddResourcesGroup())
+						elementsCreator.getLabelResourcesGroup(),
+						elementsCreator.getInputResourcesGroupName(),
+						elementsCreator.getButtonAddResourcesGroup())
 								.nextRow(FillType.BOTH,
 										elementsCreator.getTabPane()));
 
 		mainPanel.addRows(
 				SimpleRowBuilder.createRow(FillType.NONE, Anchor.CENTER,
-						elementsCreator.createTitleLabel())
+						elementsCreator.getTitleLabel())
 								.nextRow(FillType.NONE, Anchor.WEST,
-										elementsCreator.createButtonLoadLastUsedFile(),
-										elementsCreator.createButtonSave(),
-										elementsCreator.createButtonLoad())
+										elementsCreator.getButtonLoadLastUsedFile(),
+										elementsCreator.getButtonSave(),
+										elementsCreator.getButtonLoad())
 								.disableBorder().setNotOpaque()
 								.nextRow(FillType.BOTH, Anchor.WEST,
 										upperPanel.getPanel()));

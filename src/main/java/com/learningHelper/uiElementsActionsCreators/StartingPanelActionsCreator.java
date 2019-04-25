@@ -29,10 +29,10 @@ public class StartingPanelActionsCreator {
 		return new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String groupName = elementsCreator.getResourcesGroupNameInput()
+				String groupName = elementsCreator.getInputResourcesGroupName()
 												  .getText();
-				MyList<LearningResource> learningResourcesList = elementsCreator.createLearningResourcesList(
-						groupName);
+				MyList<LearningResource> learningResourcesList =
+						elementsCreator.createLearningResourcesList(groupName);
 				applicationController.addResourcesGroup(groupName,
 						learningResourcesList);
 				panelUpdater.addLearningResourcesGroupToTabPane(groupName,
@@ -99,10 +99,11 @@ public class StartingPanelActionsCreator {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean accepted = applicationController.getApplicationWindow()
-									 .showConfirmDialog(String.format(
-											 UserInformation.CONFIRM_REMOVE_RESOURCE_GROUP,
-											 resourceGroupName));
-				if (!accepted){
+														.showConfirmDialog(
+																String.format(
+																		UserInformation.CONFIRM_REMOVE_RESOURCE_GROUP,
+																		resourceGroupName));
+				if (!accepted) {
 					return;
 				}
 				applicationController.removeResourceGroup(resourceGroupName);

@@ -24,9 +24,18 @@ public class StartingPanelElementsCreator {
 
 	private StartingPanelActionsCreator actionsCreator;
 	private JTabbedPane tabPane;
-	private JTextComponent resourcesGroupName;
+	private JTextComponent resourcesGroupNameInput;
 	private ApplicationController applicationController;
 	private StartingPanel startingPanel;
+	private AbstractButton buttonRemoveResourcesGroup;
+	private AbstractButton buttonAddResourcesGroup;
+	private AbstractButton buttonLoadLastUsedFile;
+	private AbstractButton buttonOpenAllResourcesFromGroup;
+	private AbstractButton buttonSave;
+	private AbstractButton buttonLoad;
+	private JLabel labelResourcesGroup;
+	private JLabel titleLabel;
+	private MyList<LearningResource> learningResourcesList;
 
 	public StartingPanelElementsCreator(
 			ApplicationController applicationController,
@@ -37,123 +46,122 @@ public class StartingPanelElementsCreator {
 		this.startingPanel = startingPanel;
 	}
 
-	public JLabel createTitleLabel() {
-		return GuiElementsCreator.createLabel(UIElementsStyles.titleLabelStyle()
-															  .text(Titles.APPLICATION_TITLE));
+	public void createElements() {
+		createButtons();
+		resourcesGroupNameInput = GuiElementsCreator.createTextArea(
+				UIElementsStyles.shortTextInputStyle());
+		labelResourcesGroup = GuiElementsCreator.createLabel(
+				UIElementsStyles.labelForInputStyle()
+								.text(Labels.RESOURCES_GROUP_NAME));
+		titleLabel = GuiElementsCreator.createLabel(
+				UIElementsStyles.titleLabelStyle()
+								.text(Titles.APPLICATION_TITLE));
+		createTabPane();
 	}
 
-	public JTabbedPane getTabPane() {
-		if (tabPane == null) {
-			tabPane = GuiElementsCreator.createTabbedPane();
-			tabPane.setBackground(BasicColors.BLUE_NORMAL_7);
-			startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_W,
-					actionsCreator.createActionSwitchTabs(tabPane), tabPane,
-					HotkeysDescription.SWITCH_TABS);
-		}
-		return tabPane;
+	private void createButtons() {
 
-	}
-
-	private void addButtonRemoveResourcesGroup(String groupName,
-			MyList<LearningResource> learningResources) {
-		learningResources.addButtonWithHotkey(
-				GuiElementsCreator.createButtonLikeComponent(
-						UIElementsStyles.buttonStyle()
-										.text(Buttons.REMOVE_RESOURCE_GROUP)),
-				KeyModifiers.CONTROL, KeyEvent.VK_G,
-				actionsCreator.createActionRemoveResourceGroup(groupName),
-				HotkeysDescription.REMOVE_RESOURCES_GROUP);
-	}
-
-	public JLabel createNoResourcesLabel() {
-		return GuiElementsCreator.createLabel(
-				UIElementsStyles.informationLabelStyle()
-								.text(Labels.NO_RESOURCES));
-	}
-
-	public AbstractButton createButtonAddResourcesGroup() {
-		AbstractButton button = GuiElementsCreator.createButtonLikeComponent(
+		buttonAddResourcesGroup = GuiElementsCreator.createButtonLikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.ADD));
 		startingPanel.addHotkey(KeyEvent.VK_ENTER,
-				actionsCreator.createActionAddGroupResource(), button,
-				HotkeysDescription.ADD_RESOURCE_GROUP);
-		return button;
-	}
-
-	public AbstractButton createButtonLoadLastUsedFile() {
-		AbstractButton button = GuiElementsCreator.createButtonLikeComponent(
+				actionsCreator.createActionAddGroupResource(),
+				buttonAddResourcesGroup, HotkeysDescription.ADD_RESOURCE_GROUP);
+		buttonLoadLastUsedFile = GuiElementsCreator.createButtonLikeComponent(
 				UIElementsStyles.buttonStyle()
 								.text(Buttons.LOAD_LAST_USED_FILE));
 		startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_E,
-				actionsCreator.createActionOpenLastUsedFile(), button,
-				HotkeysDescription.OPEN_LAST_USED_FILE);
-		return button;
+				actionsCreator.createActionOpenLastUsedFile(),
+				buttonLoadLastUsedFile, HotkeysDescription.OPEN_LAST_USED_FILE);
+
+		buttonSave = GuiElementsCreator.createButtonLikeComponent(
+				UIElementsStyles.buttonStyle()
+								.text(Buttons.SAVE));
+		startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_S,
+				actionsCreator.openSaveDialog(), buttonSave,
+				HotkeysDescription.SAVE);
+		buttonLoad = GuiElementsCreator.createButtonLikeComponent(
+				new ButtonOptions(ButtonType.BUTTON).text(Buttons.LOAD));
+		startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_Q,
+				actionsCreator.openLoadFileDialog(), buttonLoad,
+				HotkeysDescription.LOAD);
 	}
 
-	public JTextComponent getResourcesGroupNameInput() {
-		if (resourcesGroupName == null) {
-			resourcesGroupName = GuiElementsCreator.createTextArea(
-					UIElementsStyles.shortTextInputStyle());
-		}
-		return resourcesGroupName;
-	}
+	private void createTabPane() {
+		tabPane = GuiElementsCreator.createTabbedPane();
+		tabPane.setBackground(BasicColors.BLUE_NORMAL_7);
+		startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_W,
+				actionsCreator.createActionSwitchTabs(tabPane), tabPane,
+				HotkeysDescription.SWITCH_TABS);
 
-	public JLabel createResourcesGroupNameLabel() {
-		return GuiElementsCreator.createLabel(
-				UIElementsStyles.labelForInputStyle()
-								.text(Labels.RESOURCES_GROUP_NAME));
 	}
 
 	public MyList<LearningResource> createLearningResourcesList(
 			String groupName) {
 
-		MyList<LearningResource> learningResourcesList = new MyList<>(
-				new ListConfiguration<>(
-						UserInformation.LEARNING_RESOURCE_DELETE,
-						new LearningResourceRow(applicationController,
-								groupName), LearningResource.getInitializer(),
-						Titles.LEARNING_RESOURCES_LIST,
-						applicationController.getApplicationWindow(),
-						applicationController).showButtonsLoadNextPreviousWords(
-						false));
+		learningResourcesList = new MyList<>(new ListConfiguration<>(
+				UserInformation.LEARNING_RESOURCE_DELETE,
+				new LearningResourceRow(applicationController, groupName),
+				LearningResource.getInitializer(),
+				Titles.LEARNING_RESOURCES_LIST,
+				applicationController.getApplicationWindow(),
+				applicationController).showButtonsLoadNextPreviousWords(false));
 		applicationController.addResourcesGroup(groupName,
 				learningResourcesList);
-		addButtonOpenAllResourcesFromGroup(learningResourcesList);
-		addButtonRemoveResourcesGroup(groupName, learningResourcesList);
+		buttonRemoveResourcesGroup = GuiElementsCreator.createButtonLikeComponent(
+				UIElementsStyles.buttonStyle()
+								.text(Buttons.REMOVE_RESOURCE_GROUP));
+		learningResourcesList.addButtonWithHotkey(buttonRemoveResourcesGroup,
+				KeyModifiers.CONTROL, KeyEvent.VK_G,
+				actionsCreator.createActionRemoveResourceGroup(groupName),
+				HotkeysDescription.REMOVE_RESOURCES_GROUP);
+		buttonOpenAllResourcesFromGroup = GuiElementsCreator.createButtonLikeComponent(
+				UIElementsStyles.buttonStyle()
+								.text(Buttons.OPEN_ALL_RESOURCES_IN_GROUP));
+		learningResourcesList.addButtonWithHotkey(buttonOpenAllResourcesFromGroup,
+				KeyModifiers.CONTROL, KeyEvent.VK_D,
+				actionsCreator.createActionBrowseAllResources(
+						learningResourcesList),
+				HotkeysDescription.OPEN_ALL_RESOURCES_IN_GROUP);
 		return learningResourcesList;
 
 	}
 
-	private void addButtonOpenAllResourcesFromGroup(
-			MyList<LearningResource> learningResources) {
-		learningResources.addButtonWithHotkey(
-				GuiElementsCreator.createButtonLikeComponent(
-						UIElementsStyles.buttonStyle()
-										.text(Buttons.OPEN_ALL_RESOURCES_IN_GROUP)),
-				KeyModifiers.CONTROL, KeyEvent.VK_D,
-				actionsCreator.createActionBrowseAllResources(
-						learningResources),
-				HotkeysDescription.OPEN_ALL_RESOURCES_IN_GROUP);
+	public JTabbedPane getTabPane() {
+		return tabPane;
 	}
 
-	public AbstractButton createButtonSave() {
-		AbstractButton button = GuiElementsCreator.createButtonLikeComponent(
-				UIElementsStyles.buttonStyle()
-								.text(Buttons.SAVE));
-		startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_S,
-				actionsCreator.openSaveDialog(), button,
-				HotkeysDescription.SAVE);
-		return button;
+	public JTextComponent getInputResourcesGroupName() {
+		return resourcesGroupNameInput;
 	}
 
-	public AbstractButton createButtonLoad() {
-		AbstractButton button = GuiElementsCreator.createButtonLikeComponent(
-				new ButtonOptions(ButtonType.BUTTON).text(Buttons.LOAD));
-		startingPanel.addHotkey(KeyModifiers.CONTROL, KeyEvent.VK_Q,
-				actionsCreator.openLoadFileDialog(), button,
-				HotkeysDescription.LOAD);
-		return button;
+	public ApplicationController getApplicationController() {
+		return applicationController;
+	}
+
+
+	public AbstractButton getButtonAddResourcesGroup() {
+		return buttonAddResourcesGroup;
+	}
+
+	public AbstractButton getButtonLoadLastUsedFile() {
+		return buttonLoadLastUsedFile;
+	}
+
+	public AbstractButton getButtonSave() {
+		return buttonSave;
+	}
+
+	public AbstractButton getButtonLoad() {
+		return buttonLoad;
+	}
+
+	public JLabel getLabelResourcesGroup() {
+		return labelResourcesGroup;
+	}
+
+	public JLabel getTitleLabel() {
+		return titleLabel;
 	}
 
 }
