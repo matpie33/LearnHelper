@@ -122,13 +122,17 @@ public class LearningResourceRowElementsCreator {
 		checkboxSkipChoosingVideoPlayerType = GuiElementsCreator.createCheckbox(
 				new ButtonOptions(ButtonType.CHECKBOX).text(
 						Checkboxes.SKIP_CHOOSING_VIDEO_PLAYER_TYPE),
-				actionsCreator.createActionSkipChoosingVideoPlayerType(), null);
-		checkboxSkipChoosingVideoPlayerType.setSelected(true);
+				actionsCreator.createActionSkipChoosingVideoPlayerType(
+						learningResource), null);
+		checkboxSkipChoosingVideoPlayerType.setSelected(
+				learningResource.isSkipChoosingVideoPlayerForNaruto());
+		checkboxSkipChoosingVideoPlayerType.setEnabled(
+				learningResource.isNarutoLink());
 
 		checkboxIsNarutoVideoLink = GuiElementsCreator.createCheckbox(
 				new ButtonOptions(ButtonType.CHECKBOX).text(
 						Checkboxes.NARUTO_VIDEO_LINK),
-				actionsCreator.createActionLinkToNaruto(learningResource),
+				actionsCreator.createActionLinkToNaruto(learningResource, this),
 				null);
 		checkboxIsNarutoVideoLink.setSelected(learningResource.isNarutoLink());
 

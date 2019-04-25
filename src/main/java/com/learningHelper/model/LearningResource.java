@@ -29,6 +29,9 @@ public class LearningResource implements ListElement {
 	@XStreamAlias("isNaruto")
 	private boolean isNarutoLink;
 
+	@XStreamAlias("isSkipChoosingVideoPlayerForNaruto")
+	private boolean isSkipChoosingVideoPlayerForNaruto;
+
 	public LearningStoppedPlace getLearningStoppedPlace() {
 		return learningStoppedPlace;
 	}
@@ -73,6 +76,15 @@ public class LearningResource implements ListElement {
 			learningResource.setAlternativeLocations(new ArrayList<>());
 			return learningResource;
 		};
+	}
+
+	public boolean isSkipChoosingVideoPlayerForNaruto() {
+		return isSkipChoosingVideoPlayerForNaruto;
+	}
+
+	public void setSkipChoosingVideoPlayerForNaruto(
+			boolean skipChoosingVideoPlayerForNaruto) {
+		isSkipChoosingVideoPlayerForNaruto = skipChoosingVideoPlayerForNaruto;
 	}
 
 	@Override

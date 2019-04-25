@@ -13,6 +13,7 @@ import com.learningHelper.listPropertyManagers.StoppedPlaceVideoMinutePropertyMa
 import com.learningHelper.listPropertyManagers.StoppedPlaceVideoSecondPropertyManager;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
+import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 import com.learningHelper.webBrowsing.WebBrowser;
 
 import javax.swing.*;
@@ -145,10 +146,13 @@ public class LearningResourceRowActionsCreator {
 		};
 	}
 
-	public ItemListener createActionSkipChoosingVideoPlayerType() {
+	public ItemListener createActionSkipChoosingVideoPlayerType(
+			LearningResource learningResource) {
 		return new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
+				learningResource.setSkipChoosingVideoPlayerForNaruto(
+						e.getStateChange() == ItemEvent.SELECTED);
 				WebBrowser.setSkipVideoPlayerTypeChossingForNaruto(
 						e.getStateChange() == ItemEvent.SELECTED);
 
@@ -157,12 +161,16 @@ public class LearningResourceRowActionsCreator {
 	}
 
 	public ItemListener createActionLinkToNaruto(
-			LearningResource learningResource) {
+			LearningResource learningResource,
+			LearningResourceRowElementsCreator elementsCreator) {
 		return new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				learningResource.setIsNarutoLink(
 						e.getStateChange() == ItemEvent.SELECTED);
+				elementsCreator.getCheckboxSkipChoosingVideoPlayerType()
+							   .setEnabled(e.getStateChange()
+									   == ItemEvent.SELECTED);
 
 			}
 		};
