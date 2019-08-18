@@ -12,6 +12,7 @@ import com.learningHelper.listPropertyManagers.StoppedPlaceStringPropertyManager
 import com.learningHelper.listPropertyManagers.StoppedPlaceVideoMinutePropertyManager;
 import com.learningHelper.listPropertyManagers.StoppedPlaceVideoSecondPropertyManager;
 import com.learningHelper.model.LearningResource;
+import com.learningHelper.model.LearningStoppedPlace;
 import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
 import com.learningHelper.uiElementsCreators.LearningResourceRowElementsCreator;
 import com.learningHelper.webBrowsing.WebBrowser;
@@ -19,6 +20,8 @@ import com.learningHelper.webBrowsing.WebBrowser;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -94,8 +97,21 @@ public class LearningResourceRowActionsCreator {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				WebBrowser.browseResource(learningResource);
+				if (learningResource.getType()
+									.equals(LearningResourceType.WEB_TEXT_RESOURCE)) {
+					copyToClipboard(learningResource.getLearningStoppedPlace());
+
+				}
 			}
 		};
+	}
+
+	private void copyToClipboard(LearningStoppedPlace learningStoppedPlace) {
+		StringSelection stringSelection = new StringSelection(
+				learningStoppedPlace.getTextFragmentPlace());
+		Clipboard clipboard = Toolkit.getDefaultToolkit()
+									 .getSystemClipboard();
+		clipboard.setContents(stringSelection, null);
 	}
 
 	public JTextComponent listenForChangesInStoppedPlaceTextInput(
