@@ -2,7 +2,10 @@ package com.learningHelper.uiElementsStyles;
 
 import com.guimaker.colors.BasicColors;
 import com.guimaker.enums.ButtonType;
-import com.guimaker.options.*;
+import com.guimaker.options.ButtonOptions;
+import com.guimaker.options.ComboboxOptions;
+import com.guimaker.options.ComponentOptions;
+import com.guimaker.options.TextAreaOptions;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -30,7 +33,8 @@ public class UIElementsStyles {
 	}
 
 	public static TextAreaOptions shortTextInputStyle() {
-		return defaultTextFieldOption().rowsAndColumns(1, 15);
+		return defaultTextFieldOption().lineWrap(true)
+									   .rowsAndColumns(1, 15);
 	}
 
 	public static TextAreaOptions timeRangeInputStyle() {
@@ -52,8 +56,7 @@ public class UIElementsStyles {
 						BorderFactory.createEmptyBorder(PADDING_TEXTFIELD,
 								PADDING_TEXTFIELD, PADDING_TEXTFIELD,
 								PADDING_TEXTFIELD)))
-									.backgroundColor(
-												 BasicColors.BLUE_NORMAL_7);
+									.backgroundColor(BasicColors.BLUE_NORMAL_7);
 		//TODO add the padding as default in guimaker
 	}
 

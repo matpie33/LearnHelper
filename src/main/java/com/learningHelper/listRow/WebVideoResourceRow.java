@@ -56,6 +56,8 @@ public class WebVideoResourceRow implements ResourceRow {
 										elementsCreator.getVideoSecondInput())
 								.nextRow(
 										elementsCreator.getButtonGoToResource())
+								.onlyAddIf(!commonListElements
+										.isForSingleRowOnly())
 								.nextRow(commonListElements.getButtonDelete()));
 		return rowDataCreator.createRowData(panel);
 	}

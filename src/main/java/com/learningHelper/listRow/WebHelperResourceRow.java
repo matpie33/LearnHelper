@@ -44,6 +44,8 @@ public class WebHelperResourceRow implements ResourceRow {
 													   .getPanel())
 								.nextRow(
 										elementsCreator.getButtonGoToResource())
+								.onlyAddIf(
+										!commonListElements.isForSingleRowOnly())
 								.nextRow(commonListElements.getButtonDelete()));
 
 		return rowDataCreator.createRowData(panel);

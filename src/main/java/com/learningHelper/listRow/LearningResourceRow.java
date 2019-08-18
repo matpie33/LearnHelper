@@ -10,14 +10,18 @@ import com.learningHelper.application.ApplicationController;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.panelsUpdaters.LearningResourceRowUpdater;
 
+import java.awt.*;
+
 public class LearningResourceRow implements ListRowCreator<LearningResource> {
 
 	private LearningResourceRowUpdater learningResourceRowUpdater;
+	private ApplicationController applicationController;
 
 	public LearningResourceRow(ApplicationController applicationController,
 			String groupName) {
 		learningResourceRowUpdater = new LearningResourceRowUpdater(
 				applicationController, groupName);
+		this.applicationController = applicationController;
 	}
 
 	@Override
@@ -25,7 +29,12 @@ public class LearningResourceRow implements ListRowCreator<LearningResource> {
 			LearningResource learningResource,
 			CommonListElements<LearningResource> commonListElements,
 			InputGoal inputGoal) {
-		MainPanel panel = new MainPanel(new PanelConfiguration());
+		Color contentPanelColor = applicationController.getApplicationConfigurationHolder()
+													   .getApplicationConfiguration()
+													   .getContentPanelColor();
+		MainPanel panel = new MainPanel(
+				new PanelConfiguration().setColorToUse(contentPanelColor));
+
 		return learningResourceRowUpdater.getResourceRowForType(
 				learningResource.getType())
 										 .addElementsToPanel(learningResource,

@@ -46,6 +46,8 @@ public class WebTextResourceRow implements ResourceRow {
 										elementsCreator.getStoppedPlaceTextInput())
 								.nextRow(
 										elementsCreator.getButtonGoToResource())
+								.onlyAddIf(!commonListElements
+										.isForSingleRowOnly())
 								.nextRow(commonListElements.getButtonDelete()));
 		return rowDataCreator.createRowData(panel);
 	}

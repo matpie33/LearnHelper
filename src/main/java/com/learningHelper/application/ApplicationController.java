@@ -41,6 +41,10 @@ public class ApplicationController implements ApplicationChangesManager {
 		initializeConfigurationFile();
 	}
 
+	public ApplicationConfigurationHolder getApplicationConfigurationHolder() {
+		return applicationConfigurationHolder;
+	}
+
 	private void initializeConfigurationFile() {
 		try {
 			loadAndSave.initializeConfigurationFileIfDoesntExist();
