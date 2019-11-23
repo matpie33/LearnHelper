@@ -4,7 +4,7 @@ import com.guimaker.enums.Anchor;
 import com.guimaker.enums.FillType;
 import com.guimaker.model.PanelConfiguration;
 import com.guimaker.panels.AbstractPanelWithHotkeysInfo;
-import com.guimaker.panels.MainPanel;
+import com.guimaker.panels.mainPanel.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.model.GroupOfLearningResources;

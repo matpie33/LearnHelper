@@ -3,7 +3,7 @@ package com.learningHelper.listRow;
 import com.guimaker.enums.FillType;
 import com.guimaker.list.ListRowData;
 import com.guimaker.model.CommonListElements;
-import com.guimaker.panels.MainPanel;
+import com.guimaker.panels.mainPanel.MainPanel;
 import com.guimaker.row.SimpleRowBuilder;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.listRowDataCreators.LearningResourceRowDataCreator;

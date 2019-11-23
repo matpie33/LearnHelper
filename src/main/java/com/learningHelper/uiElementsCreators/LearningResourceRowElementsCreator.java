@@ -8,7 +8,7 @@ import com.guimaker.model.CommonListElements;
 import com.guimaker.model.HotkeyWrapper;
 import com.guimaker.options.ButtonOptions;
 import com.guimaker.panels.GuiElementsCreator;
-import com.guimaker.panels.MainPanel;
+import com.guimaker.panels.mainPanel.MainPanel;
 import com.guimaker.utilities.CommonActionsCreator;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;

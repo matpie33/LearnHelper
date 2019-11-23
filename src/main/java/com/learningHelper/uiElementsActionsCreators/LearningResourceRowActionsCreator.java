@@ -4,7 +4,7 @@ import com.guimaker.enums.InputGoal;
 import com.guimaker.list.ListElementPropertyManager;
 import com.guimaker.list.myList.ListPropertyChangeHandler;
 import com.guimaker.model.CommonListElements;
-import com.guimaker.panels.MainPanel;
+import com.guimaker.panels.mainPanel.MainPanel;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.enums.LearningResourceType;
 import com.learningHelper.listPropertyManagers.ResourceTagPropertyManager;

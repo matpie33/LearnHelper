@@ -2,7 +2,7 @@ package com.learningHelper.listRowDataCreators;
 
 import com.guimaker.list.ListPropertyInformation;
 import com.guimaker.list.ListRowData;
-import com.guimaker.panels.MainPanel;
+import com.guimaker.panels.mainPanel.MainPanel;
 import com.learningHelper.application.ApplicationController;
 import com.learningHelper.model.LearningResource;
 import com.learningHelper.uiElementsActionsCreators.LearningResourceRowActionsCreator;
